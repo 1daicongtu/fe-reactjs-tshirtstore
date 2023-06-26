@@ -1,0 +1,450 @@
+.modal {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    cursor: pointer;
+}
+.modal.unactive{
+    transition: 0.7s;
+    opacity: 0;
+    visibility: hidden;
+}
+.modalBox.active{
+    transform: translateX(0%);
+}
+.modalBox {
+    cursor: pointer;
+    position: fixed;
+    z-index: 10;
+    background-color: #fff;
+    width: 400px;
+    right: 0;
+    top: 0;
+    min-height: 100vh;
+    padding: 30px 0;
+    transition: 0.7s;
+    transform: translateX(110%);
+    > .modalHeader{
+        position: relative;
+        > h1{
+            font-size: 3rem;
+            text-align: center;
+        }
+        >.btnCloseModal{
+            position: absolute;
+            top: 0;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            left: -25px;
+            background-color: #fff;
+
+            > i{
+                font-size: 1.8rem;
+            
+            }
+        }
+        >.btnCloseModal:hover{
+            transition: 0.3s;
+            background-color: #0f9d8a;
+            > i{
+                color: #fff;
+            }
+        }
+    }
+    >.modalBody{
+        margin-top: 34px;
+        
+        >.listItem{
+            max-height: 240px;
+            overflow: auto;
+            >.itemDetail:not(:last-child){
+                border-bottom: 1px solid #e3e2e2;
+            }
+            
+            >.itemDetail{
+                margin: 0 28px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 16px 0;
+                >.itemLeft{
+                    display: flex;
+                    align-items: center;
+                    
+                    >.listItemImage{
+                        width: 78px;
+                        height: 78px;
+                        border: 1px solid #e3e2e2;
+                        margin-right: 14px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    >.listItemContent{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        >.productName{
+                            font-weight: 600;
+                            font-size: 1.5rem;
+                            margin-bottom: 8px;
+                        }
+                        >.productDescription{
+                            font-size: 1.1rem;
+                            color: #828282;
+                            display: block;
+                            margin-bottom: 12px;
+                        }
+
+                        .boxChangeQuantity{    
+                            display: flex;
+                            >.changeQuantity{
+                                border: 1px solid #ccc;
+                                overflow: hidden;
+                                border-radius: 50px;
+                                >.controlQuantity{
+                                    border: none;
+                                    background-color: #FFf;
+                                    width: 20px;
+                                    padding: 0;
+                                }
+                                >.controlQuantity:hover{
+                                    background-color: #f2f2f2;
+                                }
+                                input{
+                                    font-size: 1.3rem;
+                                    border: 1px solid #ccc;
+                                    outline: none;
+                                    border-top: none;
+                                    border-bottom: none;
+                                    width: 25px;
+                                    height: 20px;
+                                    text-align: center;
+                                }
+                            }
+                            >span{
+                                margin-left: 8px;
+                                font-size: 1.3rem;
+                            }
+                        }
+                    }
+
+                }
+                >.itemRight{
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    > span{
+                        display: block;
+                        text-align: right;
+                    }
+                    > span:first-child{
+                        margin-bottom: 36px;
+                        width: 25px;
+                        height: 25px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        border-radius: 50%;
+                    }
+                    > span:first-child:hover{
+                        background-color: #f2f2f2;
+                    }
+                    >span:last-child{
+                        font-weight: 500;
+
+                    }
+                }
+            }
+            >.itemDetail:first-child{
+                padding-top: 0;
+            }
+            >.itemDetail:last-child{
+                padding-bottom: 0;
+            }
+
+        }
+        >.settingInfo{
+            margin: 0 28px;
+
+            >.boxListOption{
+                margin-top: 12px;
+                border-top: 1px solid #e3e2e2;
+                border-bottom: 1px solid #e3e2e2;
+                > .listOption{
+                    margin: 12px 0;
+                    display: flex;
+                    justify-content: space-around;
+                    >.itemOption:not(:last-child){
+                        border-right: 1px solid #e3e2e2;
+                        position: relative;
+                    }
+                    >.itemOption:hover{
+                        color: #0f9d8a;
+                        transition: .3s;
+                    }
+                    >.itemOption{
+                        text-align: center;
+                        padding: 0 35px;
+                        i{
+                            font-size: 1.8rem;
+                        }
+                        > p{
+                            font-weight: 509;
+                        }
+                    }
+                }
+            }
+            >.calcPrice{
+                margin-top: 10px;
+                >.priceBefore{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-weight: 500;
+                    span{
+                        font-size: 1.8rem;
+                    }
+                }
+                >.coupon{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    >.couponChild:hover{
+                        opacity: .6;
+                       
+                    }
+                    >.couponChild{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        > i{
+                            font-size: 1.2rem;
+                        }
+                        >i,p,button{
+                            margin: 0 2px;
+                        }
+                        >button{
+                            border: none;
+                            background-color: #fff;
+                            letter-spacing: 2px;
+                            border: 1px dashed #ccc;
+                            font-size: 1.2rem;
+                            font-weight: 500;
+                            border-radius: 2px;
+                            padding: 0 6px;
+                        }
+                    }
+                }
+                >.isShipping{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 2px 0;
+                    font-size: 1.3rem;
+                    margin-bottom: 12px;
+                }
+            }
+            >.totalPrice{
+                border-top: 1px solid #e3e2e2;
+                >.reallyPay{
+                    margin-top: 6px;
+                    display: flex;
+                    font-weight: bold;
+                    justify-content: space-between;
+                    font-size: 2rem;
+                }
+            }
+            >.boxProcessFreeship{
+                margin-top: 12px;
+                >.totalProcessFreeship{
+                   
+                    width: 100%;
+                    height: 5px;
+                    border-radius: 12px;
+                    background-color: #EDEDED;
+                    >.currentProcessFreeship{
+                        border-radius: inherit;
+                        position: relative;
+                        left: 0;
+                        width: 100%;
+                        background-color: #0f9d8a;
+                        height: 100%;
+                        .percentProcess{
+                            position: absolute;
+                            top: -12px;
+                            
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            background-color: #fff;
+                            border: 2px solid #0f9d8a;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1rem;
+                            right: -12px;
+
+                        }
+                    }
+                    >.currentProcessFreeship.freeShip{
+                        background-color: #00A32A;
+                        .percentProcess{
+                            border: 2px solid #00A32A;
+                        }
+                    }
+                }
+            }
+            >.noteFreeshipSuccess{
+                margin-top: 8px;
+                font-size: 1.6rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .iconNoteFreeship{
+                    margin-right: 8px;
+                }
+                .textNoteFreeship{
+                    font-size: 1.3rem;
+                }
+            }
+        }
+        >.boxButton{
+            margin: 0 28px;
+            margin-top: 12px;
+            >.btnControl{
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                text-transform: uppercase;
+                width: 100%;
+                padding: 12px 0;
+                font-size: 1.2rem;
+                font-weight: 500;
+                letter-spacing: 1.8px;            
+                border-radius: 6px;
+                transition: .2s;
+            }
+            >.btnViewCart{
+                background-color: #efefef;
+                color: #333;
+                margin-bottom: 10px;
+            }
+            >.btnViewCart:hover{
+                background-color: #e6e3e3;
+            }
+            >.btnCheckout{
+                background-color: #0f9d8a;
+                color: #fff;
+            }
+            >.btnCheckout:hover{
+                background-color: #0e907f;
+            }
+        }
+    }
+    >.layerModalNote, .layerModalShipping, .layerModalCoupon{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        z-index: 20;
+    }
+    >.layerModalNote.unactive, .layerModalShipping.unactive, .layerModalCoupon.unactive{
+        transition: 0.7s;
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    >.addNote{
+        transform: translateY(110%);
+        transition: .7s;
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        bottom: 0;
+        height: 280px;
+        background-color: #fff;
+        padding: 0 28px;
+        padding-top: 14px;
+        box-shadow: 0 0 15px rgba(0,0,0,.15);
+        z-index: 30;
+        >.btnCloseAddNote{
+            margin-left: auto;
+            text-align: right;
+            span {
+               padding: 5px 9px;
+                cursor: pointer;
+                
+                border-radius: 50%;
+            }
+            span:hover{
+                background-color: #e0e0e0;
+                transition: .2s
+            }
+            i{
+                font-size: 1.8rem;
+                border-radius: 50%;
+                text-align: center;   
+            }
+            
+        }
+        >.addNoteTitle{
+            font-weight: 500;
+            font-size: 1.9rem;
+            margin-bottom: 12px;
+        }
+        >textarea{
+            border: 1px solid #e4e3e3;
+            width: 100%;
+            padding: 6px 8px;
+            outline: none;
+            border-radius: 8px;
+            resize: none;
+            background-color: #f0efef;
+            height: 100px;
+        }
+        >textarea:focus{
+            background-color: #FFF;
+        }
+        >button{
+            margin-top: 12px;
+            width: 100%;
+            font-weight: 500;
+            border: none;
+            background-color: #0f9d8a;
+            color: #fff;
+            text-align: center;
+            font-size: 1.3rem;
+            letter-spacing: 1.4px;
+            padding: 10px 0;
+            border-radius: 6px;
+        }
+        >button:hover{
+            background-color: #0d9280;
+        }
+    }
+    >.addNote.active{
+        transform: translateY(0%);
+    }
+
+}

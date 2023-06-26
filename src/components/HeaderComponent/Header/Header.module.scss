@@ -1,0 +1,217 @@
+.container {
+    font-size: 1.4rem;
+}
+.headerOneParent {
+    border-bottom: 1px solid #f1f1f1;
+}
+.headerOne {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > .headerOneLeft {
+        i {
+            margin-right: 8px;
+        }
+    }
+
+    > .headerOneRight {
+        display: flex;
+        align-items: center;
+        > .headerOneRightItem {
+            position: relative;
+            margin-left: 30px;
+            padding: 10px 0;
+            cursor: pointer;
+
+            > p {
+                margin: 0;
+            }
+            &:hover > p {
+                color: #0f9d8a;
+                transition: 0.3s;
+            }
+            &:hover > span {
+                color: #0f9d8a;
+                transition: 0.3s;
+            }
+            > ul {
+                position: absolute;
+                top: 100%;
+                list-style: none;
+                width: 150px;
+                border: 1px solid #ebeaea;
+                padding: 4px 0;
+                display: none;
+                > li {
+                    padding: 4px 8px;
+                }
+                > li:hover {
+                    color: #0f9d8a;
+                    transition: 0.3s;
+                }
+            }
+
+            &:hover > ul {
+                display: block;
+                animation: fadeInUp 0.3s;
+            }
+        }
+    }
+    .account {
+        i {
+            margin-right: 6px;
+        }
+    }
+}
+.headerTwo {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    > .boxLogoImage {
+        > .mobile {
+            display: none;
+        }
+    }
+    > .boxNavigation {
+        > .boxLogoImageCenter {
+            display: none;
+        }
+        > ul {
+            display: flex;
+            align-items: center;
+
+            > .navigaItem {
+                margin: 0 18px;
+                position: relative;
+                padding: 12px 0;
+                > ul {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    border: 1px solid #ececec;
+                    padding: 20px 0;
+                    width: 230px;
+                    > li {
+                        > .navlink {
+                            color: #000;
+                            text-decoration: none;
+                            padding: 5px 30px;
+                            display: block;
+                            transition: 0.3s;
+                        }
+
+                        &:hover > .navlink {
+                            padding-left: 35px;
+                            color: #0f9d8a;
+                        }
+                    }
+                }
+                &:hover > ul {
+                    display: block;
+                }
+                > .navlink {
+                    color: #000;
+                    font-weight: 500;
+                    text-decoration: none;
+                    position: relative;
+                    > i {
+                        margin-left: 4px;
+                        font-size: 1.2rem;
+                    }
+                }
+                > .navlink::after {
+                    position: absolute;
+                    display: inline-block;
+                    content: '';
+                    width: 0px;
+                    visibility: hidden;
+                    top: 100%;
+                    opacity: 0;
+                    border-top: 2px solid transparent;
+                    left: 1px;
+                }
+                > .navlink:hover::after {
+                    width: 100%;
+                    visibility: visible;
+                    opacity: 1;
+                    border-color: #000;
+                    transition: 0.5s;
+                }
+            }
+        }
+    }
+    > .userController {
+        display: flex;
+        align-items: center;
+        > .userControllerMobile {
+            display: none;
+        }
+        > .userControllerItem {
+            position: relative;
+            margin-left: 18px;
+            cursor: pointer;
+            &:hover > i {
+                color: #0f9d8a;
+                transition: 0.4s;
+            }
+            > i {
+                font-size: 2.5rem;
+            }
+            > span {
+                position: absolute;
+                right: -7px;
+                top: -7px;
+                line-height: 1.4;
+                color: #fff;
+                width: 17px;
+                height: 17px;
+                background-color: #0f9d8a;
+                border-radius: 50%;
+                font-size: 1.2rem;
+                text-align: center;
+            }
+        }
+    }
+}
+@media (max-width: 991.98px) {
+    .container {
+    }
+    .headerOne {
+        margin: 0 8px;
+        > .headerOneRight {
+            > .headerOneRightItem {
+                margin-left: 30px;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .headerOne {
+        justify-content: center;
+        > .headerOneRight {
+            display: none;
+        }
+        > .headerOneLeft {
+            padding: 10px 0;
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(10%);
+        opacity: 0.7;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllProduct } from './redux/slices/listProductsSlice';
+import { fetchAllStores } from './redux/slices/listStoresSlice';
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/HomeComponent';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    /* const products = useSelector(state => state.products.listProduct)
+    const stores = useSelector(state => state.stores.listStore) */
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchAllProduct());
+        dispatch(fetchAllStores());
+    }, []);
+
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+        </Routes>
+    );
 }
 
 export default App;
