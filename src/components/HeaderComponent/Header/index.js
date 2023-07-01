@@ -4,20 +4,48 @@ import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import Wishlist from '../Wishlist';
 import Cart from "../Cart"
+import Compare from '../Compare';
+import Search from '../Search';
+import LoginRegistry from '../LoginRegistry';
+import MobileNavbar from '../MobileNavbar';
 
 const Header = () => {
     const [wistList, setWistlist] = useState(false);
     const [cartList, setCartList] = useState(false);
+    const [compareList, setCompareList] = useState(false);
+    const [search, setSearch] = useState(false);
+    const [loginRegistry, setLoginRegistry] = useState(false);
+    const [mobileNavbar, setMobileNavbar] = useState(false);
+
+
+    const toggleMobileNavbar = useCallback((e) => {
+        e.stopPropagation()
+        setMobileNavbar(prevState => !prevState)
+    })
 
     const toggleWishlist = useCallback((e) => {
         e.stopPropagation()
         setWistlist(prevState => !prevState)
-    }, [wistList])
+    }, [])
 
     const toggleCartList = useCallback((e) => {
         e.stopPropagation()
         setCartList(prevState => !prevState)
-    })
+    }, [])
+    const toggleCompareList = useCallback((e) => {
+        e.stopPropagation()
+        setCompareList(prevState => !prevState)
+    }, [])
+
+    const toggleSearch = useCallback((e) => {
+        e.stopPropagation()
+        setSearch(prevState => !prevState)
+    }, [])
+    const toggleOpenLoginRegistry = useCallback((e) => {
+        e.stopPropagation()
+        setLoginRegistry(prevState => !prevState)
+    }, [])
+
     return (
         <header>
             <div className={clsx(styles.container)}>
@@ -51,24 +79,35 @@ const Header = () => {
                                     styles.headerOneRightItem,
                                     styles.account,
                                 )}
+                                onClick={toggleOpenLoginRegistry}
                             >
                                 <span>
                                     <i class="fa-regular fa-circle-user"></i>
                                     Login / Registry
                                 </span>
-                            </div>
+                            </div>        
                         </div>
+                        <LoginRegistry
+                            loginRegistry={loginRegistry}
+                            setLoginRegistry={setLoginRegistry}
+                        />
                     </div>
                 </div>
                 <div className={clsx(styles.headerTwo)}>
                     <div className={clsx(styles.boxLogoImage)}>
                         <img src="https://i.imgur.com/Hc92VcL.png" alt="logo" />
 
-                        <div className={clsx(styles.mobile, styles.menu)}>
+                        <div className={clsx(styles.mobile, styles.menu)}
+                            onClick={toggleMobileNavbar}
+                        >
                             <i class="fa-solid fa-bars"></i>
                         </div>
-
-                        <div className={clsx(styles.mobile, styles.search)}>
+                        <MobileNavbar setMobileNavbar={setMobileNavbar} mobileNavbar={mobileNavbar}
+                            loginRegistry={loginRegistry} setLoginRegistry={setLoginRegistry}
+                        />
+                        <div className={clsx(styles.mobile, styles.search)}
+                            onClick={toggleSearch}
+                        >
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
@@ -206,7 +245,9 @@ const Header = () => {
                                 styles.userControllerMobile,
                             )}
                         >
-                            <i class="fa-regular fa-circle-user"></i>
+                            <i class="fa-regular fa-circle-user"
+                                onClick={toggleOpenLoginRegistry}
+                            ></i>
                         </div>
                         <div
                             className={clsx(
@@ -239,17 +280,46 @@ const Header = () => {
                                 styles.userControllerItem,
                                 styles.userControllerCompare,
                             )}
+                            onClick={toggleCompareList}
                         >
                             <i class="fa-solid fa-rotate-left"></i>
                             <span>4</span>
                         </div>
+                        <Compare compareList={compareList} setCompareList={setCompareList}></Compare>
                         <div
                             className={clsx(
                                 styles.userControllerItem,
                                 styles.userControllerSearcb,
                             )}
+                            onClick={toggleSearch}
                         >
                             <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <Search
+                            search={search}
+                            setSearch={setSearch}
+                        ></Search>
+                    </div>
+                </div>
+                <div className={clsx(styles.navigationMobileBox)}>
+                    <div className={clsx(styles.navigationMobile)}>
+                        <NavLink to="/"  className={clsx(styles.itemNavigation)}>
+                            <i class="fa-solid fa-house"></i>
+                            <span>Shop</span>
+                        </NavLink>
+
+                        <div className={clsx(styles.itemNavigation)}
+                            onClick={toggleSearch}
+                        >
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Search</span>
+                        </div>
+
+                        <div className={clsx(styles.itemNavigation)}
+                            onClick={toggleWishlist}    
+                        >
+                            <i class="fa-regular fa-heart"></i>
+                            <span>Wishlist</span>
                         </div>
                     </div>
                 </div>

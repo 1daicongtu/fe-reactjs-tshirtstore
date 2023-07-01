@@ -1,0 +1,162 @@
+.modal.unactive{
+    visibility: hidden;
+    opacity: 0;
+}
+.modal{
+    visibility: visible;
+    position: fixed;
+    z-index: 1;
+    transition: 0.4s;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    cursor: pointer;
+}
+.modalBox.active{
+    transform: translateY(0%);
+}
+.modalBox{
+    transform: translateY(110%);
+    border-radius: 6px;
+    cursor: pointer;
+    position: fixed;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 32px;
+    transition: 0.4s;
+    >.modalBoxHeader{
+        position: relative;
+       
+        i{
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 1.8rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+        i:hover{
+            background-color: #e9e8e8;
+        }
+    }
+    >.modalBoxBody{
+        height: inherit;
+        >.modalBoxTitle{
+            position: relative;
+            
+            >.containerTitle{
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                >.modalBodyTitle{
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                }
+                >.countProduct{
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    color: #706f6f
+                }
+            }
+        }
+        >div{
+            padding: 8px 0;
+        }
+        .listImage{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            .itemProduct{
+                display: block;
+                width: 90px;
+                height: 90px;
+                border: 1px solid #dbd8d8;
+                position: relative;
+                margin: 0 12px;
+                
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                span{
+                    visibility: hidden;
+                    position: absolute;
+                    right: -5px;
+                    top: -8px;
+                    i{
+                        color: #000;
+                        width: 20px;
+                        padding-top: 2px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 20px;
+                        font-size: 1rem;
+                        background-color: #fff;
+                        border-radius: 50%;
+                        border: 1px solid #808080;
+
+                    }
+                    i:hover{
+                        background-color: #ece7e7;
+                        transition: .2s;
+                    }
+                }
+                &:hover span{
+                    visibility: visible;
+                    transition: .2s;
+                }
+                
+            }
+
+            .haventProduct{
+                cursor: not-allowed;
+            }
+        }
+        >.modalBoxControl{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > button{
+                border: none;
+                background-color: transparent;
+                font-weight: 450;
+                color: #808080;
+                &:hover{
+                    color: #0f9d8a;
+                    text-decoration: underline;
+                }
+            }
+
+            >.btnLetCompare{
+                font-size: 1.6rem;
+                background-color: #0f9d8a;
+                font-weight: 500;
+                color: #fff;
+                text-decoration: none;
+                padding: 8px 20px;
+                border-radius: 4px;
+                margin-left: 16px;
+                &:hover{
+                    background-color: #0e8f7d;
+                }
+            }
+        }
+    }
+}

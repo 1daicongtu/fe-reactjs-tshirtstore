@@ -1,0 +1,259 @@
+.modal{
+    display: none;
+}
+.modalBox{
+    display: none;
+}
+@media (max-width: 991.98px){
+
+}
+@media (max-width: 575.98px) {
+
+    .modal.unactive{
+        visibility: hidden;
+        opacity: 0;
+    }
+    .modal{
+        visibility: visible;
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transition: .4s;
+        z-index: 1;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        opacity: 1;
+        cursor: pointer;
+    }
+    .modalBox.active{
+        transform: translateX(0%);
+    }
+    .modalBox{
+        display: block;
+        visibility: visible;
+        transform: translateX(-110%);
+        padding: 18px;
+        background-color: #fff;
+        z-index: 10;
+        display: block;
+        width: 80%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transition: .4s;
+        >.modalHeader{
+            position: relative;
+            >.btnCloseModal{
+                position: absolute;
+                right: -40px;
+                top: 50%;
+                transform: translateY(-50%);
+                >i{
+                  
+                    font-size: 2rem;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    background-color: #fff;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    &:hover{
+                        background-color: #0f9d8a;
+                        color: #fff;
+                    }
+                }
+                
+            }
+        }
+        >.modalBody{
+            padding: 0 18px;
+            padding-top: 50px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+            >.bodyNavigation{
+                margin-top: 18px;
+                >.itemNavigation{
+                    >li{
+                        height: auto;
+                        border-top: 1px solid #efefee;
+                        padding: 12px 0;
+                        font-weight: 500;
+                        >.pagesTitle{
+                            
+                            display: flex;
+                            justify-content: space-between;
+                            >.pageSeeMore{
+                                position: relative;
+                                
+                            }
+                            >.unactive.pageSeeMore::after{
+                                transform: translate(-50%, -50%) rotate(90deg);
+                                height: 1px;
+                                
+                            }
+                            >.pageSeeMore::before{
+                                content: "";
+                                position: absolute;
+                                top: 50%;
+                                right: 50%;
+                                transform: translate(-50%, -50%);
+                                height: 1px;
+                                width: 12px;
+                                background-color: #333;
+                                
+                            }
+                            >.pageSeeMore::after{
+                                transition: 0.3s;
+                                content: "";
+                                position: absolute;
+                                height: 1px;
+                                width: 12px;
+                                background-color: #333;
+                                top: 50%;
+                                right: 50%;
+                                transform: translate(-50%, -50%);
+                            }
+                        }
+                        >ul.active{
+                            height: 450px;
+                        }
+                        >ul{
+                            overflow: hidden;
+                            height: 0;
+                            -webkit-transition: height 0.6s ease;
+                            -moz-transition: height 0.6s ease;
+                            -o-transition: height 0.6s ease;
+                            transition: height 0.6s ease;
+
+                            >li:hover> .linkItemPages{
+                                color: #0f9d8a;
+                            }
+                            .linkItemPages{
+                                text-decoration: none;
+                                color: #333;
+                                padding: 10px 12px;
+
+                                display: block;
+                            }
+                        }
+                    }
+                    >li:last-child{
+                        border-bottom: 1px solid #efefee;
+                    }
+                }
+            }
+            >.loginAndLanguague{
+                display: flex;
+                flex-direction: column;
+                >.loginBox{
+                    margin: 0 -18px;
+                    border-top: 1px solid #efefee;
+                    >button{
+                        border: none;
+                        background-color: #fff;
+                        display: flex;
+                        width: 100%;
+                        
+                        padding: 18px;
+                        i{
+                            font-size: 1.8rem;
+                            margin-right: 8px;
+                        }
+                    }
+                    
+
+                }
+                >.languageAndTypeOfMoney{
+                    display: flex;
+                    margin: 0 -18px;
+
+                    >.languageBox{
+                        flex: 1;
+                        position: relative;
+                        >button{
+                            display: flex;
+                            justify-content: space-between;
+                            width: 100%;
+                            border: none;
+                            padding: 12px 18px;
+                            background-color: #f2f2f2;
+                            position: relative;
+                            >span{
+                                position: absolute;
+                                right: 20px;
+                                
+                            }
+                        }
+                        >ul.active{
+                            display: block;
+                        }
+                        >ul{
+                           
+                            background-color: #fff;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            bottom: 100%;
+                            display: none;
+                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                            >li{
+                                padding:6px 18px;
+                            
+                            }
+                        }
+                    }
+                    >.typeOfMoney{
+                        flex: 1;
+                        position: relative;
+                        >button{
+                            display: flex;
+                            justify-content: space-between;
+                            width: 100%;
+                            border: none;
+                            padding: 12px 18px;
+                            background-color: #f2f2f2;
+                            position: relative;
+                            >span{
+                                position: absolute;
+                                right: 20px;
+                                
+                            }
+                        }
+                        >ul.active{
+                            display: block;
+                        }
+                        >ul{
+                           
+                            background-color: #fff;
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            bottom: 100%;
+                            display: none;
+                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                            >li{
+                                padding:6px 18px;
+                            
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

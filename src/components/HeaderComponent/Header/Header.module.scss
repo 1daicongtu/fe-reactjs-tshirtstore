@@ -1,5 +1,9 @@
 .container {
     font-size: 1.4rem;
+
+    >.navigationMobileBox{
+        display: none;
+    }
 }
 .headerOneParent {
     border-bottom: 1px solid #f1f1f1;
@@ -38,6 +42,8 @@
                 transition: 0.3s;
             }
             > ul {
+                z-index: 25;
+                background-color: #fff;
                 position: absolute;
                 top: 100%;
                 list-style: none;
@@ -180,8 +186,8 @@
     }
 }
 @media (max-width: 991.98px) {
-    .container {
-    }
+
+    
     .headerOne {
         margin: 0 8px;
         > .headerOneRight {
@@ -191,9 +197,44 @@
             }
         }
     }
+    .headerTwo{
+        width: unset;
+        margin: 0 8px;
+    }
 }
 
 @media (max-width: 575.98px) {
+    .container {
+    
+        >.navigationMobileBox{
+            border-top: 1px solid #dbdbdb;
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            >.navigationMobile{
+                display: flex;
+                justify-content: space-around;
+                >.itemNavigation{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    color: #333;
+                    padding: 10px 0;
+                    text-decoration: none;
+                    >i{
+                        font-size: 2.4rem;
+                        margin-bottom: 2px;
+                    }
+                    span{
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
     .headerOne {
         justify-content: center;
         > .headerOneRight {
@@ -202,6 +243,40 @@
         > .headerOneLeft {
             padding: 10px 0;
         }
+    }
+    .headerTwo{
+        >.boxLogoImage{
+            display: flex;
+            justify-content: center;
+            >img{
+                display: none;
+            }
+            >.mobile{
+                display: block;
+                margin-right: 16px;
+                i{
+                    font-size: 2rem;
+                }
+            }
+        }
+        >.userController{
+            >.userControllerItem{
+                display: block;
+            }
+            >.userControllerWishlist, .userControllerCompare, .userControllerSearcb{
+                display: none;
+            }
+        }
+        >.boxNavigation{
+            ul{
+                display: none;
+            }
+            >.boxLogoImageCenter{
+           
+                display: block;
+            }
+        }
+        
     }
 }
 

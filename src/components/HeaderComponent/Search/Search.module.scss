@@ -1,0 +1,287 @@
+.modal.unactive{
+    visibility: hidden;
+    opacity: 0;
+}
+.modal{
+    
+    visibility: visible;
+    position: fixed;
+    z-index: 1;
+    transition: 0.4s;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    cursor: pointer;
+}
+.modalBox.active{
+    transform: translateY(0%);
+}
+.modalBox{
+    transform: translateY(-100%);
+    cursor: pointer;
+    position: fixed;
+    z-index: 10;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 18px;
+    transition: 0.4s;
+    >.modalHeader{
+        position: relative;
+        span{
+            z-index: 20;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            i{
+                font-size: 1.8rem;
+                color: #929292;
+            }
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        span:hover{
+            background-color: #f1f1f1;
+        }
+    }
+    >.bodyModal{
+        position: relative;
+        margin: 0 auto;
+        padding: 36px 0;
+        >.bodyModalChild{
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #ccc;
+            >input{
+                width: inherit;
+                font-size: 3.2rem;
+                outline: none;
+                border: none;
+                max-width: 800px;
+                font-weight: 400;
+            }
+            >.mobileClose{
+                display: none;
+            }
+            >.controlInputSearchIcon{
+                cursor: alias;
+            }
+            >span{
+                
+               i{
+                font-size: 2.6rem;
+               }
+            }
+        }
+        
+    }
+    >.keywordsSuggest{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        p{
+            font-weight: 400;
+            margin: 0 6px;
+        }
+        span{
+            display: block;
+            margin: 0 6px;
+            text-decoration: underline;
+            font-weight: 500;
+
+        }
+    }
+    >.containerListItem{
+        text-align: center;
+        >.listItem{
+            justify-content: center;
+            .itemProductBox{
+                padding: 0 18px;
+                >.itemProductBoxDetail{
+                    width: 100%;
+                    padding: 0;
+                    border: 1px solid #ccc;
+                   
+                    >.navLinkProductDetail{
+                        
+                        color: #000;
+                        text-decoration: none;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        >.navLinkProductDesc{
+                            >.productName{     
+                                font-weight: 500;
+                                font-size: 1.6rem;
+                            }
+                            >.productPrice{
+                                display: block;
+                                font-size: 1.6rem;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        >.btnMoreResult{
+            margin-top: 32px;
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            background-color: #0f9d8a;
+            padding: 10px 36px;
+            border-radius: 6px;
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+
+@media (max-width: 991.98px) {
+
+}
+@media (max-width: 575.98px){
+    .modalBox{
+        >.modalHeader{
+            display: none;
+        }
+        >.bodyModal{
+            padding: 0 0 6px 0;
+            
+            >.bodyModalChild{
+                border: none;
+                display: flex;
+                position: relative;
+                input{
+                    font-size: 1.5rem;
+                    border-radius: 4px;
+                    background-color: #f5f5f5;
+                    padding: 10px 8px;
+                    width: 85%;
+                    display: inline-block;
+                    flex: 6;
+                }
+                .controlInputSearch{
+                    position: absolute;
+                    right: calc(100% - 84%);
+                    top: 50%;
+                    transform: translateY(-50%);
+                    i{
+                        color: #Fff;
+                        font-size: 1.6rem;
+                        width: 22px;
+                        height: 23px;
+                        border-radius: 50%;
+                        background-color: #a9a7a7;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto;
+                    }
+                }
+                .controlInputSearchIcon{
+                    display: none;
+                }
+                .mobileClose{
+                    display: block;
+                    flex: 1;
+                    text-align: center;
+                    i{
+                        font-size: 1.8rem;
+                        width: 37px;
+                        height: 37px;
+                        border-radius: 50%;
+                        background-color: #f5f5f5;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-left: auto;
+                    }
+                }
+            }
+
+        }
+        >.keywordsSuggest{
+            display: block;
+
+            p{
+                display: block;
+                margin-bottom: 12px;
+            }
+            span{
+                display: inline;
+                font-weight: 460;
+                text-decoration: none;
+                border: 1px solid #f2f2f2;
+                padding: 4px 12px;
+            }
+        }
+        >.containerListItem{
+            display: block;
+            text-align: left;
+            padding: 0;
+            >.listItem{
+                
+                >.itemProductBox:not(:last-child){
+                    border-bottom: 1px solid #dbdbdb;
+                }
+                >.itemProductBox{
+                    padding: 0;
+                    >.itemProductBoxDetail{
+                        border: none;
+                        
+                        >.navLinkProductDetail{
+                            width: unset;
+                            display: flex;
+                            padding: 6px 0;
+                            >img{
+                                height: 75px;
+                                width: 75px;
+                            }
+                            >.navLinkProductDesc{
+                                >.productName{
+                                    font-weight: 400
+                                }
+                                >.productPrice{
+                                    text-align: left;
+                                    font-size: 1.4rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            >.btnMoreResult{
+                padding: 8px 20px;
+                border: 1px solid #ececec;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                border-radius: 5px;
+                color: #333;
+                background-color: transparent;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

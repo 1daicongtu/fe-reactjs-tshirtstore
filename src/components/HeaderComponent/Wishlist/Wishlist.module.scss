@@ -142,5 +142,12 @@
 }
 
 @media (max-width: 575.98px) {
-    
+    .modalBox {
+      
+        width: 80%;
+        >.modalBody{
+            margin-top: 12px;
+            padding: 0 6px
+        }
+    }
 }
