@@ -2,12 +2,18 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from "./LoginRegistry.module.scss"
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoginRegistry } from '../../../redux/slices/headerStateSlice';
 
-const LoginRegistry = ({loginRegistry, setLoginRegistry}) => {
+const LoginRegistry = () => {
+    const dispatch = useDispatch();
+    const loginRegistry = useSelector(state => state.headerStates.loginRegistry);
+    
+
     return (
         <>
             <div className={clsx(styles.modal, !loginRegistry ? styles.unactive : "")}
-                onClick={() => {setLoginRegistry(false)}}
+                onClick={() => {dispatch(setLoginRegistry(false))}}
             ></div>
             <div className={clsx(styles.modalBox, loginRegistry ? styles.active : "")}>
                 <div className={clsx(styles.modalHeader)}>
@@ -15,9 +21,9 @@ const LoginRegistry = ({loginRegistry, setLoginRegistry}) => {
                         <img src="https://i.imgur.com/Hc92VcL.png" alt="logo" />
                     </NavLink>
                     <span className={clsx(styles.btnCloseModal)}
-                        onClick={() => {setLoginRegistry(false)}}
+                        onClick={() => {dispatch(setLoginRegistry(false))}}
                     >
-                        <i class="fa-solid fa-xmark"></i>
+                        <i className="fa-solid fa-xmark"></i>
                     </span>
                 </div>
 
@@ -51,7 +57,7 @@ const LoginRegistry = ({loginRegistry, setLoginRegistry}) => {
                     </div>
                     <div className={clsx(styles.linkWithSocial)}>
                         <NavLink to="/" className={clsx(styles.itemSocial)}>
-                            <i class="fa-brands fa-facebook"></i>
+                            <i className="fa-brands fa-facebook"></i>
                             <span>Facebook</span>
                         </NavLink>
                         <NavLink to="/" className={clsx(styles.itemSocial)}>

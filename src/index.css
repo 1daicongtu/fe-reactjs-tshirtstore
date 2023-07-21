@@ -18,3 +18,39 @@ ul{
 p{
   margin-bottom: 0;
 }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-thumb{
+  border-radius: 10px;
+  background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb:hover{
+  background: rgba(0,0,0,0.4);
+}
+::-webkit-scrollbar-thumb:active{
+  background: rgba(0,0,0,.9);
+}
+
+
+.react-tooltip{
+  font-size: 1.2rem !important;
+  padding: 3px 7px !important;
+  border-radius: 6px !important;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

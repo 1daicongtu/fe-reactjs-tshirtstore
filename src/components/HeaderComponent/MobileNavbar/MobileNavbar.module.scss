@@ -27,6 +27,7 @@
         background-color: rgba(0, 0, 0, 0.4);
         opacity: 1;
         cursor: pointer;
+        backdrop-filter: blur(4px);
     }
     .modalBox.active{
         transform: translateX(0%);
@@ -35,7 +36,7 @@
         display: block;
         visibility: visible;
         transform: translateX(-110%);
-        padding: 18px;
+        padding: 0 18px;
         background-color: #fff;
         z-index: 10;
         display: block;
@@ -45,7 +46,11 @@
         bottom: 0;
         left: 0;
         transition: .4s;
+        margin-bottom: 66px;
         >.modalHeader{
+            background-color: #fff;
+            z-index: 11;
+            padding: 9px 0;
             position: relative;
             >.btnCloseModal{
                 position: absolute;

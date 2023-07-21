@@ -2,31 +2,36 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import styles from "./MobileNavbar.module.scss"
 import { NavLink } from 'react-router-dom';
+import { setMobileNavbar, setLoginRegistry } from '../../../redux/slices/headerStateSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 
-const MobileNavbar = ({setMobileNavbar, mobileNavbar, loginRegistry, setLoginRegistry}) => {
+const MobileNavbar = () => {
+    const dispatch = useDispatch();
+    const mobileNavbar = useSelector(state => state.headerStates.mobileNavbar);
+
 
     const [statePageMore, setStatePageMore] = useState(false);
     const [stateMoreLanguege, setStateMoreLanguege] = useState(false);
     const [stateMoreTypeOfMoney, setStateMoreTypeOfMoney] = useState(false);
 
     const handleOpenLoginModal = ()=>{
-        setMobileNavbar(false)
-        setLoginRegistry(true)
+        dispatch(setMobileNavbar(false));
+        dispatch(setLoginRegistry(true));
     }
 
     return (
         <>
             <div className={clsx(styles.modal, !mobileNavbar ? styles.unactive : "")}
-                onClick={()=>setMobileNavbar(false)}
+                onClick={()=>dispatch(setMobileNavbar(false))}
             ></div>
             <div className={clsx(styles.modalBox, mobileNavbar ? styles.active : "")}>
                 <div className={clsx(styles.modalHeader)}>
                     <img src="https://i.imgur.com/Hc92VcL.png" alt="logo"/>
                     <span className={clsx(styles.btnCloseModal)}
-                        onClick={()=>setMobileNavbar(false)}
+                        onClick={()=>dispatch(setMobileNavbar(false))}
                     >
-                        <i class="fa-solid fa-angle-left"></i>
+                        <i className="fa-solid fa-angle-left"></i>
                     </span>
                 </div>
 
@@ -65,7 +70,7 @@ const MobileNavbar = ({setMobileNavbar, mobileNavbar, loginRegistry, setLoginReg
                             <button
                                 onClick={handleOpenLoginModal}
                             >
-                                <i class="fa-regular fa-circle-user"></i>
+                                <i className="fa-regular fa-circle-user"></i>
                                 <span>Login / Registry</span>
                             </button>
                         </div>
@@ -76,8 +81,8 @@ const MobileNavbar = ({setMobileNavbar, mobileNavbar, loginRegistry, setLoginReg
                                 >
                                     English 
                                         {stateMoreLanguege 
-                                            ? <span><i class="fa-solid fa-angle-down"></i></span>
-                                            : <span><i class="fa-solid fa-angle-up"></i></span>
+                                            ? <span><i className="fa-solid fa-angle-down"></i></span>
+                                            : <span><i className="fa-solid fa-angle-up"></i></span>
                                         
                                         }        
                                 </button>
@@ -93,8 +98,8 @@ const MobileNavbar = ({setMobileNavbar, mobileNavbar, loginRegistry, setLoginReg
                                 >
                                     US Dollar 
                                     {stateMoreTypeOfMoney
-                                        ? <span><i class="fa-solid fa-angle-down"></i></span>
-                                        : <span><i class="fa-solid fa-angle-up"></i></span>
+                                        ? <span><i className="fa-solid fa-angle-down"></i></span>
+                                        : <span><i className="fa-solid fa-angle-up"></i></span>
                                     }
                                     
                                 </button>

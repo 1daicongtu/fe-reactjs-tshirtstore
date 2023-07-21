@@ -1,0 +1,110 @@
+.containerSlider{
+    position: relative;
+}
+
+
+.prevSlide, .nextSlide{
+    position: absolute;
+    top: 50%;
+    transform: translate(-20%, -50%);
+    font-size: 40px;
+    color: #333;
+    cursor: pointer;
+    visibility: hidden;
+    transition: .3s;
+    opacity: 0.6;
+}
+
+.containerSlider:hover > .prevSlide, .containerSlider:hover > .nextSlide{
+    visibility: visible;
+    transform: translate(0%, -50%);
+    opacity: 1;
+}
+.prevSlide{
+    left: 15px;
+}
+.prevSlide:hover{
+    color: #0f9d8a;
+}
+.nextSlide{
+    right: 15px;
+}
+.nextSlide:hover{
+    color: #0f9d8a;
+}
+.home-slider > .slick-dots{
+    bottom: 1%;
+}
+.home-slider > .slick-dots > li{
+    margin: 0;
+    height: unset;
+    width: unset;
+}
+.home-slider > .slick-dots > li.slick-active > button::before{
+    color: #0e8878;
+    background-color: #0e8878;
+    
+}
+.home-slider > .slick-dots > li.slick-active > button{
+    transition: .3s;
+    background-color: #0e8878;
+    width: 30px;
+    border-radius: 20px;
+}
+.home-slider > .slick-dots > li > button:hover{
+    background-color: #0e8878;
+}
+.home-slider > .slick-dots > li > button
+{
+    font-size: 1rem;
+    width: 3px;
+    height: 3px;
+    background-color: #434343;
+    border-radius: 50%;
+    margin: 6px;
+}
+
+.home-slider > .slick-dots > li > button::before{
+    content: none;
+}
+
+.storeName, .storeDesc, .linkShop{
+    transition: .5s;
+    opacity: 0;
+}
+.storeName{
+    transform: translateY(-100%);
+}
+.storeDesc{
+    transform: translateX(-20%);
+}
+.linkShop{
+    display: inline-block;
+    transform: translateY(100%);
+}
+.slick-active .storeName{
+    transform: translateY(0);
+    opacity: 1;
+}
+.slick-active .storeDesc{
+    transform: translateX(0);
+    opacity: 1;
+}
+.slick-active .linkShop{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+@media (max-width: 991.98px) {
+    .prevSlide, .nextSlide{
+        visibility: visible;
+    }
+}
+@media (max-width: 575.98px) {
+    .prevSlide, .nextSlide{
+        visibility: hidden;
+    }
+    .containerSlider:hover > .prevSlide, .containerSlider:hover > .nextSlide{
+        visibility: hidden;
+    }
+}

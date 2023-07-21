@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tooltip } from 'react-tooltip'
 import clsx from 'clsx';
 import styles from "./Cart.module.scss"
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setCartList } from '../../../redux/slices/headerStateSlice';
 
-
-const Cart = (props) => {
+const Cart = () => {
+    const dispatch = useDispatch();
+    const cartList = useSelector(state => state.headerStates.cartList);
     const [windowNote, setWindowNote] = React.useState(false);
     const [windowShipping, setWindowShipping] = React.useState(false);
     const [windowCoupon, setWindowCoupon] = React.useState(false);
     const [voucherSelected, setVoucherSelected] = React.useState(null);
     const [inputVoucher, setInputVoucher] = React.useState("");
+    const [inputQuantity, setInputQuantity] = useState(1);
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
@@ -72,16 +76,16 @@ const Cart = (props) => {
     }
     return (
         <>
-            <div className={clsx(styles.modal, !props.cartList ? styles.unactive : "")}
-                onClick={()=> props.setCartList(false)}
+            <div className={clsx(styles.modal, !cartList ? styles.unactive : "")}
+                onClick={()=> dispatch(setCartList(false))}
             ></div>
-            <div className={clsx(styles.modalBox, props.cartList ? styles.active : "")}>
+            <div className={clsx(styles.modalBox, cartList ? styles.active : "")}>
                 <div className={clsx(styles.modalHeader)}>
                     <h1>My Cart</h1>
                     <span className={clsx(styles.btnCloseModal)}
-                        onClick={()=> props.setCartList(false)}
+                        onClick={()=> dispatch(setCartList(false))}
                     >
-                        <i class="fa-solid fa-angle-right"></i>
+                        <i className="fa-solid fa-angle-right"></i>
                     </span>
                 </div>
                 <div className={clsx(styles.modalBody)}>
@@ -100,7 +104,7 @@ const Cart = (props) => {
                                         <div className={clsx(styles.boxChangeQuantity)}>
                                             <div className={clsx(styles.changeQuantity)}>
                                                 <button className={clsx(styles.controlQuantity, styles.controlLeft)}>-</button>
-                                                <input type="text" required name='qtyProduct' defaultValue="1"/>
+                                                <input type="text" required name='qtyProduct'/>
                                                 <button className={clsx(styles.controlQuantity, styles.controlRight)}>+</button>
                                             </div>
                                             <span>x $76.00</span>
@@ -127,7 +131,9 @@ const Cart = (props) => {
                                         <div className={clsx(styles.boxChangeQuantity)}>
                                             <div className={clsx(styles.changeQuantity)}>
                                                 <button className={clsx(styles.controlQuantity, styles.controlLeft)}>-</button>
-                                                <input type="text" required name='qtyProduct' value="1"/>
+                                                <input type="text" required name='qtyProduct' value={inputQuantity} 
+                                                    onChange={(e)=>{setInputQuantity(e.target.value)}}
+                                                />
                                                 <button className={clsx(styles.controlQuantity, styles.controlRight)}>+</button>
                                             </div>
                                             <span>x $76.00</span>
@@ -313,7 +319,7 @@ const Cart = (props) => {
                                         onClick={()=> setWindowNote(!windowNote)}
                                     >
                                         <span>
-                                            <i class="fa-regular fa-clipboard"></i>
+                                            <i className="fa-regular fa-clipboard"></i>
                                         </span>
                                         <p>Note</p>
                                     </div>
@@ -322,7 +328,7 @@ const Cart = (props) => {
                                         onClick={()=> setWindowShipping(!windowShipping)}
                                     >
                                         <span>
-                                            <i class="fa-solid fa-truck-fast"></i>
+                                            <i className="fa-solid fa-truck-fast"></i>
                                         </span>
                                         <p>Shipping</p>
                                     </div>
@@ -330,7 +336,7 @@ const Cart = (props) => {
                                         onClick={()=> setWindowCoupon(!windowCoupon)}
                                     >
                                         <span>
-                                            <i class="fa-solid fa-percent"></i>
+                                            <i className="fa-solid fa-percent"></i>
                                         </span>
                                         <p>Coupon</p>
                                     </div>
@@ -345,7 +351,7 @@ const Cart = (props) => {
                                     <span>Coupon</span>
                                     <Tooltip id="tooltip-removeCoupon" />
                                     <div className={clsx(styles.couponChild)} data-tooltip-id="tooltip-removeCoupon" data-tooltip-content="remove">
-                                        <i class="fa-solid fa-xmark"></i>
+                                        <i className="fa-solid fa-xmark"></i>
                                         <button>NS30</button>
                                         <p>-$120.60</p>
                                     </div>
@@ -371,7 +377,7 @@ const Cart = (props) => {
                             </div>
                             <div className={clsx(styles.noteFreeshipSuccess)}>
                                 <span className={clsx(styles.iconNoteFreeship)}>
-                                    <i class="fa-regular fa-circle-check" style={{color: "#37c347"}}></i>
+                                    <i className="fa-regular fa-circle-check" style={{color: "#37c347"}}></i>
                                 </span>
                                 <span className={clsx(styles.textNoteFreeship)}>Congratulations! You've got free shipping.</span>
                             </div>
@@ -398,11 +404,13 @@ const Cart = (props) => {
                         <span
                             onClick={() => {setWindowNote(false)}}
                         >
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </span>
                     </p>
                     <p className={clsx(styles.addNoteTitle)}>Add note</p>
-                    <textarea name="titleAddNote" id="titleAddNote">Notes about your order, e.g. special notes for delivery</textarea>
+                    <textarea name="titleAddNote" id="titleAddNote"
+                        placeholder='Notes about your order, e.g. special notes for delivery'
+                    ></textarea>
                     <button
                         onClick={handleSaveNote}
                     >
@@ -414,13 +422,13 @@ const Cart = (props) => {
                         onClick={() => {setWindowShipping(false)}}
                     >
                         <span>
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </span>
                     </div>
                     <h1 className={clsx(styles.shippingTitle)}>Estimate shipping rates</h1>
 
                     <form action="#">
-                        <select name="nameCountry" id="nameCountry" defaultValue={"Viet Nam"} data-show-subtext="true" data-live-search="true"
+                        <select name="nameCountry" id="nameCountry" value="Viet Nam" data-show-subtext="true" data-live-search="true"
                             className={clsx(styles.inputShipping)}
                         >
                             <option value="Afghanistan">Afghanistan</option>
@@ -694,7 +702,7 @@ const Cart = (props) => {
                         <span
                             onClick={() => setWindowCoupon(false)}
                         >
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </span>
                     </div>
                     <h1 className={clsx(styles.couponTitle)}>Select an available coupon</h1>

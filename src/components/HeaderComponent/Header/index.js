@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
@@ -8,52 +8,70 @@ import Compare from '../Compare';
 import Search from '../Search';
 import LoginRegistry from '../LoginRegistry';
 import MobileNavbar from '../MobileNavbar';
+import { useSelector, useDispatch } from 'react-redux';
+import { setWistList, setCartList, setSearch, setCompareList, setLoginRegistry, setMobileNavbar } from '../../../redux/slices/headerStateSlice';
 
 const Header = () => {
-    const [wistList, setWistlist] = useState(false);
-    const [cartList, setCartList] = useState(false);
-    const [compareList, setCompareList] = useState(false);
-    const [search, setSearch] = useState(false);
-    const [loginRegistry, setLoginRegistry] = useState(false);
-    const [mobileNavbar, setMobileNavbar] = useState(false);
+    const dispatch = useDispatch();
+    const wishlist = useSelector(state => state.headerStates.wistList);
+    const cartList = useSelector(state => state.headerStates.cartList);
+    const search = useSelector(state => state.headerStates.search);
+    const compareList = useSelector(state => state.headerStates.compareList);
+    const loginRegistry = useSelector(state => state.headerStates.loginRegistry);
+    const mobileNavbar = useSelector(state => state.headerStates.mobileNavbar);
 
+    const [stateScollDown, setStateScollDown] = useState(false);
+    const compareStore = useSelector((state)=>state.compare.compareList);
+    const wistListStore = useSelector((state) => state.wishlist.wishLists);
+
+    useEffect(()=>{
+        function handleScrollY(){
+            if(window.scrollY > 100){
+                setStateScollDown(true)
+            }else{
+                setStateScollDown(false)
+            }
+        }
+        window.addEventListener("scroll", handleScrollY)
+        return () => window.removeEventListener("scroll", handleScrollY)
+    }, [])
 
     const toggleMobileNavbar = useCallback((e) => {
         e.stopPropagation()
-        setMobileNavbar(prevState => !prevState)
-    })
+        dispatch(setMobileNavbar(!mobileNavbar))
+    }, [])
 
     const toggleWishlist = useCallback((e) => {
         e.stopPropagation()
-        setWistlist(prevState => !prevState)
+        dispatch(setWistList(!wishlist))
     }, [])
 
     const toggleCartList = useCallback((e) => {
         e.stopPropagation()
-        setCartList(prevState => !prevState)
+        dispatch(setCartList(!cartList))
     }, [])
     const toggleCompareList = useCallback((e) => {
         e.stopPropagation()
-        setCompareList(prevState => !prevState)
+        dispatch(setCompareList(!compareList))
     }, [])
 
     const toggleSearch = useCallback((e) => {
         e.stopPropagation()
-        setSearch(prevState => !prevState)
+        dispatch(setSearch(!search))
     }, [])
     const toggleOpenLoginRegistry = useCallback((e) => {
         e.stopPropagation()
-        setLoginRegistry(prevState => !prevState)
+        dispatch(setLoginRegistry(!loginRegistry))
     }, [])
 
     return (
         <header>
-            <div className={clsx(styles.container)}>
+            <div className={clsx(styles.container, stateScollDown ?  styles.scollDown : "")}>
                 <div className={clsx(styles.headerOneParent)}>
                     <div className={clsx(styles.headerOne)}>
                         <div className={clsx(styles.headerOneLeft)}>
                             <span>
-                                <i class="fa-solid fa-computer"></i>
+                                <i className="fa-solid fa-computer"></i>
                                 Add anything here or just remove it...
                             </span>
                         </div>
@@ -82,15 +100,12 @@ const Header = () => {
                                 onClick={toggleOpenLoginRegistry}
                             >
                                 <span>
-                                    <i class="fa-regular fa-circle-user"></i>
+                                    <i className="fa-regular fa-circle-user"></i>
                                     Login / Registry
                                 </span>
                             </div>        
                         </div>
-                        <LoginRegistry
-                            loginRegistry={loginRegistry}
-                            setLoginRegistry={setLoginRegistry}
-                        />
+                        <LoginRegistry/>
                     </div>
                 </div>
                 <div className={clsx(styles.headerTwo)}>
@@ -100,15 +115,13 @@ const Header = () => {
                         <div className={clsx(styles.mobile, styles.menu)}
                             onClick={toggleMobileNavbar}
                         >
-                            <i class="fa-solid fa-bars"></i>
+                            <i className="fa-solid fa-bars"></i>
                         </div>
-                        <MobileNavbar setMobileNavbar={setMobileNavbar} mobileNavbar={mobileNavbar}
-                            loginRegistry={loginRegistry} setLoginRegistry={setLoginRegistry}
-                        />
+                        <MobileNavbar/>
                         <div className={clsx(styles.mobile, styles.search)}
                             onClick={toggleSearch}
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
 
@@ -128,7 +141,7 @@ const Header = () => {
                                     className={clsx(styles.navlink)}
                                 >
                                     PAGES
-                                    <i class="fa-solid fa-angle-down"></i>
+                                    <i className="fa-solid fa-angle-down"></i>
                                 </NavLink>
                                 <ul>
                                     <li>
@@ -245,7 +258,7 @@ const Header = () => {
                                 styles.userControllerMobile,
                             )}
                         >
-                            <i class="fa-regular fa-circle-user"
+                            <i className="fa-regular fa-circle-user"
                                 onClick={toggleOpenLoginRegistry}
                             ></i>
                         </div>
@@ -256,13 +269,10 @@ const Header = () => {
                             )}
                             onClick={toggleCartList}
                         >
-                            <i class="fa-solid fa-bag-shopping"></i>
+                            <i className="fa-solid fa-bag-shopping"></i>
                             <span>0</span>
                         </div>
-                        <Cart
-                            cartList={cartList}
-                            setCartList={setCartList}
-                        ></Cart>
+                        <Cart></Cart>
                         <div
                             className={clsx(
                                 styles.userControllerItem,
@@ -270,11 +280,12 @@ const Header = () => {
                             )}
                             onClick={toggleWishlist}
                         >
-                            <i class="fa-regular fa-heart"></i>
-                            <span>4</span>
+                            <i className="fa-regular fa-heart"></i>
+                            {wistListStore && wistListStore.length > 0 ? (<span>{wistListStore.length}</span>) : ""}
+                            
                             
                         </div>
-                        <Wishlist wistList={wistList} setWistlist={setWistlist}></Wishlist>
+                        <Wishlist></Wishlist>
                         <div
                             className={clsx(
                                 styles.userControllerItem,
@@ -282,10 +293,11 @@ const Header = () => {
                             )}
                             onClick={toggleCompareList}
                         >
-                            <i class="fa-solid fa-rotate-left"></i>
-                            <span>4</span>
+                            <i className="fa-solid fa-rotate-left"></i>
+                            {compareStore && compareStore.length > 0 ?  <span>{compareStore.length}</span> : ""}
+                           
                         </div>
-                        <Compare compareList={compareList} setCompareList={setCompareList}></Compare>
+                        <Compare></Compare>
                         <div
                             className={clsx(
                                 styles.userControllerItem,
@@ -293,32 +305,29 @@ const Header = () => {
                             )}
                             onClick={toggleSearch}
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <Search
-                            search={search}
-                            setSearch={setSearch}
-                        ></Search>
+                        <Search></Search>
                     </div>
                 </div>
                 <div className={clsx(styles.navigationMobileBox)}>
                     <div className={clsx(styles.navigationMobile)}>
                         <NavLink to="/"  className={clsx(styles.itemNavigation)}>
-                            <i class="fa-solid fa-house"></i>
+                            <i className="fa-solid fa-house"></i>
                             <span>Shop</span>
                         </NavLink>
 
                         <div className={clsx(styles.itemNavigation)}
                             onClick={toggleSearch}
                         >
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i className="fa-solid fa-magnifying-glass"></i>
                             <span>Search</span>
                         </div>
 
                         <div className={clsx(styles.itemNavigation)}
                             onClick={toggleWishlist}    
                         >
-                            <i class="fa-regular fa-heart"></i>
+                            <i className="fa-regular fa-heart"></i>
                             <span>Wishlist</span>
                         </div>
                     </div>

@@ -4,8 +4,27 @@
     >.navigationMobileBox{
         display: none;
     }
+    margin-bottom: 18px;
+}
+.container.scollDown{
+    background-color: #fff;
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    >.headerOneParent{
+        height: 0;
+        visibility: hidden;
+    }
+    >.headerTwo{
+        padding: 4px 0;
+    }
 }
 .headerOneParent {
+    visibility: visible;
+    height: auto;
     border-bottom: 1px solid #f1f1f1;
 }
 .headerOne {
@@ -96,6 +115,8 @@
                 margin: 0 18px;
                 position: relative;
                 padding: 12px 0;
+                z-index: 20;
+               
                 > ul {
                     display: none;
                     position: absolute;
@@ -103,6 +124,7 @@
                     border: 1px solid #ececec;
                     padding: 20px 0;
                     width: 230px;
+                    background-color: #fff;
                     > li {
                         > .navlink {
                             color: #000;
@@ -207,10 +229,12 @@
     .container {
     
         >.navigationMobileBox{
+            z-index: 20;
+            background-color: #fff;
             border-top: 1px solid #dbdbdb;
             display: block;
             position: fixed;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             right: 0;
             >.navigationMobile{

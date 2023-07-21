@@ -1,0 +1,222 @@
+.productItem{
+    cursor: pointer;
+    .productItemDetail{
+        > .productImageBox{ 
+            position: relative;
+            overflow: hidden;
+            .frontImage{
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                transition: all 0.1s ease-in-out;
+                opacity: 1;
+            }
+            .backImage{
+                transition: all 0.1s ease-in-out;
+                visibility: hidden;
+                position: absolute;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                top: 0;
+                left: 0;
+                opacity: 0.7;
+            }
+            >.saleTitle{
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: #83b738;
+                color: #fff;
+                border-radius: 24px;
+                padding: 1px 8px;
+                font-weight: 500;
+                font-size: 1.2rem;
+            }
+            >.productAction{
+                width: 100%;
+                bottom: 0;
+                margin: 0 auto;
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #fff;
+                transform: translateY(110%);
+                transition: all 0.1s ease-in-out;
+                >.btnActionProduct{
+                    border: none;
+                    margin: 0 8px;
+                    background-color: #fff;
+                    >i{
+                        display: inline-block;
+                        font-size: 1.2rem;
+                        width: 35px;
+                        height: 35px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        color: #333;
+                        border: 1px solid #c2c2c2;
+                    }
+                    &:hover{
+                       
+                        >i{ 
+                            background-color: #0F9D8A;
+                            color: #fff;
+                        }
+                    }
+                }
+                >.btnWishlist{
+                    >i.active{
+                        color: #FF0000;
+                    }
+                    &:hover{
+                        >i.active{
+                            color: #fff;
+                        }
+                    }
+                }
+                >.btnActionCompare{
+                    >i.active{
+                        color: #0F9D8A;
+                    }
+                    &:hover{
+                        >i.active{
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        >.productInfoDetail{
+            margin-top: 22px;
+            >.productCategory{
+                text-align: center;
+                font-size: 1.2rem;
+                color: #999;
+                text-transform: uppercase;
+
+            }
+            .linkToDetail{
+                text-decoration: none;
+            }
+            .productName{
+                text-decoration: none;
+                color: #000;
+                font-size: 1.6rem;
+                text-align: center;
+                font-weight: 500;
+                &:hover{
+                    color: #0F9D8A;
+                }
+            }
+            >.productPrice{
+                font-size: 1.6rem;
+                text-align: center;
+                font-weight: 400;
+                margin-bottom: 8px;
+               
+            }
+        
+            >.listProductColor{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                >.itemProductColor{
+                    margin: 0 6px;
+                    height: 15px;
+                    width: 15px;
+                    border-radius: 50%;
+                    border: 1px solid transparent;
+                }
+                >.itemProductColor.active, >.itemProductColor:hover{
+                    border: 2px solid #666;
+                }
+            }
+
+            >.listSizeProduct{
+                margin-top: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                >.itemProductSize{
+                    margin: 0 6px;
+                    padding: 0px 8px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    color: #ccc;
+                    font-size: 0.9rem;
+                    font-weight: 500;
+                }
+                >.itemProductSize.active, >.itemProductSize:hover{
+                    border: 1px solid #000;
+                    color: #000;
+                }
+            }
+        }
+    }
+    &:hover > .productItemDetail > .productImageBox{
+        .frontImage{
+            opacity: 0.7;
+        }
+        .backImage{
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+    &:hover > .productItemDetail > .productImageBox > .productAction{
+        bottom: 15%;
+    }
+
+}
+@media (max-width: 991.98px){
+    .productItem{
+        .productItemDetail{
+            > .productImageBox{
+                >.productAction{
+                    transform: translateY(0);
+                    >.btnActionProduct{
+                        margin: 0 6px;
+                    }
+                }
+               
+            }
+        }
+        &:hover > .productItemDetail > .productImageBox{
+            .frontImage{
+                visibility: visible;
+                opacity: 1;
+            }
+            .backImage{
+                opacity: 1;
+                visibility: hidden;
+            
+            }
+        }
+    }
+    .productItem:hover > .productItemDetail > .productImageBox > .productAction{
+        bottom: 0%;
+    }
+}
+@media (max-width: 575.98px){
+    
+    .productItem{
+        .productItemDetail{
+            > .productImageBox{
+                >.productAction{
+                   
+                    >.btnActionProduct{
+                        margin: 0 3px;
+                        >i{
+                            width: 30px;
+                            height: 30px;
+                        }
+                    }
+                }
+               
+            }
+        }
+    }
+}

@@ -2,21 +2,24 @@ import React, { useState } from 'react';
 import styles from "./Search.module.scss"
 import clsx from "clsx"
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearch } from '../../../redux/slices/headerStateSlice';
 
-
-const Search = ({search, setSearch}) => {
+const Search = () => {
+    const dispatch = useDispatch();
+    const search = useSelector(state => state.headerStates.search);
     const [textSearch, setTextSearch] = useState("")
     return (
         <>
             <div className={clsx(styles.modal, !search ? styles.unactive : "") }
-                onClick={()=>setSearch(false)}
+                onClick={()=>dispatch(setSearch(false))}
             ></div>
             <div className={clsx(styles.modalBox, search ? styles.active : "")}>
                 <div className={clsx(styles.modalHeader)}>
                     <span
-                        onClick={()=>setSearch(false)}
+                        onClick={()=>dispatch(setSearch(false))}
                     >
-                        <i class="fa-solid fa-xmark"></i>
+                        <i className="fa-solid fa-xmark"></i>
                     </span>
                 </div>
                 <div className={clsx(styles.bodyModal)}>
@@ -32,10 +35,10 @@ const Search = ({search, setSearch}) => {
                         {textSearch && <span className={clsx(styles.controlInputSearch)}
                             onClick={()=>setTextSearch("")}
                         >
-                            <i class="fa-solid fa-xmark"></i>
+                            <i className="fa-solid fa-xmark"></i>
                         </span>}
                         <span className={clsx(styles.mobileClose)}
-                            onClick={()=>setSearch(false)}
+                            onClick={()=>dispatch(setSearch(false))}
                         >
                             <i className="fa-solid fa-angle-up"></i>
                         </span>
