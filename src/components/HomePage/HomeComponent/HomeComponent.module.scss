@@ -1,0 +1,161 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.listItemIntroduct {
+}
+
+.itemIntroduct {
+    position: relative;
+    cursor: pointer;
+    padding: 0 8px;
+    > .boxImage {
+        overflow: hidden;
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: 0.3s all ease-in-out;
+        }
+    }
+    &:hover > .boxImage > img {
+        transform: scale(1.05);
+    }
+    > .itemIntroductContent {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        padding-top: 40px;
+        padding-left: 40px;
+        > .titleIntroductProduct {
+            font-size: 2.2rem;
+            line-height: 1.3;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        > .onSale {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+        > .linkShopNow {
+            color: #000;
+            font-size: 1.4rem;
+            font-weight: 500;
+        }
+    }
+}
+.bannerSaleOffNewDesign {
+    width: 100%;
+    margin-top: 40px;
+    position: relative;
+    padding: 12px 0;
+    height: 280px;
+    &:hover > img {
+        opacity: 0.8;
+    }
+    > img {
+        transition: 0.3s;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    > .containerBannerNewDesign {
+        width: 500px;
+        position: absolute;
+        top: 10%;
+        left: 20%;
+
+        > .bannerDesignName {
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        > .bannerConntent {
+            font-size: 40px;
+            > span {
+                color: #0f9d8a;
+            }
+            margin-bottom: 24px;
+        }
+        > .shopnowLinkBannerDesign {
+            border-radius: 24px;
+            padding: 12px 26px;
+            background-color: #0f9d8a;
+            color: #fff;
+            font-size: 1.3rem;
+            letter-spacing: 1.2px;
+            font-weight: 500;
+            display: inline-block;
+            text-decoration: none;
+            text-transform: uppercase;
+            &:hover {
+                background-color: #0e8e7d;
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width: 991.98px) {
+    .container {
+        width: 100%;
+    }
+    .itemIntroduct {
+        > .itemIntroductContent {
+            padding-top: 20px;
+            padding-left: 30px;
+            > .titleIntroductProduct {
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+            }
+            > .onSale {
+                margin-bottom: 12px;
+                font-size: 1.2rem;
+            }
+            > .linkShopNow {
+                font-size: 1.2rem;
+            }
+        }
+    }
+    .listServices {
+        margin: 0px;
+    }
+    .boxItemServices {
+        padding: 7px;
+    }
+}
+@media (max-width: 575.98px) {
+    .container {
+        width: 100%;
+    }
+    .bannerSaleOffNewDesign {
+        > .containerBannerNewDesign {
+            width: auto;
+            position: absolute;
+            top: 10%;
+            left: 5%;
+
+            > .bannerDesignName {
+                font-size: 1.2rem;
+            }
+            > .bannerConntent {
+                font-size: 2.4rem;
+                > span {
+                    color: #0f9d8a;
+                }
+                margin-bottom: 24px;
+            }
+            > .shopnowLinkBannerDesign {
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

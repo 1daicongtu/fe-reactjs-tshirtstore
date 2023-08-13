@@ -1,72 +1,94 @@
 import { useCallback, useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Wishlist from '../Wishlist';
-import Cart from "../Cart"
+import Cart from '../Cart';
 import Compare from '../Compare';
 import Search from '../Search';
-import LoginRegistry from '../LoginRegistry';
+import Login from '../Login';
 import MobileNavbar from '../MobileNavbar';
 import { useSelector, useDispatch } from 'react-redux';
-import { setWistList, setCartList, setSearch, setCompareList, setLoginRegistry, setMobileNavbar } from '../../../redux/slices/headerStateSlice';
+import {
+    setWistList,
+    setCartList,
+    setSearch,
+    setCompareList,
+    setLogin,
+    setMobileNavbar,
+} from '../../../redux/slices/headerStateSlice';
+import PopupProductQuickView from '../../PopupProductQuickView';
+import Register from '../Register';
+import { logout } from '../../../redux/slices/userLogin';
 
 const Header = () => {
     const dispatch = useDispatch();
-    const wishlist = useSelector(state => state.headerStates.wistList);
-    const cartList = useSelector(state => state.headerStates.cartList);
-    const search = useSelector(state => state.headerStates.search);
-    const compareList = useSelector(state => state.headerStates.compareList);
-    const loginRegistry = useSelector(state => state.headerStates.loginRegistry);
-    const mobileNavbar = useSelector(state => state.headerStates.mobileNavbar);
+    const wishlist = useSelector((state) => state.headerStates.wistList);
+    const cartList = useSelector((state) => state.headerStates.cartList);
+    const search = useSelector((state) => state.headerStates.search);
+    const compareList = useSelector((state) => state.headerStates.compareList);
+    const login = useSelector(
+        (state) => state.headerStates.login,
+    );
+    const mobileNavbar = useSelector(
+        (state) => state.headerStates.mobileNavbar,
+    );
 
     const [stateScollDown, setStateScollDown] = useState(false);
-    const compareStore = useSelector((state)=>state.compare.compareList);
+    const compareStore = useSelector((state) => state.compare.compareList);
     const wistListStore = useSelector((state) => state.wishlist.wishLists);
 
-    useEffect(()=>{
-        function handleScrollY(){
-            if(window.scrollY > 100){
-                setStateScollDown(true)
-            }else{
-                setStateScollDown(false)
+    const loginUserInfo = useSelector((state) => state.userLogin.user);
+
+    useEffect(() => {
+        function handleScrollY() {
+            if (window.scrollY > 100) {
+                setStateScollDown(true);
+            } else {
+                setStateScollDown(false);
             }
         }
-        window.addEventListener("scroll", handleScrollY)
-        return () => window.removeEventListener("scroll", handleScrollY)
-    }, [])
+        window.addEventListener('scroll', handleScrollY);
+        return () => window.removeEventListener('scroll', handleScrollY);
+    }, []);
 
     const toggleMobileNavbar = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setMobileNavbar(!mobileNavbar))
-    }, [])
+        e.stopPropagation();
+        dispatch(setMobileNavbar(!mobileNavbar));
+    }, []);
 
     const toggleWishlist = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setWistList(!wishlist))
-    }, [])
+        e.stopPropagation();
+        dispatch(setWistList(!wishlist));
+    }, []);
 
     const toggleCartList = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setCartList(!cartList))
-    }, [])
+        e.stopPropagation();
+        dispatch(setCartList(!cartList));
+    }, []);
     const toggleCompareList = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setCompareList(!compareList))
-    }, [])
+        e.stopPropagation();
+        dispatch(setCompareList(!compareList));
+    }, []);
 
     const toggleSearch = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setSearch(!search))
-    }, [])
+        e.stopPropagation();
+        dispatch(setSearch(!search));
+    }, []);
     const toggleOpenLoginRegistry = useCallback((e) => {
-        e.stopPropagation()
-        dispatch(setLoginRegistry(!loginRegistry))
-    }, [])
+        e.stopPropagation();
+        dispatch(setLogin(!login));
+    }, []);
 
     return (
         <header>
-            <div className={clsx(styles.container, stateScollDown ?  styles.scollDown : "")}>
+            <div
+                className={clsx(
+                    styles.container,
+                    stateScollDown ? styles.scollDown : '',
+                )}
+            >
+                <div style={{ width: '100%', height: '1px' }}></div>
                 <div className={clsx(styles.headerOneParent)}>
                     <div className={clsx(styles.headerOne)}>
                         <div className={clsx(styles.headerOneLeft)}>
@@ -76,7 +98,7 @@ const Header = () => {
                             </span>
                         </div>
                         <div className={clsx(styles.headerOneRight)}>
-                            <div className={clsx(styles.headerOneRightItem)}>
+                            {/* <div className={clsx(styles.headerOneRightItem)}>
                                 <p>English</p>
                                 <ul>
                                     <li>Deutsch</li>
@@ -91,34 +113,85 @@ const Header = () => {
                                     <li>Indian Rupee (INR)</li>
                                     <li>Pound (GBP)</li>
                                 </ul>
-                            </div>
-                            <div
-                                className={clsx(
-                                    styles.headerOneRightItem,
-                                    styles.account,
-                                )}
-                                onClick={toggleOpenLoginRegistry}
-                            >
-                                <span>
-                                    <i className="fa-regular fa-circle-user"></i>
-                                    Login / Registry
-                                </span>
-                            </div>        
+                            </div> */}
+                            {
+                                loginUserInfo 
+                                ?
+                            
+                                <div
+                                    className={clsx(
+                                        styles.headerOneRightItem,
+                                        styles.dropdownUser,
+                                        styles.account
+                                    )}
+                                >
+                                    <span>
+                                            <i class="fa-regular fa-address-card"></i>
+                                            Hello {loginUserInfo.firstName}!
+                                    </span>
+                                    <ul>
+                                        <li>
+                                            <Link to={"/my-account"}>Dashboard</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/my-account"}>Order</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/my-account"}>Address</Link>
+                                        </li>
+                                        <li>
+                                            <Link to={"/my-account"}>Account Details</Link>
+                                        </li>
+                                        <li className={clsx(styles.logoutBox)}
+                                            onClick={()=>{dispatch(logout())}}
+                                        >    
+                                            <span >
+                                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                                Log out
+                                            </span>
+                                            
+                                        </li>
+                                    </ul>
+                                </div>
+                                : 
+                                <div
+                                    className={clsx(
+                                        styles.headerOneRightItem,
+                                        styles.account,
+                                    )}
+                                    onClick={toggleOpenLoginRegistry}
+                                >
+                                    <span>
+                                        <i className="fa-regular fa-circle-user"></i>
+                                        Login / Registry
+                                    </span>
+                                </div>
+                            }
+                            
+
                         </div>
-                        <LoginRegistry/>
+                        <Login />
+                        <Register/>
                     </div>
                 </div>
                 <div className={clsx(styles.headerTwo)}>
                     <div className={clsx(styles.boxLogoImage)}>
-                        <img src="https://i.imgur.com/Hc92VcL.png" alt="logo" />
+                        <Link to="/">
+                            <img
+                                src="https://i.imgur.com/Hc92VcL.png"
+                                alt="logo"
+                            />
+                        </Link>
 
-                        <div className={clsx(styles.mobile, styles.menu)}
+                        <div
+                            className={clsx(styles.mobile, styles.menu)}
                             onClick={toggleMobileNavbar}
                         >
                             <i className="fa-solid fa-bars"></i>
                         </div>
-                        <MobileNavbar/>
-                        <div className={clsx(styles.mobile, styles.search)}
+                        <MobileNavbar />
+                        <div
+                            className={clsx(styles.mobile, styles.search)}
                             onClick={toggleSearch}
                         >
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -258,7 +331,8 @@ const Header = () => {
                                 styles.userControllerMobile,
                             )}
                         >
-                            <i className="fa-regular fa-circle-user"
+                            <i
+                                className="fa-regular fa-circle-user"
                                 onClick={toggleOpenLoginRegistry}
                             ></i>
                         </div>
@@ -281,9 +355,11 @@ const Header = () => {
                             onClick={toggleWishlist}
                         >
                             <i className="fa-regular fa-heart"></i>
-                            {wistListStore && wistListStore.length > 0 ? (<span>{wistListStore.length}</span>) : ""}
-                            
-                            
+                            {wistListStore && wistListStore.length > 0 ? (
+                                <span>{wistListStore.length}</span>
+                            ) : (
+                                ''
+                            )}
                         </div>
                         <Wishlist></Wishlist>
                         <div
@@ -294,8 +370,11 @@ const Header = () => {
                             onClick={toggleCompareList}
                         >
                             <i className="fa-solid fa-rotate-left"></i>
-                            {compareStore && compareStore.length > 0 ?  <span>{compareStore.length}</span> : ""}
-                           
+                            {compareStore && compareStore.length > 0 ? (
+                                <span>{compareStore.length}</span>
+                            ) : (
+                                ''
+                            )}
                         </div>
                         <Compare></Compare>
                         <div
@@ -312,20 +391,22 @@ const Header = () => {
                 </div>
                 <div className={clsx(styles.navigationMobileBox)}>
                     <div className={clsx(styles.navigationMobile)}>
-                        <NavLink to="/"  className={clsx(styles.itemNavigation)}>
+                        <NavLink to="/" className={clsx(styles.itemNavigation)}>
                             <i className="fa-solid fa-house"></i>
                             <span>Shop</span>
                         </NavLink>
 
-                        <div className={clsx(styles.itemNavigation)}
+                        <div
+                            className={clsx(styles.itemNavigation)}
                             onClick={toggleSearch}
                         >
                             <i className="fa-solid fa-magnifying-glass"></i>
                             <span>Search</span>
                         </div>
 
-                        <div className={clsx(styles.itemNavigation)}
-                            onClick={toggleWishlist}    
+                        <div
+                            className={clsx(styles.itemNavigation)}
+                            onClick={toggleWishlist}
                         >
                             <i className="fa-regular fa-heart"></i>
                             <span>Wishlist</span>
@@ -333,6 +414,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
+            <PopupProductQuickView />
         </header>
     );
 };

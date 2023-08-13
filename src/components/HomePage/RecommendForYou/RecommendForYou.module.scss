@@ -1,20 +1,20 @@
-.recommendForYou{
+.recommendForYou {
     width: 1200px;
     margin: 0 auto;
 }
-.titleRecommendForYou{
+.titleRecommendForYou {
     margin-top: 22px;
     text-align: center;
     font-weight: 500;
     font-size: 2.8rem;
 }
-.listCategory{
+.listCategory {
     padding-bottom: 4px;
     display: flex;
     list-style-type: none;
     align-items: center;
     justify-content: center;
-    >.itemCategory{
+    > .itemCategory {
         font-size: 1.5rem;
         margin: 0 16px;
         margin-top: 26px;
@@ -28,7 +28,8 @@
         border: 1px dashed transparent;
         border-radius: 24px;
     }
-    >.itemCategory.active, >.itemCategory:hover{
+    > .itemCategory.active,
+    > .itemCategory:hover {
         color: #000;
 
         border: 1px dashed #000;
@@ -36,24 +37,22 @@
     }
 }
 
-@media (max-width: 991.98px){
-    .recommendForYou{
+@media (max-width: 991.98px) {
+    .recommendForYou {
         width: unset;
     }
 }
-@media (max-width: 575.98px){
-
-    .recommendForYou{
+@media (max-width: 575.98px) {
+    .recommendForYou {
         margin: 0 8px;
     }
-    .listCategory{
+    .listCategory {
         white-space: nowrap;
         overflow-x: auto;
         justify-content: flex-start;
-        >.itemCategory{
+        > .itemCategory {
             margin-top: 14px;
             margin-bottom: 14px;
         }
     }
-    
 }

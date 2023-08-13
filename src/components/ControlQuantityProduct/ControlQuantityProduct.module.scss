@@ -1,0 +1,71 @@
+.productBtnControlGroup {
+    display: flex;
+    align-items: center;
+    -webkit-flex-flow: row;
+    flex-flow: row;
+    height: 40px;
+    margin: 24px 0;
+    > .btnControlQuantity {
+        display: flex;
+
+        > .inputQuantityProduct {
+            font-weight: 500;
+            width: 40px;
+            height: inherit;
+            display: inline-block;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            outline: none;
+            border: 1px solid #efefef;
+            flex: 1;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+        > .boxModifiedQuantity {
+            height: 100%;
+            > .btnChangeQuantityProduct {
+                width: 20px;
+                height: 20px;
+                border: 1px solid #efefef;
+                display: block;
+                background-color: #fff;
+                border-left: none;
+                &:hover {
+                    background-color: #ccc;
+                }
+            }
+            > .btnIncreaseQuantity {
+                border-top-right-radius: 4px;
+            }
+            > .btnDecreaseQuantity {
+                border-bottom-right-radius: 4px;
+            }
+        }
+    }
+    > .btnControlAddToCart {
+        margin-left: 6px;
+        border: none;
+        background-color: #0f9d8a;
+        color: #fff;
+        border-radius: 4px;
+        -webkit-flex: 1 1 auto;
+        flex: 1 1 auto;
+        height: 100%;
+        font-size: 1.2rem;
+        letter-spacing: 1.2px;
+        font-weight: 500;
+    }
+    > .btnControlBuyNow {
+        margin-left: 6px;
+        border: none;
+        background-color: #6ca300;
+        color: #fff;
+        border-radius: 4px;
+        height: 100%;
+        -webkit-flex: 1 1 auto;
+        flex: 1 1 auto;
+        font-size: 1.2rem;
+        letter-spacing: 1.2px;
+        font-weight: 500;
+    }
+}

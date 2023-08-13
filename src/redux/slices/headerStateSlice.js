@@ -1,14 +1,14 @@
-import { CreateSliceOptions, createSlice } from "@reduxjs/toolkit";
-
+import { CreateSliceOptions, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     wistList: false,
     cartList: false,
     search: false,
     compareList: false,
-    loginRegistry: false,
-    mobileNavbar: false
-}
+    login: false,
+    mobileNavbar: false,
+    register: false,
+};
 
 const headerStateSlice = createSlice({
     name: 'headerState',
@@ -26,14 +26,25 @@ const headerStateSlice = createSlice({
         setCompareList: (state, action) => {
             state.compareList = action.payload;
         },
-        setLoginRegistry: (state, action) => {
-            state.loginRegistry = action.payload;
+        setLogin: (state, action) => {
+            state.login = action.payload;
         },
         setMobileNavbar: (state, action) => {
             state.mobileNavbar = action.payload;
+        },
+        setRegister: (state, action) => {
+            state.register = action.payload;
         }
-    }
-})
+    },
+});
 
-export const {setWistList, setCartList, setSearch, setCompareList, setLoginRegistry, setMobileNavbar} = headerStateSlice.actions;
+export const {
+    setWistList,
+    setCartList,
+    setSearch,
+    setCompareList,
+    setLogin,
+    setMobileNavbar,
+    setRegister,
+} = headerStateSlice.actions;
 export default headerStateSlice.reducer;

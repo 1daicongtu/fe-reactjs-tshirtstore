@@ -1,41 +1,41 @@
-.modal{
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
     z-index: 25;
-    
 }
-.modalBoxGroup{
+.modalBoxGroup {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);    
+    transform: translate(-50%, -50%);
     z-index: 30;
     border-radius: 12px;
     width: 1200px;
     height: 80%;
     background-color: #fff;
 }
-.modalBox{
+.modalBox {
     position: relative;
     height: 100%;
     border-radius: inherit;
 }
-.modalHeader{
+.modalHeader {
     position: relative;
-    >.modalBtnClose{
+    > .modalBtnClose {
         position: absolute;
         top: 20px;
         right: 20px;
         padding: 10px;
         z-index: 45;
         cursor: pointer;
-        >i{
+        > i {
             font-size: 1.8rem;
-            &:hover{
+            &:hover {
                 /* red close */
                 color: #f00;
                 transition: 0.3s;
@@ -43,27 +43,27 @@
         }
     }
 }
-.modalBody{
+.modalBody {
     height: 100%;
     padding: 15px 10px;
-    >.modalBodyLeft{
+    > .modalBodyLeft {
         height: 100%;
         position: relative;
         overflow: hidden;
-        >div{
+        > div {
             height: 100%;
         }
-        .productImage > img{
+        .productImage > img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        >.btnControlImage{
+        > .btnControlImage {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-           
-            >i{
+            cursor: pointer;
+            > i {
                 font-size: 2rem;
                 width: 40px;
                 height: 40px;
@@ -75,36 +75,34 @@
                 background-color: #fff;
             }
             opacity: 0.5;
-            transition: .3s ease-in-out;
+            transition: 0.3s ease-in-out;
         }
-        &:hover > .btnPrevImage{
+        &:hover > .btnPrevImage {
             visibility: visible;
             left: 15px;
             opacity: 1;
         }
-        >.btnPrevImage{
+        > .btnPrevImage {
             left: 20px;
             visibility: hidden;
-           
         }
-        &:hover >.btnNextImage{
+        &:hover > .btnNextImage {
             visibility: visible;
             right: 15px;
             opacity: 1;
         }
-        >.btnNextImage{
+        > .btnNextImage {
             right: 20px;
             visibility: hidden;
-          
         }
-        >.viewDetailProduct{
+        > .viewDetailProduct {
             transform: translateY(0%);
-            transition: .3s ease-in-out;
+            transition: 0.3s ease-in-out;
             position: absolute;
             width: 100%;
-            
+
             padding: 12px 0;
-            
+
             text-align: center;
             text-decoration: none;
             font-size: 1.6rem;
@@ -113,298 +111,163 @@
             background-color: #0f9d8a;
             color: #ffff;
             left: 0;
-            
         }
-        &:hover >.viewDetailProduct{
+        &:hover > .viewDetailProduct {
             transform: translateY(-110%);
         }
     }
-    >.modalBodyRight{
+    > .modalBodyRight {
         height: 100%;
-        overflow-y: scroll;  
-        .linkToProductDetail{
+        overflow-y: scroll;
+        .linkToProductDetail {
             text-decoration: none;
             color: #000;
         }
-        .productName{
+        .productName {
             font-size: 2.4rem;
-            &:hover{
+            &:hover {
                 color: #0f9d8a;
             }
             margin-bottom: 12px;
         }
-        .storeImage{
+        .storeImage {
             height: 30px;
             width: 100px;
             box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             object-fit: cover;
             margin-bottom: 6px;
         }
-        .priceList, .productPriceTotal{
+        .priceList,
+        .productPriceTotal {
             font-size: 2rem;
             font-weight: 500;
             letter-spacing: 1.2px;
         }
-        .productPriceTotal{
+        .productPriceTotal {
             margin: 12px 0;
         }
-        .productDesc{
+        .productDesc {
             padding: 25px 0;
             font-size: 1.4rem;
             color: #777;
             text-align: justify;
         }
-        .productStyle{
+        .productStyle {
             font-size: 1.4rem;
             text-transform: uppercase;
             font-weight: 500;
             margin-bottom: 8px;
         }
-        .listProductImageDemo{
+        .listProductImageDemo {
             display: flex;
             flex-wrap: wrap;
-            .itemProductImageDemo{
+            .itemProductImageDemo {
                 width: 100px;
                 position: relative;
                 margin-right: 16px;
                 border-radius: 12px;
                 border: 1px solid #e8e5e5;
                 opacity: 0.6;
-                transition: .2s;
+                transition: 0.2s;
                 overflow: hidden;
                 padding: 12px 0;
-                >img{
+                > img {
                     width: 100%;
                     height: auto;
                     object-fit: cover;
                 }
-                >.itemProductImageNameValue{
-                    
+                > .itemProductImageNameValue {
                     text-align: center;
                     display: block;
-                    
+
                     font-size: 1.2rem;
                     font-weight: 500;
                 }
             }
-            .itemProductImageDemo.active, .itemProductImageDemo:hover{
+            .itemProductImageDemo.active,
+            .itemProductImageDemo:hover {
                 border: 1px solid #0f9d8a;
                 opacity: 1;
             }
+        }
 
-        }
-        .productColorName,  .productSize{
-            display: block;
-            margin-top: 12px;
-            font-size: 1.4rem;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-        .listColor{
-            display: flex;
-            align-items: center;
-            margin: 16px 0;
-            >.productColorItem{
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
-                margin-right: 20px;
-                border: 2px solid transparent;
-                cursor: pointer;
-                &:hover, &.active{
-                    transition: 0;
-                    border: 2px solid #0f9d8a;
-                }
-            }
-            >.productColorItem.active, >.productColorItem:hover{
-                border: 2px solid #0f9d8a;
-            }
-        }
-        .listSize{
-            display: flex;
-            align-items: center;
-            margin: 8px 0;
-            >.productSizeItem{
-                font-size: 1.4rem;
-                color: 000;
-                background-color: #fff;
-                border: 1px solid #ccc;
-                width: 30px;
-                height: 30px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 500;
-                margin-right: 20px;
-            }
-            .productSizeItem:hover, .productSizeItem.active{
-                border: 2px solid #0f9d8a;
-                color: #0f9d8a;
-            }
-        }
-        .clearSelect{
-            border: none;
-            font-size: 1.1rem;
-            letter-spacing: 1.3px;
-            background-color: #fff;
-            color: #666;
-            font-weight: 400;
-            &:hover{
-                text-decoration: underline;
-                color: #111;
-            }
-        }
-        .productBtnControlGroup{
-            display: flex;
-            align-items: center;
-            -webkit-flex-flow: row;
-            flex-flow: row;
-            height: 40px;
-            margin: 24px 0;
-            >.btnControlQuantity{
-                display: flex;
-                
-                >.inputQuantityProduct{
-                    font-weight: 500;
-                    width: 40px;
-                    height: inherit;
-                    display: inline-block;
-                    border-top-left-radius: 4px;
-                    border-bottom-left-radius: 4px;
-                    outline: none;
-                    border: 1px solid #efefef;
-                    flex: 1;
-                    text-align: center;
-                    font-size: 1.4rem;
-
-                }
-                >.boxModifiedQuantity{
-                    height: 100%;
-                   >.btnChangeQuantityProduct{
-                        width: 20px;
-                        height: 20px;
-                        border: 1px solid #efefef;
-                        display: block;
-                        background-color: #fff;
-                        border-left: none;
-                        &:hover{
-                            background-color: #ccc;
-                        }
-                   }
-                   >.btnIncreaseQuantity{
-                    border-top-right-radius: 4px;
-
-                   }
-                   >.btnDecreaseQuantity{
-                    border-bottom-right-radius: 4px;
-                   }
-                }
-            }
-            >.btnControlAddToCart{
-                margin-left: 6px;
-                border: none;
-                background-color: #0f9d8a;
-                color: #fff;
-                border-radius: 4px;
-                -webkit-flex: 1 1 auto;
-                flex: 1 1 auto;
-                height: 100%;
-                font-size: 1.2rem;
-                letter-spacing: 1.2px;
-                font-weight: 500;
-            }
-            >.btnControlBuyNow{
-                margin-left: 6px;
-                border: none;
-                background-color: #6CA300;
-                color: #fff;
-                border-radius: 4px;
-                height: 100%;
-                -webkit-flex: 1 1 auto;
-                flex: 1 1 auto;
-                font-size: 1.2rem;
-                letter-spacing: 1.2px;
-                font-weight: 500;
-            }
-        }
-        .skulTitle{
+        .skulTitle {
             font-weight: 500;
             font-size: 1.4rem;
-            >.skuValue{
+            > .skuValue {
                 margin-left: 6px;
                 font-weight: 400;
             }
             margin-bottom: 8px;
         }
-        .anotherInfo{
+        .anotherInfo {
             font-weight: 500;
             font-size: 1.4rem;
             margin-bottom: 8px;
-            >.antherInfoValue{
+            > .antherInfoValue {
                 color: #888;
                 font-weight: 500;
                 margin-left: 6px;
-                
+
                 font-size: 1.2rem;
                 text-decoration: none;
-                &:hover{
+                &:hover {
                     text-decoration: underline;
                 }
             }
         }
-        .boxShare{
+        .boxShare {
             margin-top: 20px;
             display: flex;
             align-items: center;
             font-size: 1.4rem;
-            >.boxTitle{
+            > .boxTitle {
                 color: #333;
-                span{
+                span {
                     margin-left: 8px;
                     display: inline-block;
                     font-weight: 500;
                 }
             }
-            a{
+            a {
                 margin-left: 20px;
                 color: #777;
                 text-decoration: none;
             }
-            a:hover{
+            a:hover {
                 color: #000;
             }
         }
     }
 }
-@media (max-width: 991.98px){
-    .modalBoxGroup{
+@media (max-width: 991.98px) {
+    .modalBoxGroup {
         width: 90%;
         overflow-y: auto;
         height: 500px;
-        .modalBody{
+        .modalBody {
             margin: 0;
             width: 100%;
             padding: 0;
-            >.modalBodyRight{
+            > .modalBodyRight {
                 padding: 25px;
             }
-            >.modalBodyLeft{
+            > .modalBodyLeft {
                 padding: 0;
-                >.viewDetailProduct{
+                > .viewDetailProduct {
                     bottom: 0;
                 }
-                &:hover >.viewDetailProduct{
+                &:hover > .viewDetailProduct {
                     transform: translateY(0);
                 }
 
-                .btnPrevImage{
+                .btnPrevImage {
                     visibility: visible;
                     left: 15px;
                     opacity: 1;
                 }
-               
-                >.btnNextImage{
+
+                > .btnNextImage {
                     visibility: visible;
                     right: 15px;
                     opacity: 1;
@@ -412,35 +275,43 @@
             }
         }
     }
-   
 }
-@media (max-width: 575.98px){
-    .modalBoxGroup{
+@media (max-width: 575.98px) {
+    .modalBoxGroup {
         width: 95%;
-        
+
         height: 90%;
         padding: 10px;
+
+        .modalBox > .modalBody > .modalBodyRight {
+            padding: 10px 12px;
+        }
+        .modalBox > .modalBody > .modalBodyLeft {
+            padding: 10px 12px;
+        }
     }
+
     .modalBody {
         width: 100%;
-        >.modalBodyLeft{
+
+        > .modalBodyLeft {
             height: unset;
-            >.viewDetailProduct{
+            > .viewDetailProduct {
                 bottom: 100%;
             }
-            &:hover >.viewDetailProduct{
+            &:hover > .viewDetailProduct {
                 transform: translateY(0);
             }
         }
-        >.modalBodyRight{
+        > .modalBodyRight {
             overflow: unset;
-            .boxShare{
+            .boxShare {
                 padding-bottom: 24px;
             }
         }
     }
-  
-    .productItem > .productItemDetail > .productImageBox > .productAction{
+
+    .productItem > .productItemDetail > .productImageBox > .productAction {
         bottom: 20%;
     }
 }

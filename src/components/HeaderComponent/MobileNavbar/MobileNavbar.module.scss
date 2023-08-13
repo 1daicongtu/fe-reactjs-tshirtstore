@@ -1,19 +1,17 @@
-.modal{
+.modal {
     display: none;
 }
-.modalBox{
+.modalBox {
     display: none;
 }
-@media (max-width: 991.98px){
-
+@media (max-width: 991.98px) {
 }
 @media (max-width: 575.98px) {
-
-    .modal.unactive{
+    .modal.unactive {
         visibility: hidden;
         opacity: 0;
     }
-    .modal{
+    .modal {
         visibility: visible;
         display: block;
         position: fixed;
@@ -21,7 +19,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        transition: .4s;
+        transition: 0.4s;
         z-index: 1;
         overflow: auto;
         background-color: rgba(0, 0, 0, 0.4);
@@ -29,10 +27,10 @@
         cursor: pointer;
         backdrop-filter: blur(4px);
     }
-    .modalBox.active{
+    .modalBox.active {
         transform: translateX(0%);
     }
-    .modalBox{
+    .modalBox {
         display: block;
         visibility: visible;
         transform: translateX(-110%);
@@ -45,20 +43,19 @@
         top: 0;
         bottom: 0;
         left: 0;
-        transition: .4s;
+        transition: 0.4s;
         margin-bottom: 66px;
-        >.modalHeader{
+        > .modalHeader {
             background-color: #fff;
             z-index: 11;
             padding: 9px 0;
             position: relative;
-            >.btnCloseModal{
+            > .btnCloseModal {
                 position: absolute;
                 right: -40px;
-                top: 50%;
+                top: 150%;
                 transform: translateY(-50%);
-                >i{
-                  
+                > i {
                     font-size: 2rem;
                     width: 45px;
                     height: 45px;
@@ -67,16 +64,16 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-                    &:hover{
+                    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                    &:hover {
                         background-color: #0f9d8a;
                         color: #fff;
                     }
                 }
-                
             }
         }
-        >.modalBody{
+        > .modalBody {
             padding: 0 18px;
             padding-top: 50px;
             position: absolute;
@@ -89,29 +86,26 @@
             flex-direction: column;
             justify-content: space-between;
             overflow-y: auto;
-            >.bodyNavigation{
+            > .bodyNavigation {
                 margin-top: 18px;
-                >.itemNavigation{
-                    >li{
+                > .itemNavigation {
+                    > li {
                         height: auto;
                         border-top: 1px solid #efefee;
                         padding: 12px 0;
                         font-weight: 500;
-                        >.pagesTitle{
-                            
+                        > .pagesTitle {
                             display: flex;
                             justify-content: space-between;
-                            >.pageSeeMore{
+                            > .pageSeeMore {
                                 position: relative;
-                                
                             }
-                            >.unactive.pageSeeMore::after{
+                            > .unactive.pageSeeMore::after {
                                 transform: translate(-50%, -50%) rotate(90deg);
                                 height: 1px;
-                                
                             }
-                            >.pageSeeMore::before{
-                                content: "";
+                            > .pageSeeMore::before {
+                                content: '';
                                 position: absolute;
                                 top: 50%;
                                 right: 50%;
@@ -119,11 +113,10 @@
                                 height: 1px;
                                 width: 12px;
                                 background-color: #333;
-                                
                             }
-                            >.pageSeeMore::after{
+                            > .pageSeeMore::after {
                                 transition: 0.3s;
-                                content: "";
+                                content: '';
                                 position: absolute;
                                 height: 1px;
                                 width: 12px;
@@ -133,10 +126,10 @@
                                 transform: translate(-50%, -50%);
                             }
                         }
-                        >ul.active{
+                        > ul.active {
                             height: 450px;
                         }
-                        >ul{
+                        > ul {
                             overflow: hidden;
                             height: 0;
                             -webkit-transition: height 0.6s ease;
@@ -144,10 +137,10 @@
                             -o-transition: height 0.6s ease;
                             transition: height 0.6s ease;
 
-                            >li:hover> .linkItemPages{
+                            > li:hover > .linkItemPages {
                                 color: #0f9d8a;
                             }
-                            .linkItemPages{
+                            .linkItemPages {
                                 text-decoration: none;
                                 color: #333;
                                 padding: 10px 12px;
@@ -156,40 +149,38 @@
                             }
                         }
                     }
-                    >li:last-child{
+                    > li:last-child {
                         border-bottom: 1px solid #efefee;
                     }
                 }
             }
-            >.loginAndLanguague{
+            > .loginAndLanguague {
                 display: flex;
                 flex-direction: column;
-                >.loginBox{
+                > .loginBox {
                     margin: 0 -18px;
                     border-top: 1px solid #efefee;
-                    >button{
+                    > button {
                         border: none;
                         background-color: #fff;
                         display: flex;
                         width: 100%;
-                        
+
                         padding: 18px;
-                        i{
+                        i {
                             font-size: 1.8rem;
                             margin-right: 8px;
                         }
                     }
-                    
-
                 }
-                >.languageAndTypeOfMoney{
+                > .languageAndTypeOfMoney {
                     display: flex;
                     margin: 0 -18px;
 
-                    >.languageBox{
+                    > .languageBox {
                         flex: 1;
                         position: relative;
-                        >button{
+                        > button {
                             display: flex;
                             justify-content: space-between;
                             width: 100%;
@@ -197,34 +188,32 @@
                             padding: 12px 18px;
                             background-color: #f2f2f2;
                             position: relative;
-                            >span{
+                            > span {
                                 position: absolute;
                                 right: 20px;
-                                
                             }
                         }
-                        >ul.active{
+                        > ul.active {
                             display: block;
                         }
-                        >ul{
-                           
+                        > ul {
                             background-color: #fff;
                             position: absolute;
                             left: 0;
                             right: 0;
                             bottom: 100%;
                             display: none;
-                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-                            >li{
-                                padding:6px 18px;
-                            
+                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                                rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                            > li {
+                                padding: 6px 18px;
                             }
                         }
                     }
-                    >.typeOfMoney{
+                    > .typeOfMoney {
                         flex: 1;
                         position: relative;
-                        >button{
+                        > button {
                             display: flex;
                             justify-content: space-between;
                             width: 100%;
@@ -232,33 +221,30 @@
                             padding: 12px 18px;
                             background-color: #f2f2f2;
                             position: relative;
-                            >span{
+                            > span {
                                 position: absolute;
                                 right: 20px;
-                                
                             }
                         }
-                        >ul.active{
+                        > ul.active {
                             display: block;
                         }
-                        >ul{
-                           
+                        > ul {
                             background-color: #fff;
                             position: absolute;
                             left: 0;
                             right: 0;
                             bottom: 100%;
                             display: none;
-                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-                            >li{
-                                padding:6px 18px;
-                            
+                            box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+                                rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+                            > li {
+                                padding: 6px 18px;
                             }
                         }
                     }
                 }
             }
-
         }
     }
 }

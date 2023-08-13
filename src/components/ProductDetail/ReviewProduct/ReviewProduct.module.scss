@@ -1,0 +1,166 @@
+.reivewProductTitle{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 12px;
+}
+.reviewAvgReview{
+    font-size: 2.8rem;
+    color: #669900;
+    font-weight: 500;
+    .reviewAvgReviewTitle{
+        margin-left: 6px;
+        font-size: 1.6rem;
+        color: #333;
+        font-weight: 400;
+        
+    }
+    margin-bottom: 12px;
+}
+.reviewProductRatingItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    .reviewProductStar{
+        display: inline-block;
+        margin-right: 6px;
+        font-size: 1.2rem;
+        >i{
+            margin-right: 2px;
+        }
+        .productIconStarSolids{
+            color: #FF9C00;
+        }
+        .productIconStarRegulars{
+            color: #999;
+        }
+    }
+    
+}
+.reviewProductRating{
+    border-radius: 4px;
+    margin: 0 25px;
+    flex: auto;
+    background-color: #f2f2f2;
+    height: 12px;
+    position: relative;
+    .reviewProductRatingProgress{
+        border-radius: inherit;
+        position: absolute;
+        left: 0;
+        height: 100%;
+        
+    }
+    .reviewProductGood{
+        background-color: #0f9d8a;
+    }
+    .reviewProductBad{
+        background-color: #ff4d4f;
+    }
+}
+.reviewProductPercentage{
+    width: 30px;
+    font-size: 1.4rem;
+    color: #999;
+    text-align: right;
+}
+.labelRating{
+    font-size: 1.4rem;
+    color: #333;
+
+}
+.redRequired{
+    margin-left: 2px;
+    color: #ff4d4f;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+.yourRating{
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+.ratingFormList{
+    margin-left: 6px;
+    .productIconStarSolid{
+        font-size: 1.4rem;
+        color: #d2d2d2;
+        cursor: pointer;
+    }
+    .productIconStarSolid.active{
+        color: #FF9C00;
+    }
+}
+.productIconStarSolid{
+    font-size: 1.4rem;
+    color: #d2d2d2;
+    cursor: pointer;
+}
+.productIconStarSolid.active{
+    color: #FF9C00;
+}
+.reviewFormGroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    position: relative;
+}
+.msgError{
+    position: absolute;
+    top: 100%;
+    font-size: 1.4rem;
+    color: #ff4d4f;
+}
+.labelFormReview{
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.reviewInputForm{
+    outline: none;
+    border: 1px solid #e5e5e5;
+    padding: 10px 6px;
+    font-size: 1.4rem;
+    border-radius: 6px;
+}
+.reviewFormGroup> input[type="file"]{
+    font-size: 1.4rem;
+}
+.btnSubmitFormReview{
+    border: none;
+    outline: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1.4px;
+    color: #fff;
+    background-color: #0f9d8a;
+}
+.reviewItemError{
+    font-size: 1.4rem;
+}
+.reviewItem{
+    margin-bottom: 12px;
+}
+.reviewItemTitle{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    .reviewItemTitleName{
+        color: #000;
+        font-size: 1.4rem;
+        font-weight: 500;
+        
+    }   
+    .reviewItemTitleDate{
+        font-size: 1.4rem;
+    }
+    .reviewSpacing{
+        font-size: 1.4rem;
+        margin: 0 6px;
+    }
+}
+.reviewItemContent{
+    font-size: 1.4rem;
+}

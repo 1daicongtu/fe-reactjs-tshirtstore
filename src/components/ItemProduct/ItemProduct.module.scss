@@ -1,17 +1,17 @@
-.productItem{
+.productItem {
     cursor: pointer;
-    .productItemDetail{
-        > .productImageBox{ 
+    .productItemDetail {
+        > .productImageBox {
             position: relative;
             overflow: hidden;
-            .frontImage{
+            .frontImage {
                 width: 100%;
                 height: auto;
                 object-fit: cover;
                 transition: all 0.1s ease-in-out;
                 opacity: 1;
             }
-            .backImage{
+            .backImage {
                 transition: all 0.1s ease-in-out;
                 visibility: hidden;
                 position: absolute;
@@ -22,7 +22,7 @@
                 left: 0;
                 opacity: 0.7;
             }
-            >.saleTitle{
+            > .saleTitle {
                 position: absolute;
                 top: 10px;
                 left: 10px;
@@ -33,7 +33,7 @@
                 font-weight: 500;
                 font-size: 1.2rem;
             }
-            >.productAction{
+            > .productAction {
                 width: 100%;
                 bottom: 0;
                 margin: 0 auto;
@@ -44,11 +44,11 @@
                 background-color: #fff;
                 transform: translateY(110%);
                 transition: all 0.1s ease-in-out;
-                >.btnActionProduct{
+                > .btnActionProduct {
                     border: none;
                     margin: 0 8px;
                     background-color: #fff;
-                    >i{
+                    > i {
                         display: inline-block;
                         font-size: 1.2rem;
                         width: 35px;
@@ -60,88 +60,86 @@
                         color: #333;
                         border: 1px solid #c2c2c2;
                     }
-                    &:hover{
-                       
-                        >i{ 
-                            background-color: #0F9D8A;
+                    &:hover {
+                        > i {
+                            background-color: #0f9d8a;
                             color: #fff;
                         }
                     }
                 }
-                >.btnWishlist{
-                    >i.active{
-                        color: #FF0000;
+                > .btnWishlist {
+                    > i.active {
+                        color: #ff0000;
                     }
-                    &:hover{
-                        >i.active{
+                    &:hover {
+                        > i.active {
                             color: #fff;
                         }
                     }
                 }
-                >.btnActionCompare{
-                    >i.active{
-                        color: #0F9D8A;
+                > .btnActionCompare {
+                    > i.active {
+                        color: #0f9d8a;
                     }
-                    &:hover{
-                        >i.active{
+                    &:hover {
+                        > i.active {
                             color: #fff;
                         }
                     }
                 }
             }
         }
-        >.productInfoDetail{
+        > .productInfoDetail {
             margin-top: 22px;
-            >.productCategory{
+            > .productCategory {
                 text-align: center;
                 font-size: 1.2rem;
                 color: #999;
                 text-transform: uppercase;
-
             }
-            .linkToDetail{
+            .linkToDetail {
                 text-decoration: none;
             }
-            .productName{
+            .productName {
                 text-decoration: none;
                 color: #000;
                 font-size: 1.6rem;
                 text-align: center;
                 font-weight: 500;
-                &:hover{
-                    color: #0F9D8A;
+                &:hover {
+                    color: #0f9d8a;
                 }
             }
-            >.productPrice{
+            > .productPrice {
                 font-size: 1.6rem;
                 text-align: center;
                 font-weight: 400;
                 margin-bottom: 8px;
-               
             }
-        
-            >.listProductColor{
+
+            > .listProductColor {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                >.itemProductColor{
+                > .itemProductColor {
                     margin: 0 6px;
                     height: 15px;
                     width: 15px;
                     border-radius: 50%;
                     border: 1px solid transparent;
                 }
-                >.itemProductColor.active, >.itemProductColor:hover{
+                > .itemProductColor.active,
+                > .itemProductColor:hover {
                     border: 2px solid #666;
                 }
             }
 
-            >.listSizeProduct{
+            > .listSizeProduct {
                 margin-top: 8px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                >.itemProductSize{
+                > .itemProductSize {
                     margin: 0 6px;
                     padding: 0px 8px;
                     border: 1px solid #ccc;
@@ -150,72 +148,70 @@
                     font-size: 0.9rem;
                     font-weight: 500;
                 }
-                >.itemProductSize.active, >.itemProductSize:hover{
+                > .itemProductSize.active,
+                > .itemProductSize:hover {
                     border: 1px solid #000;
                     color: #000;
                 }
             }
         }
     }
-    &:hover > .productItemDetail > .productImageBox{
-        .frontImage{
+    &:hover > .productItemDetail > .productImageBox {
+        .frontImage {
             opacity: 0.7;
         }
-        .backImage{
+        .backImage {
             visibility: visible;
             opacity: 1;
         }
     }
-    &:hover > .productItemDetail > .productImageBox > .productAction{
+    &:hover > .productItemDetail > .productImageBox > .productAction {
         bottom: 15%;
     }
-
 }
-@media (max-width: 991.98px){
-    .productItem{
-        .productItemDetail{
-            > .productImageBox{
-                >.productAction{
+@media (max-width: 991.98px) {
+    .productItem {
+        .productItemDetail {
+            > .productImageBox {
+                > .productAction {
                     transform: translateY(0);
-                    >.btnActionProduct{
+                    > .btnActionProduct {
                         margin: 0 6px;
                     }
                 }
-               
             }
         }
-        &:hover > .productItemDetail > .productImageBox{
-            .frontImage{
+        &:hover > .productItemDetail > .productImageBox {
+            .frontImage {
                 visibility: visible;
                 opacity: 1;
             }
-            .backImage{
+            .backImage {
                 opacity: 1;
                 visibility: hidden;
-            
             }
         }
     }
-    .productItem:hover > .productItemDetail > .productImageBox > .productAction{
+    .productItem:hover
+        > .productItemDetail
+        > .productImageBox
+        > .productAction {
         bottom: 0%;
     }
 }
-@media (max-width: 575.98px){
-    
-    .productItem{
-        .productItemDetail{
-            > .productImageBox{
-                >.productAction{
-                   
-                    >.btnActionProduct{
+@media (max-width: 575.98px) {
+    .productItem {
+        .productItemDetail {
+            > .productImageBox {
+                > .productAction {
+                    > .btnActionProduct {
                         margin: 0 3px;
-                        >i{
+                        > i {
                             width: 30px;
                             height: 30px;
                         }
                     }
                 }
-               
             }
         }
     }

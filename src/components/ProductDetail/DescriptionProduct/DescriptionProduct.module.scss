@@ -1,0 +1,78 @@
+.descriptionProductTitle{
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 16px;
+}
+.descriptionImg{
+    position: relative;
+    width: 100%;
+    img{
+        width: inherit;
+        object-fit: contain;
+    }
+    .stylesItemMark{
+        width: 34px;
+        height: 34px;
+        position: absolute;
+        z-index: 1;
+        .positionImg{
+            cursor: pointer;
+            width: inherit;
+            height: inherit;
+            background-color: #fff;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid #0f9d8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1 !important;
+            line-height: 0;
+        }
+        .positionScale{
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            display: block;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            opacity: 0;
+            z-index: 0;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            animation: nasa_pulsate 2s ease infinite;
+            background-color: #0f9d8a;
+        }
+    }
+    .shoulderPosition{
+        top: 23%;
+        left: 21%;
+    }
+    .handPosition{
+        top: 50%;
+        left: 45%;
+    }
+    .elbowPosition{
+        bottom: 18%;
+        right: 18%;
+    }
+}
+
+@keyframes nasa_pulsate {
+    0%{
+        transform: scale(.2);
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.8;
+    }
+    100%{
+        transform: scale(1.4);
+        opacity: 0;
+    }
+}

@@ -1,0 +1,134 @@
+.compareBox{
+    width: 100%;
+    overflow-x: auto;
+
+}
+
+table.compareTable{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 32px;
+    
+    
+    border-collapse: collapse;
+    th{
+        font-size: 1.6rem;
+        background-color: #f4f4f4;
+        text-align: left;
+        font-weight: 500;
+    }
+    th,td{
+        
+        padding: 16px;
+        border: 1px solid #ddd;
+    }
+    td{
+        min-width: 250px;
+        text-align: center;
+    }
+    .productCompare{
+        a{
+            text-decoration: none;
+        }
+        img{
+         
+            object-fit: cover;
+        }
+        .productName{
+            margin-top: 12px;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+            text-decoration: none;
+            &:hover{
+                color: #0f9d8a;
+            }
+        }
+        .productCost{
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #000;
+            margin-bottom: 10px;
+        }
+        .productAddToCart{
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 12px 24px;  
+            background-color: #f76b6a;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            transition: .3s;
+            &:hover{
+                background-color: #f54543;
+            }
+        }
+        .productDescription{
+            font-weight: 400;
+            font-size: 1.4rem;
+           
+        }
+        .productAvailability{
+            font-size: 1.4rem;
+        }
+        .instock{
+            color: #0f9d8a;
+
+        }
+        .outstock{
+            color: #f54543;
+        }
+        .productShared{
+            font-size: 1.4rem;
+            font-weight: 400;
+           
+        }
+        .btnRemoveItem{
+            border: none;
+            background-color: transparent;
+            font-size: 1.4rem;
+            &:hover{
+                color: #f54543;
+            }
+        }
+    }
+}
+.emptyComapre{
+    text-align: center;
+    margin-top: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.iconEmpty{
+   
+    display: block;
+    font-size: 26rem;
+    color: #ccc;
+}
+.emptyComapreText{
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 20px;
+   
+    margin-top: 20px;
+}
+.btnEmptyCompare{
+
+    border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 12px 24px;  
+            background-color: #f76b6a;
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            transition: .3s;
+            &:hover{
+                background-color: #f54543;
+            }
+}

@@ -1,0 +1,56 @@
+.productDetailPathBox {
+    position: relative;
+}
+.productImagePath {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+.productPathContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    > .productName {
+        font-size: 2.2rem;
+        font-weight: 500;
+        color: #000;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    > .productTreePath {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        .productPathLink {
+            color: #000;
+            font-size: 1.4rem;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+                color: #0f9d8a;
+            }
+        }
+        p.productPathLink:hover {
+            text-decoration: none;
+            color: #000;
+        }
+        .productPathIcon {
+            display: block;
+            line-height: 0.2;
+        }
+        > li {
+            margin-left: 8px;
+        }
+    }
+}
+
+@media (max-width: 991.98px) {
+  
+}
+@media (max-width: 575.98px) {
+    .productPathContent{
+        width: 100%;
+    }
+}

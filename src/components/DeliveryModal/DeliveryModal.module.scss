@@ -1,0 +1,97 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.4);    
+    transition: all 300ms ease;
+    z-index: 20; 
+    opacity: 0;
+}
+.modal.activeModal{
+    visibility: visible;
+    opacity: 1;
+}
+.modalBox.activeModal{
+    visibility: visible;
+    opacity: 1;
+    
+    .modalBoxDetail{
+        background-color: #fff;
+        padding: 30px 50px;
+        border-radius: 4px;
+        -webkit-transform: translateY(px) perspective(600px) rotateX(0deg);
+        -moz-transform: translateY(0px) perspective(600px) rotateX(0deg);
+        -ms-transform: translateY(0px) perspective(600px) rotateX(0deg);
+        -o-transform: translateY(0px) perspective(600px) rotateX(0deg);
+        transform: translateY(0px) perspective(600px) rotateX(0deg);
+        transition: all 300ms ease;
+    }
+}
+.modalBox{
+    visibility: hidden;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 300ms ease all;
+    .modalClose{
+        display: block;
+        text-align: right;
+        font-size: 1.8rem;
+        cursor: pointer;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        &:hover{
+            // red close button
+            color: #f02015;
+        }
+    }    
+    .modalBoxDetail{
+        background-color: #fff;
+        padding: 30px 50px;
+        border-radius: 4px;
+        -webkit-transform: translateY(20px) perspective(600px) rotateX(10deg);
+        -moz-transform: translateY(20px) perspective(600px) rotateX(10deg);
+        -ms-transform: translateY(20px) perspective(600px) rotateX(10deg);
+        -o-transform: translateY(20px) perspective(600px) rotateX(10deg);
+        transform: translateY(20px) perspective(600px) rotateX(10deg);
+        transition: all 300ms ease;
+    }
+}
+
+.modalBodyTitle{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.modalBodyDesc{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #666;
+}
+.modalBodyDescLink{
+    color: #666;
+    display: inline-block;
+    margin-left: 8px;
+    &:hover{
+        
+        color: #0f9d8a;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .modalBox.activeModal{
+        
+        .modalBoxDetail{
+            transition: 0;
+            padding: 20px 8px;
+        }
+    }
+}

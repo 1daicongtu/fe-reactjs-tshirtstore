@@ -1,28 +1,27 @@
-.modal.unactive{
+.modal.unactive {
     visibility: hidden;
     opacity: 0;
-
 }
-.modal{
+.modal {
     visibility: visible;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 10;
     transition: 0.4s;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
     opacity: 1;
     cursor: pointer;
 }
-.modalBox.active{
+.modalBox.active {
     transform: translate(-50%, -50%);
     opacity: 1;
     visibility: visible;
 }
-.modalBox{
+.modalBox {
     opacity: 0.1;
     visibility: hidden;
     transition: 0.4s;
@@ -31,24 +30,23 @@
     left: 50%;
     transform: translate(-50%, -70%);
     background-color: #fff;
-    z-index: 10;
+    z-index: 20;
     width: 500px;
     border-radius: 6px;
     text-align: center;
-    >.modalHeader{
+    > .modalHeader {
         position: relative;
         padding: 16px 0;
         border-bottom: 1px solid #dddddd;
-        >.modalLogo{
-            
+        > .modalLogo {
         }
-        >.btnCloseModal{
+        > .btnCloseModal {
             cursor: pointer;
             top: 50%;
             transform: translateY(-50%);
             position: absolute;
             right: 20px;
-            i{
+            i {
                 font-size: 1.8rem;
                 width: 30px;
                 height: 30px;
@@ -56,74 +54,84 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                &:hover{
+                &:hover {
                     background-color: #e5e4e4;
                 }
             }
-
         }
     }
-    >.modalBody{
+    > .modalBody {
         margin: 0 15%;
-        >h3{
+        > h3 {
             margin: 25px 0;
             font-size: 2rem;
         }
-        >.labelUsername{
+         .labelUsername, >.labelPassword {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 4px;
-            >label{
+            > label {
                 font-weight: 500;
                 color: #333;
-                span{
+                span {
                     margin-left: 4px;
                     color: rgb(253, 32, 32);
                     font-size: 1.6rem;
                 }
             }
-            >.rememberPassword{
+            > .rememberPassword {
                 display: flex;
                 align-content: center;
-                input{
+                input {
                     margin-right: 4px;
                 }
             }
         }
-        >.inputForm{
-            display: block;
-            outline: none;
-            width: 100%;
-            border: 1px solid #dedede;
-            padding: 10px 6px;
-            border-radius: 4px;
-            margin-bottom: 20px;
+        .formGroup{
+            position: relative;
+            .inputForm {
+                display: block;
+                outline: none;
+                width: 100%;
+                border: 1px solid #dedede;
+                padding: 10px 6px;
+                border-radius: 4px;
+                margin-bottom: 20px;
+            }
+            .msgErr{
+                left: 0;
+                position: absolute;
+                top: 90%;
+                color: red;
+                font-size: 1.4rem;
+             
+            }
         }
-        >.labelPassword{
+         
+         .labelPassword {
             display: flex;
             justify-content: space-between;
-            >label{
-                >span{
-                    margin-left: 4px;
+            > label {
+                > span {
+                    margin-left: 2px;
                     color: rgb(253, 32, 32);
                     font-size: 1.6rem;
                 }
             }
-            >.lostPassword{
-                >.linkLostPassword{
+            > .lostPassword {
+                > .linkLostPassword {
                     text-decoration: none;
                     color: #666;
                     font-size: 1.4rem;
-                    &:hover{
+                    &:hover {
                         color: #0f9d8a;
                         text-decoration: underline;
                     }
                 }
-
             }
         }
-        >button{
+         .btnSubmit {
             width: 100%;
             background-color: #0f9d8a;
             border: none;
@@ -135,24 +143,28 @@
             font-size: 1.2rem;
             margin-bottom: 2rem;
         }
-        >.contentLogin{
+        .btnSubmit.disabled{
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        > .contentLogin {
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 12px;
-            &::before{
+            &::before {
                 z-index: 15;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                content: "";
+                content: '';
                 position: absolute;
                 width: 80%;
                 height: 1px;
                 background-color: #a1a1a1;
             }
-            >h4{
+            > h4 {
                 color: #666;
                 font-weight: 400;
                 position: relative;
@@ -163,10 +175,11 @@
                 padding: 0 24px;
             }
         }
-        >.linkWithSocial{
+        > .linkWithSocial {
             display: flex;
             justify-content: space-between;
-            >.itemSocial{
+            
+            > .itemSocial {
                 border: 1px solid #ccc;
                 border-radius: 4px;
                 text-decoration: none;
@@ -174,26 +187,28 @@
                 padding: 6px 32px;
                 display: flex;
                 align-items: center;
-                
-                i, svg{
+
+                i,
+                svg {
                     font-size: 2.2rem;
                     margin-right: 12px;
                 }
-                &:hover{
+                &:hover {
                     background-color: #f2f2f2;
                 }
             }
         }
-        h6{
+        h6 {
             margin-top: 24px;
             font-size: 1.4rem;
             color: #555;
             font-weight: 400;
-            >.createAccount{
+            > .createAccount {
+                cursor: pointer;
                 color: #0f9d8a;
                 margin-left: 6px;
                 font-size: 1.4rem;
-
+                text-decoration: underline;
             }
             margin-bottom: 42px;
         }
@@ -201,16 +216,25 @@
 }
 
 @media (max-width: 991.98px) {
-
 }
 
-
 @media (max-width: 575.98px) {
-    .modalBox{
+    .modalBox {
         max-width: 90%;
-        .modalBody{
+        max-height: 80%;
+        top: 45%;
+        overflow: auto;
+        .modalBody {
             margin: 0;
             padding: 0 18px;
+            padding-bottom: 12px;
+            > .linkWithSocial{
+                .itemSocial{
+                    width: 50%;
+                    padding-right: 12px;
+                    padding-left: 12px;
+                }
+            }
         }
     }
 }

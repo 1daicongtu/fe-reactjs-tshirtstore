@@ -1,0 +1,158 @@
+.modal.unactive {
+    visibility: hidden;
+    opacity: 0;
+}
+.modal {
+    visibility: visible;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    transition: 0.4s;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    cursor: pointer;
+}
+.modalBox.active {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    visibility: visible;
+}
+.modalBox {
+    opacity: 0.1;
+    visibility: hidden;
+    transition: 0.4s;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    background-color: #fff;
+    z-index: 20;
+    width: 500px;
+    border-radius: 6px;
+    text-align: center;
+    > .modalHeader {
+        position: relative;
+        padding: 16px 0;
+        border-bottom: 1px solid #dddddd;
+        > .modalLogo {
+        }
+        > .btnCloseModal {
+            cursor: pointer;
+            top: 50%;
+            transform: translateY(-50%);
+            position: absolute;
+            right: 20px;
+            i {
+                font-size: 1.8rem;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    background-color: #e5e4e4;
+                }
+            }
+        }
+    }
+    >.modalBody {
+        padding: 25px 0;
+        margin: 0 10%;
+       
+    }
+}
+.registerForm{
+    text-align: left;
+    .formGroup{
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        margin-bottom: 16px;
+        .formTitle{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .formTitle label{
+            
+            font-weight: 500;
+            color: #333;
+            span {
+                margin-left: 2px;
+                color: rgb(253, 32, 32);
+                font-size: 1.6rem;
+            }
+        }
+        .formInput{
+            display: block;
+            outline: none;
+            width: 100%;
+            border: 1px solid #dedede;
+            padding: 10px 6px;
+            border-radius: 4px;
+         
+        }
+        .showPwBox > label{
+            display: inline-block;
+            margin-left: 6px;
+        }
+    }
+}
+.msgErr{
+    position: absolute;
+    top: 90%;
+    color: red;
+    font-size: 1.4rem;
+    margin-top: 5px;
+}
+.btnSignUp{
+    margin-top: 8px;
+    width: 100%;
+    cursor: pointer;
+    width: 100%;
+    background-color: #0f9d8a;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    padding: 12px 0;
+    font-weight: 500;
+    letter-spacing: 1.8px;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+.alreadyAccount{
+    margin-top: 24px;
+            font-size: 1.4rem;
+            color: #555;
+            font-weight: 400;
+            > .goToLogin {
+                cursor: pointer;
+                color: #0f9d8a;
+                margin-left: 6px;
+                font-size: 1.4rem;
+                text-decoration: underline;
+            }
+}
+
+@media (max-width: 991.98px) {
+}
+
+@media (max-width: 575.98px) {
+    .modalBox {
+        top: 45%;
+        max-width: 90%;
+        max-height: 85%;
+        overflow: auto;
+        .modalBody {
+            margin: 0;
+            padding: 0px 18px;
+            padding-bottom: 6px;
+            
+        }
+    }
+}

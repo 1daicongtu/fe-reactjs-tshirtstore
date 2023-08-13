@@ -12,12 +12,12 @@
     backdrop-filter: blur(4px);
     transition: 0.7s;
 }
-.modal.unactive{
+.modal.unactive {
     opacity: 0;
     visibility: hidden;
 }
 
-.modalBox.active{
+.modalBox.active {
     transform: translateX(0%);
 }
 .modalBox {
@@ -127,10 +127,8 @@
     }
 }
 
-
 @media (max-width: 991.98px) {
     .modalBox {
-      
         width: 50%;
         right: 0;
         top: 0;
@@ -144,11 +142,10 @@
 
 @media (max-width: 575.98px) {
     .modalBox {
-      
         width: 80%;
-        >.modalBody{
+        > .modalBody {
             margin-top: 12px;
-            padding: 0 6px
+            padding: 0 6px;
         }
     }
 }

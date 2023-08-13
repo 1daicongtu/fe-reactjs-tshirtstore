@@ -1,0 +1,78 @@
+.listServices {
+    margin: -8px;
+
+    .boxItemServices {
+        padding: 8px;
+    }
+}
+.boxItemServices {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.itemServices {
+    text-align: center;
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 18px 0;
+    border-radius: 4px;
+    cursor: pointer;
+
+    > .titleService {
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        letter-spacing: 0.8px;
+    }
+    > .contentServices {
+        font-size: 1.4rem;
+        color: #999;
+        font-weight: 500;
+    }
+    > .iconServices {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 1.8rem;
+    }
+    &:hover > .iconServices {
+        animation: buzzOut 0.5s linear none;
+    }
+}
+@keyframes buzzOut {
+    10% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    20% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    30% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    40% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    50% {
+        transform: translateX(2px) rotate(1deg);
+    }
+    60% {
+        transform: translateX(-2px) rotate(-1deg);
+    }
+    70% {
+        transform: translateX(1px) rotate(0deg);
+    }
+    80% {
+        transform: translateX(-1px) rotate(0deg);
+    }
+    90% {
+        transform: translateX(1px) rotate(0deg);
+    }
+    100% {
+        transform: translateX(0px) rotate(0deg);
+    }
+}
+@media (max-width: 991.98px) {
+    
+    .listServices {
+        margin: 0px;
+    }
+   
+}
