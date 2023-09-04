@@ -73,7 +73,8 @@ const Compare = () => {
                                         <NavLink
                                             key={index}
                                             className={clsx(styles.itemProduct)}
-                                            to="/"
+                                            to={`/products/${product.productID}`}
+                                            onClick={()=>{dispatch(setCompareList(false))}}
                                         >
                                             <div
                                                 className={clsx(
@@ -152,14 +153,24 @@ const Compare = () => {
                             styles.modalBoxControl,
                         )}`}
                     >
-                        <button onClick={() => dispatch(clearAll())}>
-                            Clear All
-                        </button>
-                        <NavLink to={configs.routes.compare} className={styles.btnLetCompare}
-                            onClick={()=> dispatch(setCompareList(false))}
-                        >
-                            Let's Compare!
-                        </NavLink>
+                        {
+                            compareList.length == 0 
+                            ? 
+                            <>
+                                
+                            </>
+                            : 
+                            <>
+                                <button onClick={() => dispatch(clearAll())}>
+                                    Clear All
+                                </button>
+                                <NavLink to={configs.routes.compare} className={styles.btnLetCompare}
+                                    onClick={()=> dispatch(setCompareList(false))}
+                                >
+                                    Let's Compare!
+                                </NavLink>
+                            </>
+                        }
                     </div>
                 </div>
             </div>

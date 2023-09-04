@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, removeItemById } from '../../redux/slices/wishlistSlice';
+import { addItem, addOneWishlistToServer, deleteItemInWistListByProductID, removeItemById } from '../../redux/slices/wishlistSlice';
 import { addItemToCompareList } from '../../redux/slices/compareSlice';
 import clsx from 'clsx';
 import styles from './ItemProduct.module.scss';
@@ -14,6 +14,7 @@ import {
 } from '../../redux/slices/popupQuickViewProduct';
 
 const ItemProduct = ({ product }) => {
+    const userLogin = useSelector((state) => state.userLogin);  
     const dispatch = useDispatch();
     const listWishList = useSelector((state) => state.wishlist.wishLists)?.map(
         (product) => {
@@ -26,7 +27,8 @@ const ItemProduct = ({ product }) => {
         },
     );
     const [wishListTick, setWishListTick] = useState(
-        listWishList.includes(product.productID) ? true : false,
+        
+        listWishList && listWishList.includes(product.productID) ? true : false,
     );
 
     const [productDetailActive, setProductDetailActive] = useState(() => {
@@ -38,10 +40,21 @@ const ItemProduct = ({ product }) => {
 
     const toggleAddRemoveProductToWishList = (product) => {
         if (wishListTick) {
-            dispatch(removeItemById(product.productID));
+            if (userLogin.isLogin){
+                dispatch(deleteItemInWistListByProductID({userID : userLogin.user?._id,  productID: product.productID, productObjectId: product._id}));
+            } else {
+                dispatch(removeItemById(product.productID));
+            }
             setWishListTick(false);
         } else {
-            dispatch(addItem(product));
+            if (userLogin.isLogin){
+                // add one to server
+                dispatch(addOneWishlistToServer(
+                    {userID: userLogin.user?._id, product}
+                ))
+            }  else {
+                dispatch(addItem(product));
+            }
             setWishListTick(true);
         }
     };
@@ -114,7 +127,7 @@ const ItemProduct = ({ product }) => {
                                 toggleAddRemoveProductToWishList(product);
                             }}
                         >
-                            {listWishList.includes(product.productID) ? (
+                            {listWishList && listWishList.length > 0 && listWishList.includes(product.productID) ? (
                                 <i
                                     className={`fa-solid fa-heart  ${styles.active}`}
                                 ></i>
@@ -149,7 +162,7 @@ const ItemProduct = ({ product }) => {
                                         dispatch(setCompareList(true));
                                     }}
                                 >
-                                    {listCompare.includes(product.productID) ? (
+                                    {listCompare && listCompare.includes(product.productID) ? (
                                         <i
                                             className={`fa-solid fa-check ${styles.active}`}
                                         ></i>

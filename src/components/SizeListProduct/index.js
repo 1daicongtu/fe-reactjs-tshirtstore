@@ -2,11 +2,10 @@ import clsx from 'clsx';
 import styles from './SizeListProduct.module.scss';
 import { useEffect, useState } from 'react';
 
-const SizeListProduct = ({ product }) => {
-    const [sizeSelected, setSizeSelected] = useState(null);
+const SizeListProduct = ({ product, sizeSelected, handleSetaSizeSelected }) => {
 
     useEffect(() => {
-        setSizeSelected(product.size?.[0]);
+        handleSetaSizeSelected(product.size?.[0]);
     }, [product]);
 
     return (
@@ -21,7 +20,7 @@ const SizeListProduct = ({ product }) => {
                                 styles.productSizeItem,
                                 sizeSelected === size ? styles.active : '',
                             )}
-                            onClick={() => setSizeSelected(size)}
+                            onClick={() => handleSetaSizeSelected(size)}
                         >
                             {size}
                         </span>

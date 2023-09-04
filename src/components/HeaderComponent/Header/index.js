@@ -37,7 +37,7 @@ const Header = () => {
     const [stateScollDown, setStateScollDown] = useState(false);
     const compareStore = useSelector((state) => state.compare.compareList);
     const wistListStore = useSelector((state) => state.wishlist.wishLists);
-
+    const cartStore = useSelector((state)=> state.cart.cart)
     const loginUserInfo = useSelector((state) => state.userLogin.user);
 
     useEffect(() => {
@@ -344,7 +344,13 @@ const Header = () => {
                             onClick={toggleCartList}
                         >
                             <i className="fa-solid fa-bag-shopping"></i>
-                            <span>0</span>
+                            {
+                                cartStore && cartStore.length > 0 ? (
+                                    <span>{cartStore.length}</span>
+                                )
+                                : 
+                                ""
+                            }
                         </div>
                         <Cart></Cart>
                         <div

@@ -1,0 +1,42 @@
+.reviewItem{
+    margin-bottom: 12px;
+}
+.reviewItemTitle{
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    .reviewItemTitleName{
+        color: #000;
+        font-size: 1.4rem;
+        font-weight: 500;
+        
+    }   
+    .reviewItemTitleDate{
+        font-size: 1.4rem;
+    }
+    .reviewSpacing{
+        font-size: 1.4rem;
+        margin: 0 6px;
+    }
+}
+.productIconStarSolid{
+    font-size: 1.4rem;
+    color: #d2d2d2;
+    cursor: pointer;
+}
+.productIconStarSolid.active{
+    color: #FF9C00;
+}
+.reviewItemContent{
+    font-size: 1.4rem;
+}
+.boxGalery{
+    display: flex;
+    align-items: center;
+}
+.imageThumnailPreview{
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    object-fit: contain;
+}

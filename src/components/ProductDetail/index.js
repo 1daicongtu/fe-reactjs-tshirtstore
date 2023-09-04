@@ -25,9 +25,10 @@ import { getRandomNumberWithRange } from '../../utils/getRandomNumberWithRange';
 import { getDeliveryTime } from '../../utils/getDeliveryTime';
 import { setCompareList } from '../../redux/slices/headerStateSlice';
 import { addItemToCompareList } from '../../redux/slices/compareSlice';
-import { addItem, removeItemById } from '../../redux/slices/wishlistSlice';
+import { addItem, addOneWishlistToServer, deleteItemInWistListByProductID, removeItemById } from '../../redux/slices/wishlistSlice';
 import TreePath from '../TreePath';
 import configs from '../../config';
+import { handleDataAddToCart } from '../../utils/HandleWithCartList';
 
 const shareOnOtherSocial = [
     {
@@ -86,6 +87,7 @@ const ProductDetail = () => {
     const [tabServicesActive, setTabServicesActive] = useState(0);
     const [tabProductActive, setTabProductActive] = useState(0);
     const [imageThumnailSelected, setImageThumnailSelected] = useState(0);
+    const [sizeSelected, setSizeSelected] = useState(null);
 
     const listWishList = useSelector((state) => state.wishlist.wishLists)?.map(
         (product2) => {
@@ -106,13 +108,26 @@ const ProductDetail = () => {
     const [peoplePurchased, setPeoplePurchased] = useState(0);
     const [peopleWatching, setPeopleWatching] = useState(0);
     const [deliveryTime, setDeliveryTime] = useState("");
+
+    const userLogin = useSelector(state => state.userLogin)
     
     const toggleAddRemoveProductToWishList = (product) => {
         if (wishListTick) {
-            dispatch(removeItemById(product.productID));
+            if (userLogin.isLogin){
+                dispatch(deleteItemInWistListByProductID({userID : userLogin.user?._id,  productID: product.productID, productObjectId: product._id}));
+            } else {
+                dispatch(removeItemById(product.productID));
+            }
             setWishListTick(false);
         } else {
-            dispatch(addItem(product));
+            if (userLogin.isLogin){
+                // add one to server
+                dispatch(addOneWishlistToServer(
+                    {userID: userLogin.user?._id, product}
+                ))
+            }  else {
+                dispatch(addItem(product));
+            }
             setWishListTick(true);
         }
     };
@@ -237,6 +252,10 @@ const ProductDetail = () => {
             top: top - 100,
             behavior: "smooth"
         })
+    }
+
+    const handleSetSizeSelected = (size)=>{
+        setSizeSelected(size);
     }
 
     return product ? (
@@ -571,7 +590,10 @@ const ProductDetail = () => {
                                 product={product}
                                 setItemSelected={setProductStyleSelected}
                             />
-                            <SizeListProduct product={product}/>
+                            <SizeListProduct product={product}
+                                sizeSelected={sizeSelected}
+                                handleSetaSizeSelected={handleSetSizeSelected}
+                            />
 
                             <div className={clsx(styles.priceItemProductSelect)}>
                                 ${convertPriceInt(productDetailActive?.price)}
@@ -580,6 +602,7 @@ const ProductDetail = () => {
                             <ControlQuantityProduct
                                 quantity={quantity}
                                 setQuantity={setQuantity}
+                                dataAddToCart={handleDataAddToCart(product, productStyleSelected, sizeSelected, quantity, productDetailActive)}
                             />
                             
                             <div className={clsx(styles.listServices)}>

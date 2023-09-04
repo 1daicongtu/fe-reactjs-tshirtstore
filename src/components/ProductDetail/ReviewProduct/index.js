@@ -1,10 +1,15 @@
 import clsx from "clsx";
 import styles from "./ReviewProduct.module.scss"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { ref } from "yup";
-import {useForm} from "react-hook-form"
+import {get, set, useForm, useWatch} from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { addToastMessage } from "../../HeaderComponent/ToastMessage";
+import ItemComment from "./ItemComment";
+
 
 const validFileExtensions = { image: ['jpg', 'png', 'jpeg'] };
 
@@ -16,7 +21,8 @@ const validate = yup.object().shape({
     reviewName: yup.string().required("Vui lòng nhập tên"),
     reviewEmail: yup.string().required("Vui lòng nhập email").email("Email không hợp lệ"),
     reviewContent: yup.string().required("Vui lòng nhập nội dung"),
-    imgReview: yup.mixed().test("is-valid-type", "Vui lòng chọn file ảnh", (value)=> {
+    imgReview: yup.mixed()
+        .test("is-valid-type", "Vui lòng chọn file ảnh", (value)=> {
         
         if (value.length === 0) return true;
         let flag = true;
@@ -28,22 +34,228 @@ const validate = yup.object().shape({
         })
 
         return flag;
-    })
+        })
+        .test("is-valid-count", "Vui lòng chọn tối đa 3 file ảnh", (value)=> {
+            if (value.length === 0) return true;
+            return value.length <= 3;
+        })
 })
 
 const ReviewProduct = ({product}) => {
     const [starVote, setStarVote] = useState(5);
-    
+    const userLogin = useSelector(state => state.userLogin)
     const refStar = useRef(5)
+    const [rateComments, setRateComments] = useState([]);
+    const [updateReview, setUpdateReview] = useState(false);
+    let refProduct = useRef(null);
+    let refSettingComment = useRef({
+        page: 1,
+        limit: 5
+    })
 
-    const {register, handleSubmit, formState: { errors, isValid }} = useForm({
+
+    const [commentShow, setCommentShow] = useState({
+        isMax: false,
+        data: []
+    });
+   
+
+    const {register, handleSubmit, getValues, reset, setValue , formState: { errors, isValid, isSubmitting }, control } = useForm({
         mode: "onChange",
         resolver: yupResolver(validate)
     });
 
-    const handleSubmitForm = (data) => {
+
+    useWatch({ control , name: "imgReview"})
+
+    useEffect(()=>{
+        if (userLogin.user){
+            setValue("reviewName", userLogin.user.firstName)
+            setValue("reviewEmail", userLogin.user.email)
+        } else {
+            setValue("reviewName", "")
+            setValue("reviewEmail", "")
+        }
+    }, [userLogin])
+
+    useEffect(()=>{
+        const getRateComments = async()=>{
+            try {
+                const res = await axios.get(`${process.env.REACT_APP_PROXY}/comments/get-rate-comment`,
+                {
+                    params: {
+                        productID: product.productID
+                    }
+                }) 
+                
+                if (res.status === 200 && res.data.result){
+                    setRateComments(res.data.result);
+                } else {
+                    setRateComments([]);
+                }
+                
+            } catch (error) {
+                setRateComments([]);
+            }
+    
+        }
+        getRateComments();
+    }, [product, updateReview])
+
+
+    useEffect(()=>{
+        refSettingComment.current = {
+            page: 1,
+            limit: 5
+        }
+    }, [product])
+
+    useEffect(()=>{
+        const getCommentShow = async()=>{
+            try {
+                const params = {
+                    productID: product.productID,
+                    page: refSettingComment.current.page,
+                    limit: refSettingComment.current.limit
+                }
+                if (refProduct.current !== product){
+                    params.page = 1;
+                    params.limit = 5
+                }
+              
+                const res = await axios.get(`${process.env.REACT_APP_PROXY}/comments/get-comment`,
+                {
+                    params
+                }) 
+               
+                if (res.status === 200 && res.data.result && refProduct.current === product){
+                    let newData = await getNewCommentWithImageDimension(res.data.result)
+                
+                    setCommentShow({isMax: res.data.isMax, data: [...commentShow.data, ...newData]});
+                }
+                else if (res.status === 200 && res.data.result && refProduct.current !== product){
+                    let newData = await getNewCommentWithImageDimension(res.data.result)
+                    
+
+                    setCommentShow({isMax: res.data.isMax, data: [...newData]});
+                }
+                else {
+                    setCommentShow({isMax: false, data: []});
+                }
+                
+            } catch (error) {
+                setCommentShow({isMax: false, data: []});
+            }
+    
+        }
+        getCommentShow();
+        return ()=>{
+            refProduct.current = product;
+        }
+    }, [refSettingComment, updateReview, product])
+
+    const getNewCommentWithImageDimension = async (comments)=>{
+        if (!comments && comments.length === 0){
+            return [];
+        }
+        let newData = await Promise.all(comments.map(async (comment, indexCmt)=>{
+            let newImages = null;
+            if (comment.images && comment.images.length > 0){
+                newImages = await Promise.all(comment.images.map( async (item)=>{
+                
+                    const  {width, height} = await getImageDimensions(item.url)
+                    
+                    return {
+                        ...item,
+                        width,
+                        height
+                    }
+                }))
+            }
+            return {
+                ...comment,
+                images: newImages
+            }
+           
+        }))
+        return newData;
+    }
+
+    const getAvgRating = (rateComments) => {
+        if (rateComments.length === 0) return 0;
+        let totalRating = 0;
+        let totalCount = 0;
+        totalCount = rateComments.reduce((a, b) => a + b.count, 0);
+        totalRating = rateComments.reduce((a, b) => a + (b.count * b.star), 0);
+        return (totalRating / totalCount).toFixed(2);
+    }
+    const getPercentageRating = (rateComments, star) => {
+        if (rateComments.length === 0) return 0;
+        let totalCount = 0;
+        totalCount = rateComments.reduce((a, b) => a + b.count, 0);
+
+        let countVote = 0;
+        for (let rateComment of rateComments){
+            if (rateComment.star === star){
+                countVote = rateComment.count;
+                break;
+            }
+        }
+        return Math.floor(countVote / totalCount * 100)
+
+
+    }
+
+    const handleSubmitForm = async(data) => {
         if (isValid){
-            console.log(data)
+            
+            let finalData = new FormData();
+
+            finalData.append("data", JSON.stringify({
+                productID: product.productID,
+                rating: starVote,
+                comment: data.reviewContent,
+                name: data.reviewName,
+                email: data.reviewEmail,
+                userID: userLogin.user ? userLogin.user._id : null
+                    
+            }))
+            
+            for (let file of data.imgReview){
+
+                finalData.append("images", file)
+            }
+
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_PROXY}/comments/post-comment`, finalData,
+                    {
+                        headers: {
+                        'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                )
+                if (res.status === 200){
+                    addToastMessage(
+                        {
+                            title: "Thành công",
+                            message: "Đánh giá của bạn đã được gửi thành công",
+                            type: "success"
+                        }
+                    )
+                    reset();
+                    if (userLogin.user){
+                        setValue("reviewName", userLogin.user.firstName)
+                        setValue("reviewEmail", userLogin.user.email)
+                    }
+                    setUpdateReview(!updateReview)
+                }
+            } catch (error) {
+                addToastMessage({
+                    title: "Thất bại",
+                    message: "Đánh giá của bạn chưa được gửi thành công",
+                    type: "error"
+                })
+            }
         }
     }
 
@@ -51,16 +263,21 @@ const ReviewProduct = ({product}) => {
         <div className={clsx(styles.reviewProduct)}>
             <div className={` row `}>
                 <div className={`col col-xs-12 col-md-6 col-lg-6`}>
-                    <p className={clsx(styles.reivewProductTitle)}>Based On 0 Reviews</p>
+                    <p className={clsx(styles.reivewProductTitle)}>Based On {
+                        rateComments.length > 0 
+                        &&
+                        rateComments.reduce((a, b) => a + b.count, 0)
+                    } Reviews</p>
 
                     <p className={clsx(styles.reviewAvgReview)}>
-                        0.00
+                        {getAvgRating(rateComments)}
                         <span className={clsx(styles.reviewAvgReviewTitle)}>Overall</span>
                     </p>
 
                     <div className={clsx(styles.reviewProductRatingList)}>
                         {
                             Array(5).fill().map((v1,index)=>{
+                                const percent = getPercentageRating(rateComments, 5-index)
                                 return (
                                     <div
                                         key={index}
@@ -88,10 +305,10 @@ const ReviewProduct = ({product}) => {
                                         </div>
                                         <div className={clsx(styles.reviewProductRating)}>
                                             
-                                            <div className={clsx(styles.reviewProductRatingProgress, styles.reviewProductGood)} style={{width: "22%"}}>
+                                            <div className={clsx(styles.reviewProductRatingProgress, styles.reviewProductGood)} style={{width: `${percent}%`}}>
                                             </div>
                                         </div>
-                                        <p className={clsx(styles.reviewProductPercentage)}>0%</p>
+                                        <p className={clsx(styles.reviewProductPercentage)}>{percent}%</p>
                                     </div>
                                 )
                             })
@@ -99,7 +316,7 @@ const ReviewProduct = ({product}) => {
                     </div>
                 </div>
                 <div className={`col col-xs-12 col-md-6 col-lg-6`}>
-                    <p className={clsx(styles.reivewProductTitle)}>Be The First To Review “Rayshard Brooks”</p>
+                    <p className={clsx(styles.reivewProductTitle)}>Be The First To Review {`"${product.productName}"`}</p>
 
                     <form action="" method="POST"
                         onSubmit={handleSubmit(handleSubmitForm)}
@@ -168,29 +385,63 @@ const ReviewProduct = ({product}) => {
                             <div className={`col col-xs-12 col-md-6 col-lg-6 ${clsx(styles.reviewFormGroup)}`}>
                                 <label htmlFor="reviewName" className={clsx(styles.labelRating, styles.labelFormReview)}>Name <span className={styles.redRequired}>*</span></label>
                                 <input type="text" className={clsx(styles.reviewInputForm)} 
-                                    id="reviewName"
-                                    {...register("reviewName")}
-                                />
+                                            id="reviewName"
+                                            {...register("reviewName")}           
+                                            disabled={!!userLogin.user}      
+                                        />
                                 {errors.reviewName && <span className={styles.msgError}>{errors.reviewName.message}</span>}
+                                
                             </div>
                             <div className={`col col-xs-12 col-md-6 col-lg-6 ${clsx(styles.reviewFormGroup)}`}>
                                 <label htmlFor="reviewEmail" className={clsx(styles.labelRating, styles.labelFormReview)}>Email <span className={styles.redRequired}>*</span></label>
-                                <input id="reviewEmail" type="email" className={clsx(styles.reviewInputForm)} 
-                                    {...register("reviewEmail")}
-                                />
-                                {errors.reviewEmail && <span className={styles.msgError}>{errors.reviewEmail.message}</span>}
+                            
+                                        <input id="reviewEmail" type="email" className={clsx(styles.reviewInputForm)} 
+                                        {...register("reviewEmail")}
+                                        disabled={!!userLogin.user}
+                                        />
+                                        {errors.reviewEmail && <span className={styles.msgError}>{errors.reviewEmail.message}</span>}
+                                
                             </div>
                             <div className={`col col-xs-12 col-md-12 col-lg-12 ${clsx(styles.reviewFormGroup)}`}>
-                                <label htmlFor="imgReview"  className={clsx(styles.labelRating, styles.labelFormReview)}>Pictures ('jpg', 'png', 'jpeg')</label>
+                                <label htmlFor="imgReview"  className={clsx(styles.labelRating, styles.labelFormReview)}>Pictures ('jpg', 'png', 'jpeg')
+                                    - max 3 photos <span className={styles.redRequired}>*</span>
+                                </label>
                                 <input type="file" name="" id="imgReview" 
                                     {
                                         ...register("imgReview")
                                     }
+                                    multiple="multiple"
                                 />
+                                <div className={clsx(styles.previewImgBox)}>
+                                    {
+                                        !errors.imgReview
+                                        &&
+                                        getValues("imgReview")
+                                        &&
+                                        Array.from(getValues("imgReview")).length > 0
+                                        && 
+                                        Array.from(getValues("imgReview")).map((v, index)=>{
+                                            return (
+                                                <img key={index} src={URL.createObjectURL(v)} alt="" 
+                                                    className={clsx(styles.imgPreviewBeforeUpload)}
+                                                />
+                                            )
+                                        })
+                                   
+                                    }
+                                </div>
                                 {errors.imgReview && <span className={styles.msgError}>{errors.imgReview.message}</span>}
                             </div>
                             <div className={`col col-xs-12 col-md-12 col-lg-12`}>
-                                <input type="submit" value="SUBMIT" className={styles.btnSubmitFormReview}/>
+                                <button type="submit"
+                                    disabled={isSubmitting}  
+                                    className={clsx(styles.btnSubmitFormReview, isSubmitting ? styles.disabled : "")}
+                                >
+                                    <i className={`fa-solid fa-spinner ${styles.btnSubmitIconInifinite}`}></i>
+                                    Submit
+
+                                </button>
+                                
                             </div>
                         </div>
                     </form>
@@ -199,8 +450,36 @@ const ReviewProduct = ({product}) => {
             <div className={clsx(styles.reviewList)}>
                 <p className={clsx(styles.reivewProductTitle)}>Review</p>
 
-                <div className={clsx(styles.reviewItem)}>
-                    <p className={clsx(styles.reviewItemError)}>There are no reviews yet.</p>
+                {
+                        commentShow && commentShow.data?.length === 0
+                        ?
+                        <p className={clsx(styles.reviewItemError)}>There are no reviews yet.</p>
+                        :
+                        
+                            commentShow.data?.map((v, index)=>{
+                                return (
+                                   <ItemComment comment={v} key={index}></ItemComment>
+                                )
+                            }) 
+                }
+
+                {
+                    !commentShow.isMax && commentShow.data.length > 0
+                     &&
+                     <div className={clsx(styles.boxLoadMoreComment)}>
+                        <button className={clsx(styles.btnLoadMoreReview)}
+                            onClick={()=> {
+                                refSettingComment.current = {page: refSettingComment.current.page + 1, limit: refSettingComment.current.limit}
+                                setUpdateReview(!updateReview)
+                            }}
+                        >
+                            Load More
+                        </button>
+                    </div>
+ 
+                }
+             {/*    <div className={clsx(styles.reviewItem)}>
+                   
                     <div className={clsx(styles.reviewItemTitle)}>
                         <p className={clsx(styles.reviewItemTitleName)}>nhnkhang</p>
                         <span className={clsx(styles.reviewSpacing)}>-</span>
@@ -218,7 +497,7 @@ const ReviewProduct = ({product}) => {
                     <p className={clsx(styles.reviewItemContent)}>
                         Áo siêu đẹp luôn nhé mọi ngườiiii ơiii. Vải ổn, mềm mịn co giãn, rất là mát luôn á. Form xịn, mình cao m64 61kg bận size M rất vừa vặn và đúng basic fit luôn. Với giá như này thì rất đáng mua nhé. À shop đóng gửi áo chắc chắn gọn gàng lắm ạ. Ủng hộ 5 saoo
                     </p>
-                </div>
+                </div> */}
             </div>
         </div>
         
@@ -226,3 +505,15 @@ const ReviewProduct = ({product}) => {
 };
 
 export default ReviewProduct;
+
+export const getImageDimensions = (url) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({
+        width: img.width,
+        height: img.height,
+      });
+      img.onerror = (error) => reject(error);
+      img.src = url;
+    });
+};

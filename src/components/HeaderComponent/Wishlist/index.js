@@ -3,9 +3,10 @@ import clsx from 'clsx';
 import styles from './Wishlist.module.scss';
 import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemById } from '../../../redux/slices/wishlistSlice';
+import { deleteItemInWistListByProductID, removeItemById } from '../../../redux/slices/wishlistSlice';
 import { setWistList } from '../../../redux/slices/headerStateSlice';
-import PopupProductQuickView from '../../PopupProductQuickView';
+
+
 import {
     setProductToShow,
     setShowPopup,
@@ -15,11 +16,21 @@ const Wishlist = () => {
     const dispatch = useDispatch();
     const wistListStore = useSelector((state) => state.wishlist.wishLists);
     const wistList = useSelector((state) => state.headerStates.wistList);
-
+    const userLogin = useSelector(state => state.userLogin) 
+ 
     function handleOpenPopup(product) {
         dispatch(setWistList(false));
         dispatch(setProductToShow(product));
         dispatch(setShowPopup(true));
+    }
+
+    const handleDeleteItemWishlist = ({productID, productObjectId}) => {
+       
+        if (userLogin.isLogin){
+            dispatch(deleteItemInWistListByProductID({userID: userLogin.user?._id, productObjectId, productID}))
+        } else {
+            dispatch(removeItemById(productID));
+        }
     }
 
     return (
@@ -63,7 +74,9 @@ const Wishlist = () => {
                                                   styles.wishItemImage,
                                               )}
                                           >
-                                              <Link to="/">
+                                              <Link to={`/products/${product.productID}`}
+                                                onClick={()=>{dispatch(setWistList(false))}}
+                                              >
                                                   <img
                                                       src={
                                                           product
@@ -80,7 +93,8 @@ const Wishlist = () => {
                                               )}
                                           >
                                               <NavLink
-                                                  to="/"
+                                                  to={`/products/${product.productID}`}
+                                                  onClick={()=>{dispatch(setWistList(false))}}
                                                   className={clsx(
                                                       styles.navlink,
                                                       styles.productName,
@@ -130,13 +144,10 @@ const Wishlist = () => {
                                           )}
                                       >
                                           <span
-                                              onClick={() =>
-                                                  dispatch(
-                                                      removeItemById(
-                                                          product.productID,
-                                                      ),
-                                                  )
-                                              }
+                                              onClick={()=> handleDeleteItemWishlist({
+                                                    productID: product.productID,
+                                                    productObjectId: product._id,
+                                              })}
                                           >
                                               <i className="fa-solid fa-xmark"></i>
                                           </span>

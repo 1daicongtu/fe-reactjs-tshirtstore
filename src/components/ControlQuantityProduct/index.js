@@ -1,7 +1,15 @@
+import { handleAddToCart } from '../../utils/HandleWithCartList';
 import styles from './ControlQuantityProduct.module.scss';
 import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCart, addOneItemCartToServer } from '../../redux/slices/cartSlice';
+import { addToastMessage } from '../HeaderComponent/ToastMessage';
 
-const ControlQuantityProduct = ({ quantity, setQuantity }) => {
+
+const ControlQuantityProduct = ({ quantity, setQuantity, dataAddToCart }) => {
+    const dispatch = useDispatch();
+    const userLogin = useSelector(state => state.userLogin);
+
     const handleChangeQuantity = (e) => {
         if (e.target.value.trim() === ""){
             setQuantity("")
@@ -12,6 +20,22 @@ const ControlQuantityProduct = ({ quantity, setQuantity }) => {
         }
         setQuantity(parseInt(e.target.value).toString());
     };
+
+    const handleClickAddToCart = ()=>{
+        if (quantity == "" || quantity <= 0) {
+            addToastMessage({title: "Error", message: "Quantity is invalid", type: "error"})
+            return;
+        }
+        if (userLogin.isLogin){
+            dispatch(addOneItemCartToServer({
+                userID: userLogin.user?._id,
+                ...dataAddToCart
+            })) 
+        } else {
+            dispatch(addCart(dataAddToCart));
+        }
+        
+    }
 
     return (
         <div className={clsx(styles.productBtnControlGroup)}>
@@ -45,7 +69,9 @@ const ControlQuantityProduct = ({ quantity, setQuantity }) => {
                     </button>
                 </div>
             </div>
-            <button className={clsx(styles.btnControlAddToCart)}>
+            <button className={clsx(styles.btnControlAddToCart)}
+                onClick={handleClickAddToCart}
+            >
                 ADD TO CART
             </button>
             <button className={clsx(styles.btnControlBuyNow)}>BUY NOW</button>

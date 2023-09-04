@@ -12,6 +12,7 @@ import StyleTshirt from '../StyleTshirt';
 import ColorListProduct from '../ColorListProduct';
 import SizeListProduct from '../SizeListProduct';
 import ControlQuantityProduct from '../ControlQuantityProduct';
+import { handleDataAddToCart } from '../../utils/HandleWithCartList';
 
 const PopupProductQuickView = () => {
     const product = useSelector((state) => state.popupProduct.product);
@@ -22,6 +23,7 @@ const PopupProductQuickView = () => {
     const [quantity, setQuantity] = useState(1);
     const [itemSelected, setItemSelected] = useState(null);
     const [productDetailActive, setProductDetailActive] = useState(null);
+    const [sizeSelected, setSizeSelected] = useState(null);
 
     useEffect(() => {
         if (product) {
@@ -35,7 +37,7 @@ const PopupProductQuickView = () => {
             setProductDetailActive(itemSelected.type?.[0]);
         }
     }, [itemSelected]);
-
+    
     const settings = {
         className: styles.slickSlider,
         slidesToShow: 1,
@@ -61,6 +63,11 @@ const PopupProductQuickView = () => {
             },
         ],
     };
+
+    const handleSetSizeSelected = (size) => {
+        setSizeSelected(size);
+    }
+    
 
     return show && product ? (
         <div
@@ -193,6 +200,8 @@ const PopupProductQuickView = () => {
                             ></ColorListProduct>
                             <SizeListProduct
                                 product={product}
+                                sizeSelected={sizeSelected}
+                                handleSetaSizeSelected={handleSetSizeSelected}
                             ></SizeListProduct>
 
                             <p className={clsx(styles.productPriceTotal)}>
@@ -201,6 +210,8 @@ const PopupProductQuickView = () => {
                             <ControlQuantityProduct
                                 quantity={quantity}
                                 setQuantity={setQuantity}
+                                dataAddToCart={handleDataAddToCart(product, itemSelected, sizeSelected, quantity, productDetailActive)}
+                                
                             ></ControlQuantityProduct>
                             <p className={clsx(styles.skulTitle)}>
                                 SKU:

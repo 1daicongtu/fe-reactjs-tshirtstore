@@ -125,7 +125,25 @@
 .reviewFormGroup> input[type="file"]{
     font-size: 1.4rem;
 }
-.btnSubmitFormReview{
+.btnSubmitIconInifinite{
+    margin-right: 4px;
+    animation: spin 1s linear infinite;
+    font-size: 1.6rem;
+    display: none;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.btnSubmitFormReview.disabled{
+    background-color: #d9d9d9;
+    color: #fff;
+    cursor: not-allowed;
+    .btnSubmitIconInifinite{
+        display: block;
+    }
+}
+.btnSubmitFormReview, .btnLoadMoreReview{
     border: none;
     outline: none;
     padding: 10px 24px;
@@ -136,31 +154,29 @@
     letter-spacing: 1.4px;
     color: #fff;
     background-color: #0f9d8a;
+    display: flex;
+    align-items: center;
 }
+
 .reviewItemError{
     font-size: 1.4rem;
 }
-.reviewItem{
-    margin-bottom: 12px;
-}
-.reviewItemTitle{
+
+.previewImgBox{
+   
+    width: 100%;
     display: flex;
-    align-items: center;
-    margin-bottom: 6px;
-    .reviewItemTitleName{
-        color: #000;
-        font-size: 1.4rem;
-        font-weight: 500;
-        
-    }   
-    .reviewItemTitleDate{
-        font-size: 1.4rem;
-    }
-    .reviewSpacing{
-        font-size: 1.4rem;
-        margin: 0 6px;
-    }
+    margin: 0 -4px;
+    margin-top: 12px;
 }
-.reviewItemContent{
-    font-size: 1.4rem;
+.imgPreviewBeforeUpload{
+    flex: 1;
+    width: 100px;
+    height: 200px;
+    object-fit: contain;
+    padding: 4px;
+}
+.boxLoadMoreComment{
+    display: flex;
+    justify-content: center;
 }

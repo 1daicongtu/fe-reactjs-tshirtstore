@@ -28,7 +28,7 @@
     right: 0;
     top: 0;
     min-height: 100vh;
-    padding: 30px 0;
+    padding-top: 20px;
     transition: 0.7s;
     transform: translateX(110%);
     > .modalHeader {
@@ -65,130 +65,26 @@
         }
     }
     > .modalBody {
-        margin-top: 80px;
-        position: absolute;
-        top: 0;
-        bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 34px 0;
+        padding: 12px 0;
+        
+        height: calc(100vh - 50px);
         > .boxListItem {
+            flex-grow: 1;
             margin-bottom: auto;
+            max-height: calc(100% - 400px);
             > .listItem {
-                max-height: 240px;
+                height: 100%;
                 overflow: auto;
-                > .itemDetail:not(:last-child) {
-                    border-bottom: 1px solid #e3e2e2;
-                }
-
-                > .itemDetail {
-                    margin: 0 28px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 16px 0;
-                    > .itemLeft {
-                        display: flex;
-                        align-items: center;
-
-                        > .listItemImage {
-                            width: 78px;
-                            height: 78px;
-                            border: 1px solid #e3e2e2;
-                            margin-right: 14px;
-                            img {
-                                width: 100%;
-                                height: 100%;
-                                object-fit: cover;
-                            }
-                        }
-                        > .listItemContent {
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: space-between;
-                            > .productName {
-                                font-weight: 600;
-                                font-size: 1.5rem;
-                                margin-bottom: 8px;
-                            }
-                            > .productDescription {
-                                font-size: 1.1rem;
-                                color: #828282;
-                                display: block;
-                                margin-bottom: 12px;
-                            }
-
-                            .boxChangeQuantity {
-                                display: flex;
-                                > .changeQuantity {
-                                    border: 1px solid #ccc;
-                                    overflow: hidden;
-                                    border-radius: 50px;
-                                    > .controlQuantity {
-                                        border: none;
-                                        background-color: #fff;
-                                        width: 20px;
-                                        padding: 0;
-                                    }
-                                    > .controlQuantity:hover {
-                                        background-color: #f2f2f2;
-                                    }
-                                    input {
-                                        font-size: 1.3rem;
-                                        border: 1px solid #ccc;
-                                        outline: none;
-                                        border-top: none;
-                                        border-bottom: none;
-                                        width: 25px;
-                                        height: 20px;
-                                        text-align: center;
-                                    }
-                                }
-                                > span {
-                                    margin-left: 8px;
-                                    font-size: 1.3rem;
-                                }
-                            }
-                        }
-                    }
-                    > .itemRight {
-                        height: auto;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                        > span {
-                            display: block;
-                            text-align: right;
-                        }
-                        > span:first-child {
-                            margin-bottom: 36px;
-                            width: 25px;
-                            height: 25px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-
-                            border-radius: 50%;
-                        }
-                        > span:first-child:hover {
-                            background-color: #f2f2f2;
-                        }
-                        > span:last-child {
-                            font-weight: 500;
-                        }
-                    }
-                }
-                > .itemDetail:first-child {
-                    padding-top: 0;
-                }
-                > .itemDetail:last-child {
-                    padding-bottom: 0;
-                }
+                
             }
         }
 
         > .modalBodyControler {
+            height: 400px;
+            
             > .settingInfo {
                 margin: 0 28px;
 
@@ -531,7 +427,7 @@
         right: 0;
         width: 100%;
         bottom: 0;
-        height: 88%;
+        height: 100%;
         background-color: #fff;
         z-index: 30;
         padding: 0 28px;
