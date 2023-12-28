@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, addOneWishlistToServer, deleteItemInWistListByProductID, removeItemById } from '../../redux/slices/wishlistSlice';
-import { addItemToCompareList } from '../../redux/slices/compareSlice';
+import { addItemToCompareList, addOneToCompareListServer } from '../../redux/slices/compareSlice';
 import clsx from 'clsx';
 import styles from './ItemProduct.module.scss';
 import { Tooltip } from 'react-tooltip';
@@ -70,6 +70,23 @@ const ItemProduct = ({ product }) => {
         dispatch(setProductToShow(product));
         dispatch(setShowPopup(true));
     };
+
+    const handleAddItemToCompareList = (product)=>{
+
+       
+        if (listCompare && listCompare.includes(product.productID)){
+            dispatch(setCompareList(true));
+            return;
+        }
+    
+        if (userLogin.isLogin){
+            dispatch(addOneToCompareListServer({userID: userLogin.user?._id, product}))
+            
+        } else {
+            dispatch(addItemToCompareList(product));
+            dispatch(setCompareList(true));
+        }
+    }
 
     return (
         <div className={`${clsx(styles.productItem)}`}>
@@ -158,8 +175,8 @@ const ItemProduct = ({ product }) => {
                                     data-tooltip-id={`id-btn-Compare-${product.productID}`}
                                     data-tooltip-content="Compare"
                                     onClick={() => {
-                                        dispatch(addItemToCompareList(product));
-                                        dispatch(setCompareList(true));
+                                        
+                                        handleAddItemToCompareList(product);
                                     }}
                                 >
                                     {listCompare && listCompare.includes(product.productID) ? (

@@ -7,6 +7,7 @@ import {
     setLogin,
 } from '../../../redux/slices/headerStateSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import configs from '../../../config';
 
 const MobileNavbar = () => {
     const dispatch = useDispatch();
@@ -51,7 +52,14 @@ const MobileNavbar = () => {
                 <div className={clsx(styles.modalBody)}>
                     <div className={clsx(styles.bodyNavigation)}>
                         <ul className={clsx(styles.itemNavigation)}>
-                            <li>HOME</li>
+                            <li>
+                                <NavLink
+                                    to={configs.routes.homePage}
+                                    className={styles.linkItemPages}
+                                >
+                                    HOME
+                                </NavLink>
+                            </li>
                             <li>
                                 <div className={clsx(styles.pagesTitle)}>
                                     <span>PAGES</span>
@@ -162,7 +170,14 @@ const MobileNavbar = () => {
                                     </li>
                                 </ul>
                             </li>
-                            <li>VENDOR</li>
+                            <li>
+                                <NavLink
+                                    to={configs.routes.store}
+                                    className={styles.linkItemPages}
+                                >
+                                    VENDORS
+                                </NavLink>
+                            </li>
                         </ul>
                     </div>
                     <div className={clsx(styles.loginAndLanguague)}>

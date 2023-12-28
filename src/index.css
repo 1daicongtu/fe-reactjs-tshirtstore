@@ -73,6 +73,26 @@ input[type=number] {
 .slick-prev {
 	left: 0;
 }
+.col-2-4 {
+  width: 20%;
+}
+
+@media (max-width: 991.98px) {
+  .col-2-4 {
+    width: 50%;
+  }
+  
+}
+
+@media (max-width: 575.98px)  {
+  .col-2-4 {
+    width: 100%;
+  }
+  
+}
+
+
+
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -88,4 +108,42 @@ input[type=number] {
   to {
     opacity: 0;
   }
+}
+
+@keyframes slideLeftStore {
+  from {
+    transform: translate(-32px, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+}
+@keyframes slideRightStore{
+  from {
+    transform: translate(32px, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(0, -50%);
+    opacity: 1;
+  }
+
+}
+
+.slick-active .boxContentStoreLeft {
+  animation: slideLeftStore 0.5s ease-in-out 1s forwards;
+}
+.slick-active .boxContentStoreRight {
+  animation: slideRightStore 0.5s ease-in-out 1s forwards;
+} 
+
+.boxContentStoreLeft{
+  opacity: 0;
+  transform: translate(-32px, -50%);
+}
+.boxContentStoreRight{
+  opacity: 0;
+  transform: translate(32px, -50%);
 }

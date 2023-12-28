@@ -24,7 +24,7 @@ import { SideBySideMagnifier } from 'react-image-magnifiers';
 import { getRandomNumberWithRange } from '../../utils/getRandomNumberWithRange';
 import { getDeliveryTime } from '../../utils/getDeliveryTime';
 import { setCompareList } from '../../redux/slices/headerStateSlice';
-import { addItemToCompareList } from '../../redux/slices/compareSlice';
+import { addItemToCompareList, addOneToCompareListServer } from '../../redux/slices/compareSlice';
 import { addItem, addOneWishlistToServer, deleteItemInWistListByProductID, removeItemById } from '../../redux/slices/wishlistSlice';
 import TreePath from '../TreePath';
 import configs from '../../config';
@@ -258,6 +258,20 @@ const ProductDetail = () => {
         setSizeSelected(size);
     }
 
+    const handleAddItemToCompareList = (product)=>{
+        if (listCompare.includes(product.productID)){
+            dispatch(setCompareList(true));
+            return;
+        }
+        if (userLogin.isLogin){
+            dispatch(addOneToCompareListServer({userID: userLogin.user?._id, product}))
+            
+        } else {
+            dispatch(addItemToCompareList(product));
+            dispatch(setCompareList(true));
+        }
+    }
+
     return product ? (
         <div className={clsx(styles.productDetail)}>
             <TreePath 
@@ -336,8 +350,7 @@ const ProductDetail = () => {
                                     data-tooltip-id={`id-btn-Compare-${product.productID}`}
                                     data-tooltip-content="Compare"
                                     onClick={() => {
-                                        dispatch(addItemToCompareList(product));
-                                        dispatch(setCompareList(true));
+                                        handleAddItemToCompareList(product)
                                     }}
                                 >
                                     {listCompare.includes(product.productID) ? (

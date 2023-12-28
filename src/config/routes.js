@@ -10,7 +10,9 @@ const routes = {
     profile: '/profile',
     aboutUs: '/about-us',
     contactUs: '/contact-us',
+    store: "/stores",
     notFound: '*',
+    storeDetail: '/stores/:id',
 };
 
 export default routes;

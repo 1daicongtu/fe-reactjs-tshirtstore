@@ -20,6 +20,7 @@ import {
 import PopupProductQuickView from '../../PopupProductQuickView';
 import Register from '../Register';
 import { logout } from '../../../redux/slices/userLogin';
+import configs from '../../../config';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -309,19 +310,21 @@ const Header = () => {
                             </li>
                             <li className={clsx(styles.navigaItem)}>
                                 <NavLink
-                                    to="/"
+                                    to={configs.routes.store}
                                     className={clsx(styles.navlink)}
                                 >
                                     VENDORS
                                 </NavLink>
                             </li>
                         </ul>
-                        <div className={clsx(styles.boxLogoImageCenter)}>
+                        <Link className={clsx(styles.boxLogoImageCenter)}
+                            to={"/"}
+                        >
                             <img
                                 src="https://i.imgur.com/Hc92VcL.png"
                                 alt="logo"
                             />
-                        </div>
+                        </Link>
                     </div>
 
                     <div className={clsx(styles.userController)}>

@@ -15,7 +15,9 @@ export const fetchAllStores = createAsyncThunk('fetchListStores', async () => {
 const storesSlice = createSlice({
     name: 'stores',
     initialState,
-    reducers: {},
+    reducers: {
+        
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllStores.pending, (state, action) => {

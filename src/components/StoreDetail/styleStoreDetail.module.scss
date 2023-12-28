@@ -1,0 +1,366 @@
+.storeDetailWrapper{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+    position: relative;
+}
+
+.storeDetailRowRightBox{
+    position: relative;
+}
+
+.storeImgBackground{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.storeDetailRowRightStoreInfo{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    background-color: rgba(0,0,0,0.7);
+    padding: 0 25px;
+}
+.storeDetailStoreAvtAndName{
+    text-align: center;
+    margin-bottom: 22px;
+    > img{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-top: 20px;
+    }
+    > .storeDetailStoreName{
+        color: #fff;
+        font-size: 20px;
+        font-weight: 500;
+        
+    }
+}
+.storeBoxInfoDesp{
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    > i {
+        margin-right: 10px;
+    }
+}
+.boxSocialNetwork{
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 0 6px;
+    i{
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+.storeDetailFilterAndControlLayoutWrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    padding: 15px;
+    background-color: #F8F8F8;
+}
+.filterProductOfStoreWrapper{
+    display: flex;
+    align-items: center;
+}
+.inputFilterProductOfStore{
+    width: 300px;
+    height: 40px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 12px;
+}
+.btnFilterProductOfStore{
+    width: 100px;
+    height: 38px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FF5F6D;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+
+}
+.btnChangeProductLayout{
+    border: none;
+    color: #999;
+    margin-left: 8px;
+    > i {
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+.btnChangeProductLayout.active{
+    color: #000;
+}
+.storeDatailLeftCategories, .storeDatailLeftWorkTime{
+    background-color: #F8F8F8;
+    padding: 20px;
+}
+.categoriesWrapperHeader, .workTimeWrapperHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px 0;
+}
+.categoriesName, .workTimeName{
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+.categoryBoxControl, .workTimeBoxControl{
+    display: flex;
+    position: relative;
+    border: none;
+    background-color: transparent;
+    
+}
+.btnOpenCategory, .btnOpenWorkTime{
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+}
+.btnOpenCategory.closed{
+    transform: rotate(90deg);
+}
+.btnOpenWorkTime.closed{
+    transform: rotate(90deg);
+}
+.btnCloseCategory, .btnOpenCategory, .btnOpenWorkTime, .btnCloseWorkTime{
+    font-size: 1.6rem;
+}
+.listCategory, .listSchedule, .listVendorProduct{
+    height: 0;
+    transition: height 0.3s ease-in-out;
+    overflow: hidden;
+}
+.listCategory.open, .listSchedule.open{
+    height: 180px;
+}
+.listVendorProduct.open{
+    height: 320px;
+}
+
+.tempCategory{
+    height: 0;
+    transition: height 0.3s ease-in-out;
+}
+.tempCategory.active{
+    height: 10px;
+}
+.listCategory > li {
+    display: flex;
+    align-items: center;
+}
+.circleCategoryItem{
+    width: 7px;
+    height: 7px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+.itemCategory{
+    font-size: 1.3rem;
+    padding: 0 4px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        color: #FF5F6D;
+    }
+}
+.listSchedule{
+    list-style-type: none;
+}
+.itemSchedule{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+}
+.scheduleDayOfWeek{
+    font-size: 1.3rem;
+}
+.scheduleWorkingTime{
+    font-size: 1.3rem;
+}
+.inputContactVendor{
+    padding: 10px 6px;
+    outline: none;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    display: block;
+    font-size: 1.4rem;
+    width: 100%;
+    margin-bottom: 18px;
+}
+.btnSendContactVendor{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    background-color: #FF5F6D;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    &:hover{
+        background-color: #f35562;
+    }
+}
+.btnOpenLeftSide{
+    position: absolute;
+    display: none;
+
+}
+.layoutForLeftSide{
+    display: none;
+}
+.btnCloseSideLeft{
+    display: none;
+    position: absolute;
+    top: 10%;
+    right: -15px;
+    font-size: 1.6rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px 1px rgba(0,0,0,.1);
+    border: none;
+    display: flex;
+    align-items: center;
+}
+.boxStoreDetailRowLeft{
+
+}
+
+@media (max-width: 991.98px) {
+    .storeDetailWrapper{
+        width: unset;
+        margin: 0 12px;
+    }
+    .btnChangeProductLayout{
+        display: none;
+    }
+    .storeDetailRowRightBox{
+        flex-direction: column;
+        display: flex;
+    }
+    .storeDetailRowRightStoreInfo{
+        margin-top: 1px;
+        position: unset;
+        background-color: #fff;
+        border: 1px solid #f2f2f2;
+        border-bottom: unset;
+        width: 100%;
+    }
+    .boxSocialNetwork{
+        position: unset;
+        justify-content: center;
+        width: 100%;
+        border-bottom: 1px solid #f2f2f2;
+        border-right: 1px solid #f2f2f2;
+        border-left: 1px solid #f2f2f2;
+        padding-bottom: 10px;
+    }
+    .storeDetailStoreAvtAndName > .storeDetailStoreName{
+        color: #000;
+        font-size: 28px;
+    }
+    .storeDetailStoreAvtAndName > img{
+        width: 100px;
+        height: 100px;
+    
+    }
+    .storeBoxInfoDesp {
+        color: #000;
+        text-align: center;
+        > i {
+            display: none;
+        }
+    }
+    .storeDetailFilterAndControlLayoutWrapper{
+        display: block;
+    }
+    .inputFilterProductOfStore{
+        width: unset;
+        flex: 1
+
+    }
+    .boxStoreDetailRowLeft{
+        position: fixed;
+        top: 0;
+        left: -8px;
+        bottom: 0;
+        transform: translateX(-110%);
+        transition: all 0.3s ease-in-out;
+        z-index: 101;
+        background-color: #f8f8f8;
+    }
+    .boxStoreDetailRowLeft.active{
+        transform: translateX(0%);
+    }
+    .storeDetailRowLeft{
+        top: 0;
+        bottom: 0;
+        overflow: auto;
+        max-height: 100vh;
+        padding: 0;
+        direction: rtl;
+    }
+   
+    .storeDatailLeftCategories, .storeDatailLeftWorkTime{
+        direction: ltr;
+    }
+    .btnOpenLeftSide{
+        border: none;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        width: 5rem;
+        height: 5rem;
+        display: block;
+        >i {
+            font-size: 2.2rem;
+        }
+        z-index: 99;
+        box-shadow: 1px 1px 5px 1px rgba(0,0,0,.1);
+    }
+    
+    .layoutForLeftSide{
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 99;
+        background-color: rgba(0,0,0,.5);
+    }
+    .btnCloseSideLeft{
+        display: block;
+    }
+}
+
+
+@media (max-width: 575.98px) {
+
+}

@@ -7,11 +7,14 @@ import { setCompareList } from '../../../redux/slices/headerStateSlice';
 import {
     removeItemToCompareList,
     clearAll,
+    removeAllByUserID,
+    removeOneToCompareListServer,
 } from '../../../redux/slices/compareSlice';
 import { Tooltip } from 'react-tooltip';
 import configs from '../../../config';
 
 const Compare = () => {
+    const userLogin = useSelector((state) => state.userLogin);
     const dispatch = useDispatch();
     const compareList = useSelector((state) => state.headerStates.compareList);
     const compareStore = useSelector((state) => state.compare.compareList);
@@ -22,6 +25,26 @@ const Compare = () => {
         }
         return count;
     }, [compareStore]);
+
+    const handleClearAll = () => {
+        if (userLogin.isLogin) {
+            dispatch(removeAllByUserID(userLogin.user?._id));
+            return;
+        }
+        dispatch(clearAll());
+    }
+    const handleDeleteOneItemComapre = (product)=>{
+        if (userLogin.isLogin) {
+            dispatch(removeOneToCompareListServer({
+                userID: userLogin.user?._id,
+                productObjectId: product._id,
+                productID: product.productID
+                
+            }));
+            return;
+        }
+        dispatch(removeItemToCompareList(product.productID));
+    }
 
     return (
         <>
@@ -115,12 +138,10 @@ const Compare = () => {
                                             <span>
                                                 <i
                                                     className="fa-solid fa-xmark"
-                                                    onClick={() => {
-                                                        dispatch(
-                                                            removeItemToCompareList(
-                                                                product.productID,
-                                                            ),
-                                                        );
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        e.preventDefault();
+                                                        handleDeleteOneItemComapre(product)
                                                     }}
                                                 ></i>
                                             </span>
@@ -154,14 +175,14 @@ const Compare = () => {
                         )}`}
                     >
                         {
-                            compareList.length == 0 
+                            !compareStore || compareStore.length == 0 
                             ? 
                             <>
                                 
                             </>
                             : 
                             <>
-                                <button onClick={() => dispatch(clearAll())}>
+                                <button onClick={() => handleClearAll()}>
                                     Clear All
                                 </button>
                                 <NavLink to={configs.routes.compare} className={styles.btnLetCompare}

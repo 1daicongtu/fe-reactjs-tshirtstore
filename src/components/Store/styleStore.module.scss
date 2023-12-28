@@ -1,0 +1,484 @@
+.boxItemBanner{
+    width: 100%;
+    height: 400px;
+    position: relative;
+}
+.boxItemBanner > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.boxItemContentWrapperLeft{
+    position: absolute;
+    left: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.boxItemContentWrapperRight{
+    position: absolute;
+    right: 25%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.boxVendorShop{
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.2rem;
+    letter-spacing: 7px;
+    margin-bottom: 1.6rem;
+}
+.boxItemDesc{
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 3.2rem;
+}
+.btnStartSelling{
+    background-color: #F76B6A;
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: 0.2s;
+    &:hover{
+        background-color: #F76B6A;
+        color: #fff;
+    }
+}
+.btnControllWrapper{
+    width: 75%;
+    margin: 0 auto;
+}
+.btnControlContainer{
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 20px 0px #e9e9e9;
+    
+}
+.gridControllLeft{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 30px;
+}
+.btnFilterStore{
+    border: none;
+    background-color: #F76B6A;
+    font-size: 1.4rem;
+    padding: 8px 10px;
+    font-weight: 500;
+    color: #fff;
+
+    border-radius: 4px;
+    > i {
+        padding-right: 10px;
+        font-size: 14px;
+        color: #fff;
+    }
+}
+.selectSortBy{
+    background: #fff;
+    border: 1px solid #edecec;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 6px 18px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.btnSelectLayout{
+    border: none;
+    color: #333;
+    font-size: 2rem;
+    background-color: #fff;
+}
+.btnSelectLayout.active{
+    color: #F76B6A;
+}
+.gridStoreList{
+    margin: 0 -16px;
+    margin-top: 32px;
+}
+.gridStoreItem{
+    padding: 0 16px;
+    margin-bottom: 32px;
+}
+.gridStoreItemChild{
+    box-shadow: 0 0 25px 0 #ddd;
+}
+.gridStoreBoxImg{
+    width: 100%;
+    position: relative;
+}
+.backgroundStore{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+.productIconStarSolids{
+    color: #FF9C00;
+    display: inline-block;
+    margin-right: 2px;
+    font-size: 1.3rem;
+}
+.productIconStarRegulars{
+    color: #ece9e9;
+    display: inline-block;
+    margin-right: 2px;
+    font-size: 1.3rem;
+}
+.contentStore{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+.storeName{
+    margin-top: 12px;
+    font-size: 2.3rem;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 10px;
+}
+.addressStore{
+    font-size: 1.4rem;
+    color: #fff;
+    margin-top: 10px;
+    width: 60%;
+    font-weight: 400;
+}
+.boxTelStore{
+    display: flex;
+    color: #fff;
+    align-items: center;
+    margin-top: 6px;
+    font-size: 1.5rem;
+    >i{
+        font-size: 1.2rem;
+        margin-right: 4px;
+    }
+}
+.labelOpened{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    background-color: #1DBF73;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.labelClosed{
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    position: absolute;
+    background-color: #999999;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.labelFeatured{
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background-color: #2D54A3;
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.avatarStore{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    position: absolute;
+    right: 20px;
+    bottom: -10px;
+    box-shadow: 0 0 30px -6px #afafaf;
+}
+.boxNavigation{
+    background-color: #F7FBFC;
+    padding: 15px 25px;
+
+}
+.linkToStoreDetail{
+    background-color: #F75E5F;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 35px;
+    height: 35px;
+    > i{
+        font-size: 2.0rem;
+        color: #fff;
+    }
+    &:hover{
+        background-color: #ea4b4b;
+    }
+}
+a{
+    text-decoration: none;
+    color: #333;
+}
+.rowStoreList{
+    margin-top: 32px;
+}
+.rowStoreItem{
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 25px 0 #ddd;
+    margin-bottom: 32px;
+    position: relative;
+}
+.backgroundRowStore{
+    height: 150px;
+    width: 280px;
+    object-fit: cover;
+}
+.rowBoxContent{
+    flex: 1;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.rowStoreName{
+    font-size: 2.3rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #000;
+}
+.rowAddressStore{
+    font-size: 1.5rem;
+
+}
+.rowRatingNumber{
+    font-size: 1.5rem;
+    color: #666;
+    margin-top: 8px;
+
+}
+.boxFilterSearchWrapper{
+    height: 0px;
+    margin-top: 28px;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 0 25px 0 #ddd;
+    transition: 0.3s ease-in-out;
+    opacity: 0;
+}
+.boxFilterSearchWrapper.active{
+    height: 100%;
+    opacity: 1;
+}
+.boxFilterSearch{
+    padding: 20px 40px;
+    display: flex;
+}
+.btnFilterCancer{
+    display: none;
+}
+.inputFilterSearch{
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    flex: 1;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 1.3rem;
+    outline: none;
+}
+.btnFilterSearch{
+    height: 100%;
+    padding: 10px 40px;
+    transition: ease-in-out 0.3s; 
+    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 6px;
+    letter-spacing: 1.4px;
+    background-color: #F76B6A;
+    border: none;
+    font-weight: 500;
+    &:hover{
+        background-color: #e14747;
+    }
+}
+.headerBoxListSelling{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+    margin-bottom: 15px;
+
+}
+.headerBoxListSelling:hover > .boxControlSlideItem{
+    opacity: 1;
+}
+.boxControlSlideItem{
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+
+}
+.titleNameItem{
+    font-size: 2.3rem;
+    font-weight: 500;
+    color: #000;
+}
+
+.btnControlSlideItemSelling{
+    border: none;
+    background-color: transparent;
+    color: #999;
+    > i{
+        cursor: not-allowed;
+        font-size: 2rem;
+        margin: 0 4px;
+        
+    }
+}
+.btnControlSlideItemSelling.active{
+    color: #000;
+    >i{
+        cursor: pointer;
+    }
+}
+.productItem{
+    margin: 18px 0;
+    display: flex !important;
+}
+.productBoxImg{
+    text-decoration: none;
+    position: relative;
+    width: 75px;
+    height: 75px;
+    margin-right: 20px;
+    transition: 0.3s ease-in-out;
+    z-index: 1;
+    > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    &:hover > img{
+        filter: brightness(0.8);        
+    }
+}
+.btnOpenQuickView{
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > i{
+        font-size: 1.5rem;
+        color: #000;
+    }
+    &:hover{
+        background-color: #F76B6A;
+        > i{
+            color: #fff;
+        }
+    }
+}
+.productItemName{
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.productItemPrice{
+    margin-top: 6px;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+@media (max-width: 991.98px) {
+    .btnControllWrapper{
+        width: 100%;
+        padding: 0 12px;
+    }
+    .gridStoreList{
+        margin: 0 -12px;
+    }
+    .gridStoreItem{
+        padding: 0 12px;
+    }
+}
+@media (max-width: 575.98px) {
+    .btnControlContainer{
+        margin-top: 32px;
+        display: block;
+    }   
+
+    .gridControllLeft{
+        margin-top: 10px;
+    }
+    .btnSelectLayout{
+        display: none;
+    }
+    .boxFilterSearch{
+        display: block;
+        padding: 20px;
+    }
+    .inputFilterSearch{
+        flex: 1;
+        width: 100%;
+    }
+    .boxFilterSearchWrapper{
+        margin: 0 12px;
+        background-color: #FFFFFF;
+        margin-top: 24px;
+        width: auto;
+        margin-bottom: 32px;
+    }
+    .boxBtnFilterSearch{
+        margin-top: 18px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .btnFilterCancer{
+        display: block;
+        padding: 10px 30px;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #f2f2f2;
+        border-radius: 4px;
+        font-size: 1.4rem;
+        font-weight: 500;
+
+    }
+    .gridStoreList{
+        margin: 0px;
+    }
+    .gridStoreItem{
+        padding: 0px;
+    }
+    .boxControlSlideItem{
+        opacity: 1;
+    }
+  
+    .boxItemContentWrapperRight{
+        right: 15%;  
+    }
+}
