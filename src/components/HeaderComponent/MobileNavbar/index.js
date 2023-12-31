@@ -90,7 +90,7 @@ const MobileNavbar = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/"
+                                            to={configs.routes.contactUs}
                                             className={styles.linkItemPages}
                                         >
                                             Contact Us
@@ -98,7 +98,7 @@ const MobileNavbar = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/"
+                                            to={configs.routes.aboutUs}
                                             className={styles.linkItemPages}
                                         >
                                             About Us

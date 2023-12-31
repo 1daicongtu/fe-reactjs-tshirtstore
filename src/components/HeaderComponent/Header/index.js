@@ -228,7 +228,7 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/"
+                                            to={configs.routes.contactUs}
                                             className={clsx(styles.navlink)}
                                         >
                                             Contact Us
@@ -236,7 +236,7 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <NavLink
-                                            to="/"
+                                            to={configs.routes.aboutUs}
                                             className={clsx(styles.navlink)}
                                         >
                                             About Us

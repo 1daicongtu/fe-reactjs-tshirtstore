@@ -1,8 +1,9 @@
 import { DefaultLayout } from '../layouts';
 import configs from '../config';
-import { HomePage, ProductDetailPage, StoreDetailPage, StorePage } from '../pages';
+import { AboutUsPage, ContactUsPage, HomePage, ProductDetailPage, StoreDetailPage, StorePage } from '../pages';
 import ComparePage from '../components/ComparePage';
 import { element } from 'prop-types';
+import AboutUs from '../components/AboutUs';
 
 const routes = [
     {
@@ -32,6 +33,18 @@ const routes = [
     {
         path: configs.routes.storeDetail,
         element: StoreDetailPage,
+        layout: DefaultLayout,
+        requireLogin: false
+    },
+    {
+        path: configs.routes.contactUs,
+        element: ContactUsPage,
+        layout: DefaultLayout,
+        requireLogin: false
+    }, 
+    {
+        path: configs.routes.aboutUs,
+        element: AboutUsPage,
         layout: DefaultLayout,
         requireLogin: false
     }
