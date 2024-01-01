@@ -117,7 +117,8 @@ const initialValue = {
     cart: [],
     isLoading: false,
     isError: false,
-    isSuccess: false
+    isSuccess: false,
+    voucher: null
 }
 
 const cartSlice = createSlice({
@@ -210,6 +211,9 @@ const cartSlice = createSlice({
             const cart = JSON.parse(localStorage.getItem(process.env.REACT_APP_LOCALSTORAGE_KEY_CART)) || []
 
             state.cart = cart;
+        },
+        setVoucher: (state, action)=>{
+            state.voucher = action.payload;
         }
     },
     extraReducers: (builder)=>{
@@ -259,7 +263,7 @@ const cartSlice = createSlice({
 
 export const { addCart, removeCart, updateCart, updateCartFromLocalStorage
     , updateCartWithoutSaveLocalStorage, removeCartWithoutSaveLocalStorage, 
-    addCartWithoutSaveLocalStorage } = cartSlice.actions
+    addCartWithoutSaveLocalStorage, setVoucher } = cartSlice.actions
 export default cartSlice.reducer
 
 

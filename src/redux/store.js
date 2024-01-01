@@ -8,7 +8,8 @@ import headerStateReducer from './slices/headerStateSlice';
 import popupQuickViewProduct from './slices/popupQuickViewProduct';
 import userLogin from './slices/userLogin';
 import cartReducer from "./slices/cartSlice"
-
+import couponReducer from "./slices/coupon"
+import infoCheckoutReducer from "./slices/infoCheckoutSlice"
 
 export const store = configureStore({
     reducer: {
@@ -20,5 +21,7 @@ export const store = configureStore({
         popupProduct: popupQuickViewProduct,
         userLogin: userLogin,
         cart: cartReducer,
+        coupon: couponReducer,
+        infoCheckout: infoCheckoutReducer
     },
 });

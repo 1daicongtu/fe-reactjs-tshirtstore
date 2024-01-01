@@ -9,6 +9,8 @@ import routes from './routes';
 import addAccessTokenToHeader from './utils/addAccessTokenToHeader';
 import CheckExpiredToken from './components/CheckExpiredToken';
 import { addCartItemToServer, getCartListByUserID, updateCartFromLocalStorage } from './redux/slices/cartSlice';
+import { getAllCouponNotExpired } from './redux/slices/coupon';
+import { loadingInfoCheckoutFromLocalStorage } from './redux/slices/infoCheckoutSlice';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
     useEffect(() => {
         dispatch(fetchAllProduct());
         dispatch(fetchAllStores());
+        dispatch(getAllCouponNotExpired());
+        dispatch(loadingInfoCheckoutFromLocalStorage())
         addAccessTokenToHeader();
 
     }, [])

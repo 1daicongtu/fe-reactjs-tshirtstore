@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
 import clsx from 'clsx';
 import styles from './Cart.module.scss';
@@ -6,17 +6,38 @@ import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCartList } from '../../../redux/slices/headerStateSlice';
 import ItemCart from './ItemCart';
+import calcTotalPriceOfCart from "../../../utils/calcTotalPriceOfCart";
+import getFinalTotalPriceOfCart from '../../../utils/getFinalTotalPriceOfCart';
+import { setVoucher } from '../../../redux/slices/cartSlice';
+import { updateInfoCheckout } from '../../../redux/slices/infoCheckoutSlice';
 
 const Cart = () => {
     const dispatch = useDispatch();
     const cartList = useSelector((state) => state.headerStates.cartList);
+    const voucherSelected = useSelector(state => state.cart.voucher);
+    const cartStore = useSelector(state => state.cart.cart)
+    const infoCheckout = useSelector(state => state.infoCheckout)
     const [windowNote, setWindowNote] = React.useState(false);
     const [windowShipping, setWindowShipping] = React.useState(false);
     const [windowCoupon, setWindowCoupon] = React.useState(false);
-    const [voucherSelected, setVoucherSelected] = React.useState(null);
     const [inputVoucher, setInputVoucher] = React.useState('');
-    const [inputQuantity, setInputQuantity] = useState(1);
-    const cartStore = useSelector(state => state.cart.cart)
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    const [note, setNote] = useState(""); 
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
+    const [passcode, setPasscode] = useState("");
+
+    useEffect(()=>{
+        setTotalPrice(calcTotalPriceOfCart(cartStore));
+    }, [cartStore])
+
+    useEffect(()=>{
+        setNote(infoCheckout.note)
+        setCountry(infoCheckout.country)
+        setCity(infoCheckout.city)
+        setPasscode(infoCheckout.passcode)
+    }, [infoCheckout])
 
     const monthNames = [
         'January',
@@ -32,64 +53,54 @@ const Cart = () => {
         'November',
         'December',
     ];
-
-    const listVoucher = [
-        {
-            id: 1,
-            code: 'GIFT',
-            type: 'money',
-            value: 10.0,
-            date: null,
-            desc: 'Hurry! Shop at Elessi and get a discount on your Orders',
-        },
-        {
-            id: 2,
-            code: 'NS30',
-            type: 'percent',
-            value: 30,
-            date: new Date('2025-12-24'),
-            desc: "Don't Miss Out: Claim 30% Discount Using Great Deal",
-        },
-        {
-            id: 3,
-            code: 'OFF1',
-            type: 'percent',
-            value: 10,
-            date: null,
-            desc: 'Additinal 10% Off On Your Final Cart Value',
-        },
-    ];
+    const listCoupon = useSelector(state => state.coupon.couponList)
     
     const handleClickVoucher = (item) => {
-        setVoucherSelected(item);
+        dispatch(setVoucher(item));
         setWindowCoupon(false);
     };
 
     const handleSaveNote = () => {
         setWindowNote(false);
+        dispatch(updateInfoCheckout({
+            ...infoCheckout,
+            note: note
+        }))
     };
-    const handleUpdateShipping = () => {
+    const handleUpdateShipping = (e) => {
+        e.preventDefault()
+
         setWindowShipping(false);
+        dispatch(updateInfoCheckout({
+            ...infoCheckout,
+            country: country,
+            city: city,
+            passcode: passcode
+        }))
     };
+
+
     const handleUpdateCoupon = () => {
         if (inputVoucher.trim() !== '') {
             let flag = false;
-            listVoucher.forEach((item) => {
+            listCoupon.forEach((item) => {
                 if (
                     item.code.toUpperCase() ===
                     inputVoucher.trim().toUpperCase()
                 ) {
-                    setVoucherSelected(item);
+                    dispatch(setVoucher(item));
                     flag = true;
                 }
             });
             if (flag === false) {
-                setVoucherSelected(null);
+                dispatch(setVoucher(null));
             }
             setInputVoucher('');
         }
         setWindowCoupon(false);
     };
+
+
     return (
         <>
             <div
@@ -109,7 +120,19 @@ const Cart = () => {
                     </span>
                 </div>
                 <div className={clsx(styles.modalBody)}>
-                    <div className={clsx(styles.boxListItem)}>
+                    {
+                        !cartStore || cartStore.length === 0 
+                        ?
+                        <div className={clsx(styles.noProductCase)}>
+                            <i className={clsx("fa-solid fa-cart-shopping", styles.iconNoItemInCart)}></i>
+                            <p className={clsx(styles.textNoItemInCart)}>No products in the cart.</p>
+                            <button className={clsx(styles.btnReturnToShop)}
+                                onClick={() => dispatch(setCartList(false))}
+                            >Return to shop</button>
+                        </div>
+                        :
+                        <>
+                            <div className={clsx(styles.boxListItem)}>
                         <div className={clsx(styles.listItem)}>
                             {
                                 cartStore.map((item, index) => {
@@ -121,130 +144,176 @@ const Cart = () => {
                            
                             
                         </div>
-                    </div>
-                    <div className={clsx(styles.modalBodyControler)}>
-                        <div className={clsx(styles.settingInfo)}>
-                            <div className={clsx(styles.boxListOption)}>
-                                <div className={clsx(styles.listOption)}>
-                                    <div
-                                        className={clsx(styles.itemOption)}
-                                        onClick={() =>
-                                            setWindowNote(!windowNote)
-                                        }
-                                    >
-                                        <span>
-                                            <i className="fa-regular fa-clipboard"></i>
-                                        </span>
-                                        <p>Note</p>
-                                    </div>
+                            </div>
+                            <div className={clsx(styles.modalBodyControler)}>
+                                <div className={clsx(styles.settingInfo)}>
+                                    <div className={clsx(styles.boxListOption)}>
+                                        <div className={clsx(styles.listOption)}>
+                                            <div
+                                                className={clsx(styles.itemOption)}
+                                                onClick={() =>
+                                                    setWindowNote(!windowNote)
+                                                }
+                                            >
+                                                <span>
+                                                    <i className="fa-regular fa-clipboard"></i>
+                                                </span>
+                                                <p>Note</p>
+                                            </div>
 
-                                    <div
-                                        className={clsx(styles.itemOption)}
-                                        onClick={() =>
-                                            setWindowShipping(!windowShipping)
+                                            <div
+                                                className={clsx(styles.itemOption)}
+                                                onClick={() =>
+                                                    setWindowShipping(!windowShipping)
+                                                }
+                                            >
+                                                <span>
+                                                    <i className="fa-solid fa-truck-fast"></i>
+                                                </span>
+                                                <p>Shipping</p>
+                                            </div>
+                                            <div
+                                                className={clsx(styles.itemOption)}
+                                                onClick={() =>
+                                                    setWindowCoupon(!windowCoupon)
+                                                }
+                                            >
+                                                <span>
+                                                    <i className="fa-solid fa-percent"></i>
+                                                </span>
+                                                <p>Coupon</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={clsx(styles.calcPrice)}>
+                                        <div className={clsx(styles.priceBefore)}>
+                                            <span>Subtotal</span>
+                                            <span>${totalPrice.toFixed(2)}</span>
+                                        </div>
+                                        {
+                                            voucherSelected && 
+                                            <div className={clsx(styles.coupon)}>
+                                                <span>Coupon</span>
+                                                <Tooltip id="tooltip-removeCoupon" />
+                                                <div
+                                                    className={clsx(styles.couponChild)}
+                                                    data-tooltip-id="tooltip-removeCoupon"
+                                                    data-tooltip-content="remove"
+                                                    onClick={() => {
+                                                        dispatch(setVoucher(null))
+                                                    }}
+                                                >
+                                                    <i className="fa-solid fa-xmark"></i>
+                                                    <button>{voucherSelected.code}</button>
+                                                    <p>-${
+                                                        voucherSelected.discountType == "percent" 
+                                                        ? (totalPrice * voucherSelected.discount / 100).toFixed(2) 
+                                                        : 
+                                                        voucherSelected.discountType == "money"
+                                                        ? voucherSelected.discount.toFixed(2)
+                                                        :
+                                                        voucherSelected.discountType == "ship fee"
+                                                        ? voucherSelected.discount >= process.env.REACT_APP_SHIPPING_FEE
+                                                            ? process.env.REACT_APP_SHIPPING_FEE
+                                                            : voucherSelected.discount.toFixed(2)
+                                                            : 0
+                                                    }</p>
+                                                </div>
+                                            </div>
                                         }
-                                    >
-                                        <span>
-                                            <i className="fa-solid fa-truck-fast"></i>
-                                        </span>
-                                        <p>Shipping</p>
+                                        <div className={clsx(styles.isShipping)}>
+                                            <span>Shipping</span>
+                                            <span>{
+                                                totalPrice >= process.env.REACT_APP_STANDARD_FREESHIPPING_COST 
+                                                ? "Free Shipping" 
+                                                : "Flat rate: " + process.env.REACT_APP_SHIPPING_FEE
+                                            }</span>
+                                        </div>
                                     </div>
-                                    <div
-                                        className={clsx(styles.itemOption)}
-                                        onClick={() =>
-                                            setWindowCoupon(!windowCoupon)
-                                        }
-                                    >
-                                        <span>
-                                            <i className="fa-solid fa-percent"></i>
-                                        </span>
-                                        <p>Coupon</p>
+                                    <div className={clsx(styles.totalPrice)}>
+                                        <div className={clsx(styles.reallyPay)}>
+                                            <span>Total</span>
+                                            <span>${getFinalTotalPriceOfCart(totalPrice, voucherSelected).toFixed(2)}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className={clsx(styles.calcPrice)}>
-                                <div className={clsx(styles.priceBefore)}>
-                                    <span>Subtotal</span>
-                                    <span>$402.00</span>
-                                </div>
-                                <div className={clsx(styles.coupon)}>
-                                    <span>Coupon</span>
-                                    <Tooltip id="tooltip-removeCoupon" />
-                                    <div
-                                        className={clsx(styles.couponChild)}
-                                        data-tooltip-id="tooltip-removeCoupon"
-                                        data-tooltip-content="remove"
-                                    >
-                                        <i className="fa-solid fa-xmark"></i>
-                                        <button>NS30</button>
-                                        <p>-$120.60</p>
-                                    </div>
-                                </div>
-                                <div className={clsx(styles.isShipping)}>
-                                    <span>Shipping</span>
-                                    <span>Free Shipping</span>
-                                </div>
-                            </div>
-                            <div className={clsx(styles.totalPrice)}>
-                                <div className={clsx(styles.reallyPay)}>
-                                    <span>Total</span>
-                                    <span>$281.40</span>
-                                </div>
-                            </div>
-                            <div className={clsx(styles.boxProcessFreeship)}>
-                                <div
-                                    className={clsx(
-                                        styles.totalProcessFreeship,
-                                    )}
-                                >
-                                    <div
-                                        className={clsx(
-                                            styles.currentProcessFreeship,
-                                        )}
-                                    >
-                                        <span
+                                    <div className={clsx(styles.boxProcessFreeship)}>
+                                        <div
                                             className={clsx(
-                                                styles.percentProcess,
+                                                styles.totalProcessFreeship,
                                             )}
                                         >
-                                            100%
-                                        </span>
+                                            <div
+                                                className={clsx(
+                                                    styles.currentProcessFreeship,
+                                                )}
+                                                style={{
+                                                    width: totalPrice/process.env.REACT_APP_STANDARD_FREESHIPPING_COST * 100 >= 100
+                                                    ? "100%"
+                                                    : (totalPrice/process.env.REACT_APP_STANDARD_FREESHIPPING_COST * 100) + "%"
+                                                }}
+                                            >
+                                                <span
+                                                    className={clsx(
+                                                        styles.percentProcess,
+                                                    )}
+                                                >
+                                                    {totalPrice/process.env.REACT_APP_STANDARD_FREESHIPPING_COST * 100 >= 100 
+                                                    ? 
+                                                    100
+                                                    :
+                                                    (totalPrice/process.env.REACT_APP_STANDARD_FREESHIPPING_COST * 100)
+                                                    }%
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
+                                    {
+                                        totalPrice < process.env.REACT_APP_STANDARD_FREESHIPPING_COST 
+                                        ?
+                                        <div className={clsx(styles.noteFreeshipNotSuccess)}>
+                                            <p
+                                                className={clsx(styles.descNoteFreeshipNotSuccess)}
+                                            >Spend <span className={clsx(styles.moneyNeedToFreeship)}>${
+                                                (process.env.REACT_APP_STANDARD_FREESHIPPING_COST - totalPrice).toFixed(2)
+                                            }</span> more to reach <span className={clsx(styles.fontWeightWithUppercase)}>FREE SHIPPING!</span></p>
+                                        </div>
+                                        :
+                                        <div className={clsx(styles.noteFreeshipSuccess)}>
+                                            <span className={clsx(styles.iconNoteFreeship)}>
+                                                <i
+                                                    className="fa-regular fa-circle-check"
+                                                    style={{ color: '#37c347' }}
+                                                ></i>
+                                            </span>
+                                            <span className={clsx(styles.textNoteFreeship)}>
+                                                Congratulations! You've got free shipping.
+                                            </span>
+                                        </div>
+                                    }
+                                </div>
+                                <div className={clsx(styles.boxButton)}>
+                                    <NavLink
+                                        to="/"
+                                        className={clsx(
+                                            styles.btnViewCart,
+                                            styles.btnControl,
+                                        )}
+                                    >
+                                        View CART
+                                    </NavLink>
+                                    <NavLink
+                                        to="/"
+                                        className={clsx(
+                                            styles.btnCheckout,
+                                            styles.btnControl,
+                                        )}
+                                    >
+                                        Checkout
+                                    </NavLink>
                                 </div>
                             </div>
-                            <div className={clsx(styles.noteFreeshipSuccess)}>
-                                <span className={clsx(styles.iconNoteFreeship)}>
-                                    <i
-                                        className="fa-regular fa-circle-check"
-                                        style={{ color: '#37c347' }}
-                                    ></i>
-                                </span>
-                                <span className={clsx(styles.textNoteFreeship)}>
-                                    Congratulations! You've got free shipping.
-                                </span>
-                            </div>
-                        </div>
-                        <div className={clsx(styles.boxButton)}>
-                            <NavLink
-                                to="/"
-                                className={clsx(
-                                    styles.btnViewCart,
-                                    styles.btnControl,
-                                )}
-                            >
-                                View CART
-                            </NavLink>
-                            <NavLink
-                                to="/"
-                                className={clsx(
-                                    styles.btnCheckout,
-                                    styles.btnControl,
-                                )}
-                            >
-                                Checkout
-                            </NavLink>
-                        </div>
-                    </div>
+                        </>
+                    }
                 </div>
                 <div
                     className={clsx(
@@ -294,6 +363,8 @@ const Cart = () => {
                         name="titleAddNote"
                         id="titleAddNote"
                         placeholder="Notes about your order, e.g. special notes for delivery"
+                        value={note}
+                        onChange={e => setNote(e.target.value)}
                     ></textarea>
                     <button onClick={handleSaveNote}>SAVE</button>
                 </div>
@@ -317,14 +388,16 @@ const Cart = () => {
                         Estimate shipping rates
                     </h1>
 
-                    <form action="#">
+                    <div className={clsx(styles.formInfoCheckout)}>
                         <select
                             name="nameCountry"
                             id="nameCountry"
-                            value="Viet Nam"
+                            value={country}
+                            onChange={e => setCountry(e.target.value)}
                             data-show-subtext="true"
                             data-live-search="true"
                             className={clsx(styles.inputShipping)}
+                            
                         >
                             <option value="Afghanistan">Afghanistan</option>
                             <option value="Aland Islands">Aland Islands</option>
@@ -696,6 +769,8 @@ const Cart = () => {
                             className={clsx(styles.inputShipping)}
                             placeholder="City"
                             required
+                            value={city}
+                            onChange={e => setCity(e.target.value)}
                         />
                         <input
                             type="text"
@@ -703,15 +778,17 @@ const Cart = () => {
                             className={clsx(styles.inputShipping)}
                             placeholder="Passcode / ZIP"
                             required
+                            value={passcode}
+                            onChange={e => setPasscode(e.target.value)}
                         />
 
                         <button
                             className={clsx(styles.btnSubmitShipping)}
-                            onSubmit={handleUpdateShipping}
+                            onClick={handleUpdateShipping}
                         >
                             UPDATE
                         </button>
-                    </form>
+                    </div>
                 </div>
                 <div
                     className={clsx(
@@ -728,38 +805,38 @@ const Cart = () => {
                         Select an available coupon
                     </h1>
                     <div className={clsx(styles.listCoupon)}>
-                        {listVoucher.map((item, index) => {
+                        {listCoupon.map((item, index) => {
                             return (
                                 <div
                                     className={clsx(
                                         styles.itemCoupon,
-                                        voucherSelected?.id === item.id
+                                        voucherSelected?._id === item._id
                                             ? styles.active
                                             : '',
                                     )}
-                                    key={item.id}
+                                    key={item._id}
                                     onClick={() => handleClickVoucher(item)}
                                 >
                                     <p className={clsx(styles.valueCoupon)}>
-                                        {item.type == 'money'
-                                            ? `$${item.value}`
-                                            : `${item.value}%`}{' '}
+                                        {item.discountType == 'money' || item.discountType == "ship fee"
+                                            ? `$${item.discount}`
+                                            : `${item.discount}%`}{' '}
                                         Discount
                                     </p>
                                     <div className={clsx(styles.couponInfo)}>
                                         <button>{item.code}</button>
                                         <span>
-                                            {item.date === null
+                                            {item.endDate === null
                                                 ? 'Never Expire'
                                                 : `${
                                                       monthNames[
-                                                          item.date.getMonth()
+                                                          item.endDate.getMonth()
                                                       ]
-                                                  } ${item.date.getDay()} ${item.date.getFullYear()}`}
+                                                  } ${item.endDate.getDay()} ${item.endDate.getFullYear()}`}
                                         </span>
                                     </div>
                                     <p className={clsx(styles.descriptCoupon)}>
-                                        {item.desc}
+                                        {item.description}
                                     </p>
                                 </div>
                             );

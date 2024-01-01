@@ -23,7 +23,7 @@ const ItemCart = ({itemCart}) => {
     }, [itemCart])
 
     const handleUpdateItemCart = (newQuantity)=>{
-        if (quantity > 0) {
+        if (quantity >= 0) {
            
             if (userLogin.isLogin){
                 dispatch(updateCartItemToServer({
@@ -80,7 +80,23 @@ const ItemCart = ({itemCart}) => {
             }))
         }
     }
-
+    const handleChangeQuantityWithKeyboard = (e)=>{
+        let newQuantity = quantity;
+        if (Number.isInteger(e.target.value - 0) && e.target.value > 0){
+            newQuantity = e.target.value - 0;
+            handleUpdateItemCart(newQuantity);
+        }
+        if (e.target.value === ""){
+            newQuantity = 0
+        }
+        setQuantity(newQuantity);
+    }
+    const handleBlurQuantity = (e)=>{
+        if (quantity == "0"){
+            setQuantity(1)
+            handleUpdateItemCart(1);
+        }
+    }
 
     function calcTotalItemCart(){
         return Number(itemCart.quantity * convertPriceInt(itemCart.productDetailSelected?.price)).toFixed(2)
@@ -142,6 +158,8 @@ const ItemCart = ({itemCart}) => {
                                                                 required
                                                                 name="qtyProduct"
                                                                 value={quantity}
+                                                                onChange={e => handleChangeQuantityWithKeyboard(e)}
+                                                                onBlur={e => handleBlurQuantity(e)}
                                                             />
                                                             <button
                                                                 className={clsx(

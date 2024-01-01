@@ -188,7 +188,7 @@
                             border-radius: inherit;
                             position: relative;
                             left: 0;
-                            width: 100%;
+                            
                             background-color: #0f9d8a;
                             height: 100%;
                             .percentProcess {
@@ -216,7 +216,7 @@
                     }
                 }
                 > .noteFreeshipSuccess {
-                    margin-top: 8px;
+                    margin-top: 12px;
                     font-size: 1.6rem;
                     display: flex;
                     align-items: center;
@@ -228,6 +228,23 @@
                         font-size: 1.3rem;
                     }
                 }
+                >.noteFreeshipNotSuccess{
+                    text-align: center;
+                    margin-top: 12px;
+                    font-size: 1.3rem;
+                    .moneyNeedToFreeship{
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                        color: #0f9d8a;
+                    }
+                    .fontWeightWithUppercase{
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        color: #000;
+                        font-size: 1.5rem;
+                    }
+                }
+
             }
             > .boxButton {
                 margin: 0 28px;
@@ -388,7 +405,7 @@
             font-size: 2rem;
             margin-bottom: 16px;
         }
-        > form {
+        > .formInfoCheckout {
             > .inputShipping {
                 display: block;
                 width: 100%;
@@ -517,6 +534,39 @@
             }
         }
     }
+}
+.noProductCase{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: inherit;
+}
+.iconNoItemInCart{
+    font-size: 20rem;
+    color: #999;
+    margin-bottom: 30px;
+}
+.textNoItemInCart{
+    font-size: 1.6rem;
+    color: #000;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.btnReturnToShop{
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #0f9d8a;
+    color: #fff;
+    font-size: 1.3rem;
+    border: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    border-radius: 6px;
+    transition: 0.2s;
+    width: 80%;
+    margin: 0 auto;
 }
 @media (max-width: 991.98px) {
     .modalBox {
