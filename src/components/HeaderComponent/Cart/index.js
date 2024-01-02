@@ -10,6 +10,7 @@ import calcTotalPriceOfCart from "../../../utils/calcTotalPriceOfCart";
 import getFinalTotalPriceOfCart from '../../../utils/getFinalTotalPriceOfCart';
 import { setVoucher } from '../../../redux/slices/cartSlice';
 import { updateInfoCheckout } from '../../../redux/slices/infoCheckoutSlice';
+import configs from '../../../config';
 
 const Cart = () => {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Cart = () => {
     const [windowCoupon, setWindowCoupon] = React.useState(false);
     const [inputVoucher, setInputVoucher] = React.useState('');
     const [totalPrice, setTotalPrice] = useState(0);
+    const listCoupon = useSelector(state => state.coupon.couponList)
 
     const [note, setNote] = useState(""); 
     const [country, setCountry] = useState("");
@@ -53,7 +55,6 @@ const Cart = () => {
         'November',
         'December',
     ];
-    const listCoupon = useSelector(state => state.coupon.couponList)
     
     const handleClickVoucher = (item) => {
         dispatch(setVoucher(item));
@@ -293,11 +294,12 @@ const Cart = () => {
                                 </div>
                                 <div className={clsx(styles.boxButton)}>
                                     <NavLink
-                                        to="/"
+                                        to={configs.routes.shoppingCart}
                                         className={clsx(
                                             styles.btnViewCart,
                                             styles.btnControl,
                                         )}
+                                        onClick={() => dispatch(setCartList(false))}
                                     >
                                         View CART
                                     </NavLink>

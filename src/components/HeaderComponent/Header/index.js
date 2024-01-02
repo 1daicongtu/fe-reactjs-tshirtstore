@@ -400,7 +400,7 @@ const Header = () => {
                 </div>
                 <div className={clsx(styles.navigationMobileBox)}>
                     <div className={clsx(styles.navigationMobile)}>
-                        <NavLink to="/" className={clsx(styles.itemNavigation)}>
+                        <NavLink to={configs.routes.homePage} className={clsx(styles.itemNavigation)}>
                             <i className="fa-solid fa-house"></i>
                             <span>Shop</span>
                         </NavLink>

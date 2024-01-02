@@ -231,6 +231,12 @@
         }
     }
 }
+@media (max-width: 1199.98px) {
+    .headerTwo{
+        width: 100%;
+        
+    }
+}
 @media (max-width: 991.98px) {
     .headerOne {
         margin: 0 8px;
@@ -246,6 +252,7 @@
         margin: 0 8px;
     }
 }
+
 
 @media (max-width: 575.98px) {
     .container {
