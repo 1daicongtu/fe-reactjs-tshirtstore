@@ -74,7 +74,7 @@ export default function ShoppingCart() {
         setTotalPrice(calcTotalPriceOfCart(cartStore));
     }, [cartStore])
 
-    console.log(cartStore)
+   
 
     function handleClickApplyCouponCode(){
         if(inputCouponCode){
@@ -156,14 +156,7 @@ export default function ShoppingCart() {
             }))
         }  
     }
-    const handleChangeQuantityWithKeyboard = (e, itemCart)=>{
-        if (e.target.value > 0) {
-            handleUpdateItemCart(e.target.value - 0, itemCart);
-        } else {
-            handleUpdateItemCart(1, itemCart);
-        }
-    
-    }
+
   return (
     <div className={clsx(styles.shoppingCartWrapper)}>
         <div className={clsx(styles.stepByStepToOrderWrapper)}>
@@ -225,11 +218,11 @@ export default function ShoppingCart() {
                                                     >
                                                         <i class="fa-solid fa-xmark"></i>
                                                     </button>
-                                                    <div className={clsx(styles.productImage)}>
+                                                    <Link to={`/products/` + product.productID}  className={clsx(styles.productImage)}>
                                                         <img src={product.productDetailSelected?.imageSmall?.front} alt="product" />
-                                                    </div>
+                                                    </Link>
                                                     <div className={clsx(styles.productInfoDetail)}>
-                                                        <p className={clsx(styles.productName)}>{product.productName}</p>
+                                                        <Link to={`/products/` + product.productID} className={clsx(styles.productName)}>{product.productName}</Link>
                                                         <p className={clsx(styles.productOtherInfoName)}>Style: <span className={clsx(styles.productOtherInfoValue)}>{product.productDetailSelected?.typeName}</span></p>
                                                         <p className={clsx(styles.productOtherInfoName)}>Color: <span className={clsx(styles.productOtherInfoValue)}>{GetColorName(product.colorSelected)}</span></p>
                                                         <p className={clsx(styles.productOtherInfoName)}>Size: <span className={clsx(styles.productOtherInfoValue)}>{product.sizeSelected}</span></p>
@@ -856,7 +849,9 @@ export default function ShoppingCart() {
                                 <p className={clsx(styles.finalTotalPriceAfterApplyCoupon)}>${getFinalTotalPriceOfCart(totalPrice, voucherSelected).toFixed(2)}</p>
                             </div>
                             <div className={clsx(styles.boxBtnCheckout)}>
-                                <button className={clsx(styles.btnCheckout)}>Proceed to checkout</button>
+                                <Link
+                                    to={configs.routes.checkout}
+                                className={clsx(styles.btnCheckout)}>Proceed to checkout</Link>
                             </div>
                         </div>
                         <img 

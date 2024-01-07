@@ -304,11 +304,12 @@ const Cart = () => {
                                         View CART
                                     </NavLink>
                                     <NavLink
-                                        to="/"
+                                        to={configs.routes.checkout}
                                         className={clsx(
                                             styles.btnCheckout,
                                             styles.btnControl,
                                         )}
+                                        onClick={() => dispatch(setCartList(false))}
                                     >
                                         Checkout
                                     </NavLink>

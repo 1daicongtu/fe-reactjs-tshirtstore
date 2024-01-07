@@ -1,0 +1,756 @@
+.checkOutWrapper{
+    position: relative;
+}
+.setBackgroundForPage{
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+.backgroundForLeftSide{
+    width: 50%;
+    background-color: #FFFFFF;
+}
+.backgroundForRightSide{
+    width: 50%;
+    background-color: #F9F9F9;
+}
+.checkOutContainer{
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+    z-index: 5;
+}
+.rowCheckout{
+    display: flex;
+    margin: 0 -40px;
+    padding: 40px 0;
+}
+.boxColCheckout{
+    width: 50%;
+    padding: 0 40px;
+}
+.leftColCheckout{
+    background-color: #fff;
+ 
+}
+
+.rightColCheckout{
+    background-color: #f9f9f9;
+}
+.processPathTree{
+    display: flex;
+    align-items: center;
+    gap: 0 8px;
+}
+.pathItem{
+    i{
+        font-size: 10px;
+        color: #999;
+        margin-right: 6px;
+    }
+    .pathItemName{
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1.3rem;
+        letter-spacing: 1.1px;
+        color: #999;
+    }
+    &:hover{
+        cursor: pointer;
+        i{
+            color: #000;
+        }
+        .pathItemName{
+            color: #000;
+        }
+    }
+}
+.pathItem.active{
+    i{
+        color: #000;
+    }
+    .pathItemName{
+        color: #000;
+    }
+}
+.titleChekcOutForm{
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin: 20px 0;
+}
+.formGroupCheckOut{
+    position: relative;
+    margin-bottom: 30px;
+}
+.inputCheckOutForm{
+    padding: 12px 8px;
+    outline: none;
+    border: 1px solid #E5E5E5;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    transition: all 0.2s ease-in-out;
+}
+.inputCheckOutForm:focus{
+    border: 1px solid #000;
+}
+.inputCheckOutForm.active{
+    padding: 20px 8px 4px;
+}
+.inputCheckOutForm.failed{
+    border: 1px solid red;
+}
+.errMsgInputCheckout{
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 1.2rem;
+    color: red;
+}
+.labelCheckOutForm{
+    font-size: 1.2rem;
+    color: #999;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    padding: 0 8px;
+    transition: all 0.3s ease-in-out;
+    span{
+        color: red;
+    }
+}
+.labelCheckOutForm.active{
+    opacity: 1;
+    transform: translateY(0);
+    top: 3px;
+}
+.boxBtnControlNavigation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+.btnReturnToCart{
+    display: flex;
+    background-color: transparent;
+    border: none;
+    align-items: center;
+    i {
+        font-size: 1.2rem;
+        margin-right: 8px;
+    }
+    span{
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 3px;
+        display: block;
+    }
+    &:hover{
+        cursor: pointer;
+        i {
+            color: #F76B6A;
+        }
+        span{
+            color: #F76B6A;
+        }
+    }
+}
+.btnCountinueToShipping{
+    background-color: #F76B6A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+        cursor: pointer;
+        background-color: #f74848;
+    }
+}
+.itemReview{
+    display: flex !important;
+    gap: 0 10px;
+    margin-bottom: 20px;
+}
+.imgUsername{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.reviewerUsername{
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.reviewerDesc{
+    font-size: 1.4rem;
+    color: #333;
+}
+.rowShippingAdressForm{
+    margin: 0 -4px;
+}
+.colShippingAdressForm{
+    padding: 0 4px;
+
+}
+.productItemInCart{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.productInfoBox{
+    display: flex;
+    align-items: center;
+}
+.productImageBox{
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid #E5E5E5;
+    }
+}
+.quantityProductInCart{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    right: -10px;
+    top: -10px;
+}
+.productNameInCart{ 
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 4px;
+}
+.productPriceInCart{
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #777;
+    margin-bottom: 6px;
+}
+.subTotalOfEachProduct{
+    font-weight: 500;
+    font-size: 1.5rem;
+
+}
+.boxChangeQuantityProduct{
+    display: flex;
+
+}
+.btnChangeQuantityProduct{
+    border: none;
+    background-color: #fff;
+    height: inherit;
+    width: 20px;
+}
+.btnDecreaseQuantityProduct{
+    border: 1px solid #E5E5E5;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-right: unset;
+}
+.btnIncreaseQuantityProduct{
+    border: 1px solid #E5E5E5;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-left: unset;
+}
+.btnChangeQuantityProduct{
+    > i {
+        font-size: 1rem;
+        color: #000;
+    }
+    &:hover{
+        cursor: pointer;
+        background-color: #f2f2f2;
+    }
+}
+.inputQuantityProduct{
+    width: 25px;
+    height: 20px;
+    border: 1px solid #E5E5E5;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: #333;
+    outline: none;
+    align-items: center;
+    display: flex;
+}
+.productListInCart{
+    padding-bottom: 30px;
+}
+.boxAppCouponCode{
+    padding: 20px 0;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;   
+}
+.btnToggleCouponForm{
+    font-weight: 500;
+    font-size: 1.5rem;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    i{
+        font-size: 1.5rem;
+        margin-right: 8px;
+    }
+    margin-right: 8px;
+    transition: all 0.2s ease-in-out;
+    &:hover{
+        cursor: pointer;
+        color: #F76B6A;
+        i{
+            color: #F76B6A;
+        }
+    }
+}
+.inputCouponCode{
+    padding: 10px 8px;
+    outline: none;
+    border: 1px solid #E5E5E5;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    transition: all 0.2s ease-in-out;
+}
+.btnApplyCouponCode{
+    background-color: #F76B6A;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+    letter-spacing: 1.2px;
+    &:hover{
+        cursor: pointer;
+        background-color: #f74848;
+    }
+}
+.formGroupCoupon{
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    margin-top: 20px;
+}
+.boxSubTotalAndShipping{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+.boxSubTotalAndShippingTitle{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #000;
+}
+.boxSubTotalAndShippingValue{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #000;
+}
+.totalPriceInfoBox{
+    margin-top: 20px;
+}
+.boxSubTotalAndShippingTitleFinal{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #000;
+}
+.boxSubTotalAndShippingValueFinal{
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #000;
+}
+.boxSubTotalAndShippingFinal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.boxInputCouponCode{
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    margin-top: 20px;
+}
+.btnApplyCoupon{
+    background-color: #F76B6A;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #fff;
+    transition: all 0.2s ease-in-out;
+    letter-spacing: 1.2px;
+    &:hover{
+        cursor: pointer;
+        background-color: #f74848;
+    }
+}
+.flexBoxCartTotalItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+.titleCartTotalInfo{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.couponChild:hover {
+    opacity: 0.6;
+}
+.couponChild {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    > i {
+        font-size: 1.2rem;
+    }
+    > i,
+    p,
+    button {
+        margin: 0 2px;
+    }
+    > button {
+        border: none;
+        background-color: #fff;
+        letter-spacing: 2px;
+        border: 1px dashed #ccc;
+        font-size: 1.2rem;
+        font-weight: 500;
+        border-radius: 2px;
+        padding: 0 6px;
+    }
+    .moneyReduced{
+        font-size: 1.4rem;
+    }
+}
+.mobileRightColCheckout{
+    display: none;
+}
+.btnOpenOrderMobileBox{
+    display: none;
+}
+.shippingInfoBox{
+    margin-top: 20px;
+    padding: 10px 25px;
+    border-radius: 6px;
+    border: 1px solid #E5E5E5;
+
+}
+.paymentInfoBox{
+    margin-top: 20px;
+    padding: 0px 25px;
+    border-radius: 6px;
+    border: 1px solid #E5E5E5;
+}
+.shippingInfoItem{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+}
+.paymentInfoItemBox{
+    padding: 15px 0;
+}
+.paymentInfoItemContent img {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+
+}
+.paymentInfoItemContent{
+    display: flex;
+    padding: 15px 0;
+    align-items: center;
+}
+.paymentInfoItemDesc{
+    background-color: #F9F9F9;
+    padding: 20px;
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.06);
+}
+.shippingInfoItemValue{
+    flex: 1;
+}
+
+.titleShippingInfo{
+    font-size: 1.4rem;
+    color: #333;
+    width: 80px;
+}
+.shippingInfoItemValue, .paymentInfoItemValue{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #000;
+    margin-right: 10px;
+}
+
+.btnChangeShippingInfo{
+    display: block;
+    color: #888;
+    background-color: transparent;
+    border: none;
+    font-size: 1.4rem;
+    font-weight: 500;
+    &:hover{
+        cursor: pointer;
+        color: #333;
+    }
+}
+.borderBottomShippingItem{
+    border-bottom: 1px solid #E5E5E5;
+
+}
+.billingAddressDesc{
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+
+}
+.shippingInfoItemPaypal{
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 12px;
+}
+.inputRadioBillingAddress{
+    margin-right: 10px;
+}
+.paymentInfoPolicy{
+    font-size: 1.3rem;
+    color: #000;
+    padding: 12px 0;
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    margin: 12px 0;
+}
+.boxAgreePolicy{
+    display: flex;
+    align-items: center;
+}
+.textCheckboxPolicy{
+    font-size: 1.3rem;
+    color: #000;
+    margin-left: 10px;
+    
+    a{
+        color: #000;
+        text-decoration: underline;
+        &:hover{
+            cursor: pointer;
+            color: #F76B6A;
+        }
+    }
+}
+.btnPlaceOrder{
+    width: 100%;
+    background-color: #F76B6A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: #fff;
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+.productGuarenteedSafe{
+    margin-top: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px 20px;
+    .productGuarenteedSafeTitle{
+        position: absolute;
+        top: -15px;
+        font-size: 1.6rem;
+        color: #000;
+        font-weight: 500;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #fff;
+    }
+    .productGuarenteedSafeImg{
+        width: 100%;
+        object-fit: cover;
+    }
+}
+.formInBillingAddress{
+    height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+
+}
+.formInBillingAddress.active{
+    height: 450px;
+}
+@media (max-width: 1199.98px) {
+    .checkOutContainer{
+        width: 100%;
+        padding: 0 10px;
+    }
+    .rowCheckout{
+        margin: 0 -10px;
+    }
+    .boxColCheckout{
+        padding: 0 10px;
+    }
+    .btnCountinueToShipping{
+        padding: 4px 20px;
+    }
+}
+@media (max-width: 991.98px) {
+
+}
+@media (max-width: 575.98px) {
+   .rowCheckout{
+     padding: 20px 0;
+   }
+   .backgroundForRightSide{
+        background-color: #fff;
+   }
+   .boxColCheckout{
+        background-color: #fff;
+        width: 100%;
+   }
+   .pathItemName{
+        border: 1px solid #ccc;
+        padding: 2px;
+        border-radius: 3px 4px;
+   }
+   .active .pathItemName{
+        border: 1px solid #000;
+   }
+   .whatTheySay{
+        display: none;
+   }
+   .sliderReviewList{
+    
+        display: none !important;
+   }
+   .processPathTree{
+        margin-bottom: 40px;
+   }
+   .rightBoxColCheckout{
+        display: none;
+    }
+    .rightColCheckout{
+        background-color: #fff;
+    }
+    .mobileRightColCheckout{
+        display: block;
+        position: fixed;
+        background-color: #fff;
+        overflow: auto;
+        bottom: 0;
+        right: 0;
+        top: 110%;
+        left: 0;
+        z-index: 33;
+        padding: 30px;
+        transition: all 0.3s ease-in-out;
+    }
+    .mobileRightColCheckout.active{
+        top: 0;
+    }
+    .controlCloseModelOrder{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    .titleControlCloseModelOrder{
+        font-size: 1.8rem;
+        font-weight: 500;   
+    }
+    .btnControlCloseModelOrder{
+        background-color: transparent;
+        border: none;
+        font-size: 1.8rem;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #ccc;
+        font-weight: 500;
+        color: #000;
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            cursor: pointer;
+            color: #F76B6A;
+        }
+    }
+    .btnOpenOrderMobileBox{
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ececec;
+        background-color: #f9f9f9;
+        padding: 16px 20px;
+        border-radius: 4px;
+        align-items: center;
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #000;
+        transition: all 0.2s ease-in-out;
+        margin-top: 20px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .btnOpenOrderMobileBoxLeft{
+        i{
+            font-size: 1.8rem;
+        }
+    }
+    .titleOrderMobile{
+        font-size: 1.5rem;
+        margin: 0 8px;
+    }
+    .totalPriceOfCart{
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: #000;
+    }
+    .productGuarenteedSafe{
+        align-items: center;
+    }
+    .productGuarenteedSafe .productGuarenteedSafeTitle{
+        position: absolute;
+        width: 65%;
+        text-align: center;
+    }
+}

@@ -1,6 +1,6 @@
 import { DefaultLayout } from '../layouts';
 import configs from '../config';
-import { AboutUsPage, ContactUsPage, HomePage, ProductDetailPage, ShoppingCartPage, StoreDetailPage, StorePage } from '../pages';
+import { AboutUsPage, CheckoutPage, ContactUsPage, HomePage, ProductDetailPage, ShoppingCartPage, StoreDetailPage, StorePage } from '../pages';
 import ComparePage from '../components/ComparePage';
 import { element } from 'prop-types';
 import AboutUs from '../components/AboutUs';
@@ -51,6 +51,12 @@ const routes = [
     {
         path: configs.routes.shoppingCart,
         element: ShoppingCartPage,
+        layout: DefaultLayout,
+        requireLogin: false
+    },
+    {
+        path: configs.routes.checkout,
+        element: CheckoutPage,
         layout: DefaultLayout,
         requireLogin: false
     }

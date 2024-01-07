@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 const initialState = {
     email: "",
     firstname: "",
-    lsatname: "",
+    lastname: "",
     country: "Viet Nam",
     streetAddress: "",
     passcode: "",

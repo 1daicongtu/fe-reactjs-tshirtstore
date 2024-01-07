@@ -90,6 +90,10 @@ tr{
     font-size: 1.5rem;
     font-weight: 470;
     margin-bottom: 4px;
+    color: #000;
+    &:hover{
+        color: #000;
+    }
 }
 .productOtherInfoName{
     font-size: 1.2rem;
@@ -468,9 +472,14 @@ tr{
     justify-content: space-between;
     padding: 20px 0;
 }
+.boxBtnCheckout{
+    width: 100%;
+}
 .btnCheckout{
     border: none;
-    width: 100%;
+    width: inherit;
+    display: block;
+    text-align: center;
     background-color: #F76B6A;
     color: #fff;
     text-transform: uppercase;
@@ -482,7 +491,7 @@ tr{
     transition: all 0.3s ease-in-out;
     &:hover {
         background-color: #f03c3c;
-    
+        color: #fff;
     }
 }
 
