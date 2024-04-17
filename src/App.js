@@ -48,6 +48,7 @@ function App() {
                             layout: Layout,
                             element: Component,
                             path: Path,
+                            requireLogin: requireLogin
                         } = route;
                         return (
                             <Route
@@ -55,7 +56,7 @@ function App() {
                                 path={Path}
                                 element={
                                     <Layout>
-                                        <Component />
+                                        <Component requireLogin={requireLogin}/>
                                     </Layout>
                                 }
                             />

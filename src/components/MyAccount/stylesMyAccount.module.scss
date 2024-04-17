@@ -1,0 +1,260 @@
+.myAccountContainer{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 32px;
+}
+.myAccountRow{
+    margin: 0 -12px;
+}
+.myAccountRightCol, .myAccountLeftCol{
+    padding: 0 12px;
+}
+.myAccountUserInfo{
+    display: flex;
+    border: 3px solid #ebebeb;
+    padding: 22px;
+    
+}
+.myAccountAvatar{
+    width: 65px;
+    height: 65px;
+    margin-right: 8px;
+    object-fit: cover;
+}
+.myAccountTitle{
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #666;
+}
+.myAccountNameUser{
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+.tabsListMyAccount{
+    margin-top: 32px;
+    border-top: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+}
+.tabsItemMyAccount.active{
+    padding: 12px 14px;
+    background-color: #f5f5f5;
+    color: #000;
+}
+.tabsItemMyAccount{
+    padding: 15px 8px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-bottom: 1px solid #ebebeb;
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: #888;
+    cursor: pointer;
+    letter-spacing: 1.2px;
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        background-color: #f5f5f5;
+        color: #000;
+    }
+}
+.tabsItemMyAccount > svg{
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+.dashboardMainTitle{
+    font-size: 1.4rem;
+    margin-bottom: 26px;
+}
+.dashboardUserName{
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #000;
+
+}
+.btnChooseNewTab{
+    font-weight: 400;
+    text-decoration: underline;
+    color: #000;
+    font-size: 1.4rem;
+    cursor: pointer;
+    &:hover{
+        color: #F76B6A;
+    }
+}
+.dashboardRow{
+    margin: 0 -12px;
+}
+.dashbaordCol{
+    padding: 12px;
+}
+.dashboardItem{
+    border: 1px solid #ebebeb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 26px 0;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: #f5f5f5;
+        > svg{
+            color: #F76B6A;
+        }
+    }
+    > svg{
+        transition: all 0.3s ease-in-out;
+        width: 50px;
+        height: 50px;
+        margin-bottom: 6px;
+        color: #888;
+    }
+    > .dashboardItemTitle{
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: #000;
+    }
+}
+.boxDownload{
+    display: flex;
+    align-items: center;
+}
+.titleDownload{
+    font-size: 1.4rem;
+    color: #666;
+}
+.btnBrowseProduct{
+    border: none;
+    font-size: 1.3rem;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #F76B6A;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    &:hover{
+        background-color: #F76B6A;
+        color: #fff;
+    }
+}
+.titleAddress{
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+}
+.rowAddress{
+    margin: 0 -12px;
+}
+.colAddress{
+    padding: 12px;
+}
+.typeAddress{
+    font-size: 2rem;
+    font-weight: 500;
+    color: #000;
+    margin-bottom: 6px;
+}
+.btnEditAddress{
+    text-decoration: underline;
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 4px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover{
+        color: #F76B6A;
+    }
+}
+.rowShippingAdressForm{
+    margin: 0 -4px;
+}
+.colShippingAdressForm{
+    padding: 0 4px;
+}
+.formGroupCheckOut{
+    position: relative;
+    margin-bottom: 30px;
+}
+.inputCheckOutForm{
+    padding: 12px 8px;
+    outline: none;
+    border: 1px solid #E5E5E5;
+    width: 100%;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    transition: all 0.2s ease-in-out;
+}
+.inputCheckOutForm:focus{
+    border: 1px solid #000;
+}
+.inputCheckOutForm.active{
+    padding: 20px 8px 4px;
+}
+.inputCheckOutForm.failed{
+    border: 1px solid red;
+}
+.errMsgInputCheckout{
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 1.2rem;
+    color: red;
+}
+.labelCheckOutForm{
+    font-size: 1.2rem;
+    color: #999;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    padding: 0 8px;
+    transition: all 0.3s ease-in-out;
+    span{
+        color: red;
+    }
+}
+.labelCheckOutForm.active{
+    opacity: 1;
+    transform: translateY(0);
+    top: 3px;
+}
+.btnSaveAddress{
+    border: none;
+    font-size: 1.3rem;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #F76B6A;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    &:hover{
+        background-color: #F76B6A;
+        color: #fff;
+    }
+
+}
+@media (max-width: 1199.98px) {
+    .myAccountContainer{
+        width: 100%;
+    }
+    .myAccountRow{
+        padding: 0 12px;
+    }
+    .boxDownload{
+        display: block;
+    
+    }
+}
+@media (max-width: 991.98px) {
+
+}
+@media (max-width: 575.98px) {
+
+}

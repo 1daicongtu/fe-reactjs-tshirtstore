@@ -13,7 +13,8 @@ const routes = {
     store: "/stores",
     notFound: '*',
     storeDetail: '/stores/:id',
-    shoppingCart: '/shopping-cart'
+    shoppingCart: '/shopping-cart',
+    myAccount: '/my-account'
 };
 
 export default routes;

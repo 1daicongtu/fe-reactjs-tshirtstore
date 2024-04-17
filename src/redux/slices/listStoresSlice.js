@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const fetchAllStores = createAsyncThunk('fetchListStores', async () => {
-    const res = await axios.get('http://localhost:5000/stores/all-store');
+    const res = await axios.get(process.env.REACT_APP_PROXY + '/stores/all-store');
     return res && res.status === 200 ? res.data : [];
 });
 

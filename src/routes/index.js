@@ -4,6 +4,8 @@ import { AboutUsPage, CheckoutPage, ContactUsPage, HomePage, ProductDetailPage, 
 import ComparePage from '../components/ComparePage';
 import { element } from 'prop-types';
 import AboutUs from '../components/AboutUs';
+import MyAccountPage from '../pages/myAccountPage';
+import MyAccount from '../components/MyAccount';
 
 const routes = [
     {
@@ -59,6 +61,12 @@ const routes = [
         element: CheckoutPage,
         layout: DefaultLayout,
         requireLogin: false
+    },
+    {
+        path: configs.routes.myAccount,
+        element: MyAccount,
+        layout: DefaultLayout,
+        requireLogin: true
     }
 ];
 

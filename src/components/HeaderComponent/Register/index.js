@@ -41,7 +41,7 @@ const Register = () => {
     const handleSubmitForm = async(data)=>{
         if (isValid){
             try {
-                const res = await axios.post(`http://localhost:5000/users/sign-up`, data);
+                const res = await axios.post(process.env.REACT_APP_PROXY + `/users/sign-up`, data);
                 if (res.status == 200){
                     addToastMessage({title: "Register success", message: res.data.message, type: "success"})
                     reset();

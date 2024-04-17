@@ -179,7 +179,6 @@ export default function Checkout() {
     }))
     setCurrentStep(PAYMENT);
   }
-  console.log(infoCheckout);
 
   return (
     <div className={clsx(styles.checkOutWrapper)}>
@@ -825,7 +824,7 @@ export default function Checkout() {
                             }
                           </div>
                         </div>
-                      </div>
+                    </div>
                   </div>
                 </div>
 

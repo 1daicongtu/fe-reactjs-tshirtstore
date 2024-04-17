@@ -220,7 +220,7 @@ const Header = () => {
                                 <ul>
                                     <li>
                                         <NavLink
-                                            to="/"
+                                            to={configs.routes.myAccount}
                                             className={clsx(styles.navlink)}
                                         >
                                             My Account
