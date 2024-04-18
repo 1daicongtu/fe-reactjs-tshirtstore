@@ -14,6 +14,7 @@
 ## 🚩 Table of Contents
 
 - [Build With](#built-with)
+- [Features](#features)
   + [Sign in and Sign up account](#sign-in-and-sign-up-account)
   + [Quick view](#quick-view)
   + [Cart](#cart)
