@@ -14,6 +14,7 @@
 ## 🚩 Table of Contents
 
 - [Build With](#built-with)
+- [Installation](#installation)
 - [Features](#features)
   + [Sign in and Sign up account](#sign-in-and-sign-up-account)
   + [Quick view](#quick-view)
@@ -22,8 +23,6 @@
   + [Product Detail / Review product / Statistic review](#product-detail-/-review-product-/-statistic-review)
   + [Stores / Store Detail](#store-/-store-detail)
   + [More...](#more...)
-- [Installation](#installation)
-- [Features](#features)
 - [Contact](#contact)
 
 
